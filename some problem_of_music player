@@ -1,0 +1,87 @@
+今天在做android播放器的时候遇到了一些问题，在实现歌词同步时，发现将歌词显示的时候会显示两倍的歌词，这样导致显示歌词的页面不美观，然后我
+想这个问题应该与读取歌词的类有关，然后我就仔细检查这个类，发现没有问题，再运行一次，发现还是错，然后我就把之前单独写的一个读取歌词的类复
+制过来代替这个类，因为那个单独写的读取歌词的类我能确定没错，因为我之前为了实现歌词同步的方法，在网上找了一段实现这个功能的程序，经过简单
+的修改运行没有错，我以为这样替换后应该就对了，结果发现还是错了，然后你开始在那里各种用Log类来输出语句，观察程序运行到哪里，一步一步的看，
+结果发现自己都搞混了，后来检查到显示歌词的自定义的控件这个类时的Init函数，突然发现自己调用了两次读取歌词的函数，顿时明了，居然是因为我调
+用了两次所以才会读取两倍的歌词，害我花了这么久的时间，真是无语，我应该早知道的，出现这个错误，如果确定读取的时候没有错误，那么就是说明调
+用的时候出现了错误，我早该想到的，感觉自己还是太嫩，遇到错误完全不知道该去哪里找，还是得多写程序多找错误多多历练呀，淡然这只是其中的一个
+问题，后面又遇到了当我播放一首歌曲时，点击一首X播放，然后点击别的歌，新点击的这首歌不会播放依旧播放X，就算在播放新歌之前，暂停X，结果点
+击播放还是播放X，除非点击Reset（无论你是播放X时，按Reset，再点击新歌，再按Play，或者播放X时直接点击别的歌，然后点击Reset，再Play都会播放
+新歌），在点击新歌才会播放，然后我就想是不是当我点击另一首歌时，这首歌的地址没有传进来，然后用Log类来输出播放时的歌曲路径，结果发现路径
+更换了，也就是说更换了路径结果却还是播放原来的路径，这是为什么？然后上网查了一下资料，也没有相关的介绍，然后一个一个看别人的播放代码，发
+现他们在播放时会先调用reset方法将数据恢复到初始状态，然后我就觉得我这样改应该也行，就也调用reset方法，结果发现行了，所以感觉解决问题应该
+是先要想出现这个问题可能的情况有什么，然后再去解决，而不能像无头苍蝇一样乱撞，同时可以多利用网络资源，但是这样还玩之后其实还是有问题的，
+因为这样的话我自己写的pause函数就没有意义了，因为每次播放的时候都会先调用reset方法，然后我就进行改进，利用if语句进行判断，
+
+public void play(){
+if(!mediaPlayer.isPlaying()){
+Init(path);
+mediaPlayer.start();
+Log.i("Logcat", "play"+path);
+}
+else{
+mediaPlayer.reset();
+Init(path);
+mediaPlayer.start();
+}
+}
+这样pause就有用了，但是我想了一下发现这样还是有问题，因为这样的话暂停一首歌之后再点击别的歌曲就不会播放别的歌曲了，所以还是有问题，要解决
+这个问题就需要明白点击pause按钮之后，音乐会停止，当你再点击播放时会有两种情况，第一种就是没有回到listActivity中选歌曲，还有一种就是回到
+了listActivity选歌曲，我们需要将这两个区分开，不然只能实现其中一个，那么点击lsitActivity和不点击的区别是什么？我想到的是点击后path会改变，
+那么就可以跟之前的path进行比较，如何得到之前的path呢？我的想法是将读入的path放入一个list中，然后将list的倒数第二个元素和最新的path进行对
+比，如果相等，则就说明没有点击listActivity的歌名，那么不调用reset，否则调用，而还有一个判定就是需要判断list的元素是否大于等于二，因为取
+的是list倒数第二个元素，下面是我的代码
+public List<String> PathList(String path){
+if(path!=null){
+pathList.add(path);
+}
+return pathList;
+}
+public String [] pathshuzhu(List<String> listPath){
+String stringlist=listPath.toString();
+String []shuzuList=stringlist.split(",");
+return shuzuList;
+}
+public String chuliString(String s){
+String ss=s.substring(1, s.length());
+return ss;
+}
+下面这段是判断的语句：
+
+ if(!mediaPlayer.isPlaying()){
+if(arrayPath.length<2){
+Init(path);
+mediaPlayer.start();
+}
+     else{  
+     Log.i("Logcat", "play"+path);
+Log.i("Logcat", "playPath"+chuliString(arrayPath[arrayPath.length-2]));
+Log.i("Logcat", "playPath"+path);
+if(chuliString(arrayPath [arrayPath.length-2]).equals(path)){
+Log.i("Logcat", "xiangdneg");
+Log.i("Logcat", chuliString(arrayPath[arrayPath.length-2]));
+Log.i("Logcat", "playPath"+path);
+
+Init(path);
+mediaPlayer.start();
+}
+else{
+Log.i("Logcat", "buxinagdneg");
+mediaPlayer.reset();
+Init(path);
+mediaPlayer.start();
+}
+}
+      }
+  else {
+
+//Log.i("Logcat", arrayPath[arrayPath.length-1]);
+//Log.i("Logcat", "playPath"+path);
+mediaPlayer.reset();
+Init(path);
+mediaPlayer.start();
+
+
+
+}
+这样就能实现播放的功能，所以感觉解决问题就需要明白想实现什么功能，然后想需要怎么做，然后做就好了。
