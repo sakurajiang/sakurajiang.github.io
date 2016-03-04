@@ -1,0 +1,30 @@
+我自己在用MP3播放器的时候，利用jsoup从网上下载网页并解析，但是发现在导入jsoup包之后，发现出现
+java.lang.NoClassDefFoundError:org.jsoup.Jsoup问题，我已经设置了网络权限，后面通过查询发现是因为ADT20以后不支持导入Jsoup.jar包，要想继续
+使用应该先将导入的包删了，再在自己项目的根目录下建立libs目录，方法如下：右键项目，选择folder，在弹出的选项中输入libs，然后直接将
+Jsoup.jar包移到libs中，这里说下，我用复制黏贴不行，然后直接拖拽的，因为libs貌似不能打开，也可能是我不知道
+2.然后运行程序，接下来会出现android.os.NetworkOnMainThreadException错误，这个错误是4.0之后在主线程里面执行Http请求都会报这个错误，这个
+错误的解决方法如下：将jsoup的哪些代码放在一个线程中，如我自己写的 class DownListener implements OnClickListener{
+
+        @Override
+        public void onClick(View arg0) {
+            // TODO Auto-generated method stub
+            new Thread(downloadRun).start();
+        }
+        
+    }
+    Runnable downloadRun = new Runnable(){  
+          
+        @Override  
+        public void run() {  
+            // TODO Auto-generated method stub  
+            DownLoad download=new DownLoad();
+            String geci=download.Download();
+            System.out.println("geci:"+geci);
+        }  
+          };  
+    
+}
+
+这是在activity中的代码一部分，DownLoad这个类是自己写的，这个类中存放的就是jsoup的代码，如果直接在监听器调中写  
+DownLoad download=new DownLoad();  String geci=download.Download();，就会出现这个错误，需要放在一个线程中，代码如上，再次运行程序就好了，
+在这里特别说下，一定要记得在AndroidManifest.xml中声明访问网络权限，这样应该就不会有问题了。
