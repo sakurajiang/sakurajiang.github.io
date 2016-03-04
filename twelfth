@@ -1,0 +1,16 @@
+今天是android的第十二天，今天学习的是sqlite，当我们需要操作sqlite数据库时，我们必须有sqliteopenhelper对象，这个对象是抽象类，所以我们要写
+一个类继承它，继承它之后我们拥有两个函数，一个是getreadabledatabase和getwritedatabase方法，这两个函数从字面便可看出，一个是得到可读的数据
+库，比如查询，还有一个是可写的数据库，比如增加，删除。除了这些我们还可以重写一些方法，比如oncreate，onopen之类的，当你复写oncreate时会看到
+这个方法需要传入一个sqlitedatabase对象，这就是回调模式，这个函数称为回调函数，如何知道自己的数据库创建成功呢？这时就需要adb这个工具，我们
+在命令行输入adb，然后输入adb shell，这个就是linux命令行方式，ls ，ls -l，我们输入ls -l，然后cd data，再ls -l，在cd data，然后ls -l，然后进
+入程序的目录中，也就是包名，然后ls，发现有一个lib，然后我们创建一个数据库，再ls，就可以看到这个目录多了一个databases，然后cd databases，再
+ls，就会发现有个文件，这个文件就是数据库文件，名字就是数据库名字，如何访问这个数据库呢？我们需要使用sqlite3这个命令来打开sqlite的操作环境，
+sqlite3 +数据库名字，这样我们就可以操作数据库了，.schema是显示表，然后select * from 表名，这是查询这个表的所有数据，对于插入，我们需要用到
+contentvalues对象，这个相当于mysql的statement，然后调用contentvalues对象的put方法赋值，然后调用数据库的insert方法，这个方法需要传入三个参数，
+第一个表名，第二个null，第三个是contentvalues对象，更新则是调用update方法，这个方法需要传入需要更新的表名，第二个参数是一个contentvalues对
+象，第三个参数是where子句，第四个就是需要更新的id，然后是查询的方法，需要调用query方法，需要传入表名，需要查询的列名，selection相当于sql语
+句的where之后的语句，然后是selection的参数，然后是groupby子句，having子句，orderby子句，这个方法传入一个cursor对象，就是游标对象，然后调用
+cursor的getstring方法，这个方法需要传入一个列的编号，这个和jdbc不同，这个编号可以通过cursor.getcolumnindex方法，这个方法传入一个列名，这样
+就可以得到编号，也就可以得到这列的值。当然这些只是sqlite的基本方法。总之我们需要记住当我们需要操作sqlite数据库时，我们必须有sqliteopenhelper
+对象，这个对象是抽象类，所以我们要写一个类继承它，继承它之后我们拥有两个函数，一个是getreadabledatabase和getwritedatabase方法来得到可读和
+可写的数据库。
