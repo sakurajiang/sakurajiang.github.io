@@ -1,0 +1,102 @@
+今天是学习android的第十一天，今天学习的是两个控件，一个是progressbar和listview，同样对于控件的步骤一样的，现在布局中声明，然后在activity
+中用findviewbyid方法找到，然后就可以使用了，对于第一个控件，它的意思是进度条控件，这个控件是我们经常见到的，这次练习是通过点击button事件
+来控制进度条的进度，在声明progressbar时一般都会设置进度条的可见性，用的是android:visibility="gone"，然后一般我们用的都不是系统默认的进度
+条，设置进度条的样式是style="?android:attr/progressBarStyleHorizontal",这样设置的就是水平的，然后在button的监听器类来设置进度条的进度，
+比如声明一个变量，初值为零，然后用if判断，为零的时候设置进度条可见，然后i<100(进度条的最大值默认100),用setprogress方法，传入i的值，i到
+100时，设置不可见，i是以十为递进的，有时候我们会调用progressbar的setsecondaryprogress，这样在一个进度条会显示两个不同颜色的进度，这样会
+满足某些需要，比如下载的时候，一个可以表示当前文件的下载进度，另一个显示总下载进度，因为我们可能会下载好多文件，这就是进度条的使用，接下
+来是listview的使用，这个控件的使用比较复杂，当时用途多，比如音乐播放器中显示歌曲的列表，我们先声明一个类继承activity，既然是控件，那么就
+需要在布局文件中声明，这个控件的id是用android内置的id，形式为android:id=@id/android:list，然后设置一个scrollbars设置成垂直的，这样当我
+们的屏幕不够显示时是垂直显示出来，与别的控件的不同之处在于还需要声明一个layout文件，用于显示list中的数据的，这个activity需要调用
+setadapter方法，这个方法需要传入传入一个adapter，这个simpleadapter是android提供的一个类，adapter我们翻译成汉语就是适配器的意思，适配器
+里面主要是添加一些数据，simpleadapter是最简单的一个adapter，要生成一个adapter对象，需要传入5个参数，this，list是你要显示的东西，这个
+list里放入的是hashmap，hashmap放的是键值对，第三个参数是显示list中每条内容的布局，第四个是一个string类型的数组，这个数组是你当前list中
+有几列，那么数组就要有几个元素，可以简单的理解为这些元素是列的名字，这些列的名字不是随便起的，这些名字对应map的键，然后最后一个是int型
+的数组，这个是显示list的值的，里面放的是布局的id，就是显示list布局的id，第一列显示的就是int数组的第一个控件的值，这个值是string数组的第
+一列的键对应的值，每一个map的内容显示在一行中，有几个map显示几行，给map赋值使用put方法，将hashmap放入list中是用list的add方法，将每
+个map都放进去，这样就可以显示了，由于比较辅助，下面是我的代码，
+activity的布局：<RelativeLayoutxmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+   android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+
+    <ListView 
+        android:id="@id/android:list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ></ListView>
+        "
+
+
+</RelativeLayout>
+显示list每条内容的布局：
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayoutxmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TextView 
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/ip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"/>"
+
+
+</LinearLayout>
+activity的内容：
+public class MainActivity extends ListActivity {
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ArrayList<HashMap<String, String>>list=new ArrayList<HashMap<String, String>>();
+        HashMap<String, String> map1=newHashMap<String, String>();
+        HashMap<String, String> map2=newHashMap<String, String>();
+        HashMap<String, String> map3=newHashMap<String, String>();
+        map1.put("user_name","zhangsan");
+        map1.put("user_ip","192.168.03.1");
+        map2.put("user_name", "lisi");
+        map2.put("user_ip","192.168.03.2");
+        map3.put("user_name","wangwu");
+        map3.put("user_ip","192.168.03.3");
+        list.add(map1);
+        list.add(map2);
+        list.add(map3);
+        SimpleAdapter listAdapter=newSimpleAdapter(this,list,R.layout.user,new String []{"user_name","user_ip"},new int [] {R.id.name,R.id.ip});
+        setListAdapter(listAdapter);
+    }
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the actionbar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+
+
+
+         @Override
+         protectedvoid onListItemClick(ListView l, View v, int position, long id) {
+                   //TODO Auto-generated method stub
+                   super.onListItemClick(l,v, position, id);
+                   System.out.println("position-----"+position);
+                   System.out.println("id----"+id);
+         }
+    
+}
