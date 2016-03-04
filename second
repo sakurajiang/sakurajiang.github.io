@@ -1,0 +1,5 @@
+今天是android学习的第二天，今天学习的是android重要的组件：activity，activity的重要可以从两方面讲，第一：作为一个activity来讲，它是用户和应
+用程序交互的接口，第二：activity里可以放置各种各样的控件，所以说activity是控件的容器，那么如何创建一个activity，首先要创建一个类继承
+android提供的activity类，然后要复写oncreate方法，这个方法是在activity第一次运行是调用，然后要在manifest.xml中进行配置，最后要为activity添加
+必要的控件，如何添加控件呢？可以在layout文件夹中声明一个布局文件，在布局文件中对整个应用程序的布局以及添加怎样的控件进行设置，然后可以在
+应用程序中用findviewbyid方法来寻找到这个控件，这也就要求你在声明控件时，需要给控件一个ID。
