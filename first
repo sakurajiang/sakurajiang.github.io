@@ -1,1 +1,11 @@
-今天是记录android学习的第一天，我参照的是mars_chen的教学视频来学习android的，因为我觉得视频比课本生动具体，可能没有课本详细，但是更适合初学者。今天学习的是写一个简单的程序:say_hello_to_Android，点击File，选择new，然后选择Android Application Project，然后弹出一个框，依次在里面写入Hello（Application name）,Android_Hello(Project name),mars.Hello(Application name),然后点击next，直到出现finish，点击finish。这样一个项目就建好了，然后在项目里面会出现很多的目录，src目录存放的是编写程序的源文件，gen这个目录是ADT插件生成的文件，这个文件叫R.java,里面的代码都是自动生成的，Android 1.6是Android提供的jar文件，我们所引用的所有的Android类都来自于这个jar文件，assets和res目录都可以存放一些文件，但是在res的文件都会在R.java中生成相应的id，res目录里有关于图片的目录,布局目录,values目录放的是我们在应用程序中用到的值，然后就是AndroidManifest.xml文件是整个应用程序的配置文件，打开它会有根标签<manifest></manifest>，然后是应用程序的配置标签<Application>里面有两个重要的属性android:icon,这个是配置整个程序的图标，android:label是配置整个文件的标签。接下来是activity的配置，同样有一个activity的label，就是activity的标签，引用方法类似，然后有一个android:name是指activity的位置，然后有一个<intent-filter>这个标签在哪个activity中哪个activity就会先运行，然后右键项目，点击Run As，选择Android Application，然后程序就运行了，在模拟器上显示Hello World,Hello！，其实都没写代码，这个都是ADT插件自动帮我们生成的，然后我们返回可以再模拟器上看到我们的程序的图标。
+今天是记录android学习的第一天，我参照的是mars_chen的教学视频来学习android的，因为我觉得视频比课本生动具体，可能没有课本详细，但是更适合初学
+者。今天学习的是写一个简单的程序:say_hello_to_Android，点击File，选择new，然后选择Android Application Project，然后弹出一个框，依次在里面写
+入Hello（Application name）,Android_Hello(Project name),mars.Hello(Application name),然后点击next，直到出现finish，点击finish。这样一个项目
+就建好了，然后在项目里面会出现很多的目录，src目录存放的是编写程序的源文件，gen这个目录是ADT插件生成的文件，这个文件叫R.java,里面的代码都是
+自动生成的，Android 1.6是Android提供的jar文件，我们所引用的所有的Android类都来自于这个jar文件，assets和res目录都可以存放一些文件，但是在
+res的文件都会在R.java中生成相应的id，res目录里有关于图片的目录,布局目录,values目录放的是我们在应用程序中用到的值，然后就是
+AndroidManifest.xml文件是整个应用程序的配置文件，打开它会有根标签<manifest></manifest>，然后是应用程序的配置标签<Application>里面有两个重要
+的属性android:icon,这个是配置整个程序的图标，android:label是配置整个文件的标签。接下来是activity的配置，同样有一个activity的label，就是
+activity的标签，引用方法类似，然后有一个android:name是指activity的位置，然后有一个<intent-filter>这个标签在哪个activity中哪个activity就会先
+运行，然后右键项目，点击Run As，选择Android Application，然后程序就运行了，在模拟器上显示Hello World,Hello！，其实都没写代码，这个都是ADT插
+件自动帮我们生成的，然后我们返回可以再模拟器上看到我们的程序的图标。
