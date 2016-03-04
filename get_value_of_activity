@@ -1,0 +1,13 @@
+今天下午一直在想解决有关于在自定义的控件获得该activity的某些变量的值，网上的一些是关于自定义控件的数据传递给activity，这个是在activity中重
+写onPickerChangeListener()方法，但是这个和我要实现的功能不同，然后网上又没有答案，所以把这个方法写下来，这是我问同学之后加上自己的改动实现
+的，这个方法就是将你在自定义控件中需要得到的变量单独声明成一个类，也就是一个变量类，比如我要得到name这个变量:public static String name=null;
+然后把它赋值成你需要的数据，比如我是要得到通过contentprovider得到的歌息，
+int indexTitle =cursor.getColumnIndex(MediaStore.Audio.AudioColumns.TITLE);
+int indexARTIST = cursor.getColumnIndex(MediaStore.Audio.AudioColumns.ARTIST);
+String strTitle = cursor.getString(indexTitle);
+
+String strARTIST = cursor.getString(indexARTIST);
+
+Contant.name=strARTIST+" - "+ strTitle =;
+
+这样就给name赋值了，你需要用的时候只要String name=Contant.name;这样就name就是你需要的值了。
