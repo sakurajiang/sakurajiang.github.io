@@ -9,8 +9,9 @@ ContextThemeWrapper-ContextWrapper-Context-Object这样的层次关系，从上�
 后这个是复写View的方法，先判断TextView中是否有数据，有的话就开始保存，返回一个parcelable对象，那么还有问题，在声明EditText控件时，
 是声明为EditText对象，并不是TextView对象，也就是说声明的EditText对象不能使用TextView的onSaveInstanceState()方法，那么它是如何做到保存的呢？
 然后我上网查询TextView和EditText可以相互转换吗？然后没看到类似的结果，然后我突发奇想，我在eclipse中定义一个EditText对象，然后看它能否调用
-onSaveInstanceState()方法，结果可以。。。那么为什么呢？既然能调用，那么EditText对象是什么时候会调用onSaveInstanceState()这个方法呢？当在
-activity中调用onSaveInstanceState()方法时，EditText对象会调用onSaveInstanceState()方法吗？如果会，这两个方法之间怎么联系呢？整个保存数据和
-恢复数据的过程是什么？等下实验一下如何让EditText对象调用onSaveInstanceState()方法。实验的结果是直接用EditText对象调用onSaveInstanceState()
-方法，返回一个parcelable对象，然后直接打印出来的结果就是你在EditText中输入的内容，输出结果是：
-TextView.SavedState{53e150e start=5end=5 text=dhjvg},其中的dhjvg是自己在EditText输入的内容，可是后面两个我还是不知道，以我的知识很难弄明白它。
+onSaveInstanceState()方法，结果可以。。。那么为什么呢？
+既然能调用，那么EditText对象是什么时候会调用onSaveInstanceState()这个方法呢？当在activity中调用onSaveInstanceState()方法时，EditText对象会
+调用onSaveInstanceState()方法吗？如果会，这两个方法之间怎么联系呢？整个保存数据和恢复数据的过程是什么？等下实验一下如何让EditText对象调用
+onSaveInstanceState()方法。实验的结果是直接用EditText对象调用onSaveInstanceState()方法，返回一个parcelable对象，然后直接打印出来的结果就是
+你在EditText中输入的内容，输出结果是：TextView.SavedState{53e150e start=5end=5 text=dhjvg},其中的dhjvg是自己在EditText输入的内容，可是后面
+两个我还是不知道，以我的知识很难弄明白它。
