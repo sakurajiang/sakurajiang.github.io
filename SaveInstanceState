@@ -4,14 +4,20 @@ android应用框架中定义的几乎所有的UI控件都恰当的实现了onSav
 态数据，看到这句话时，我就想，这onSaveInstanceState()方法不是activity的吗？为什么又变成了UI控件实现了onSaveInstanceState()方法？是说activity
 和UI控件同时继承了一个类或实现了同一个接口吗？于是我便查看这两个的继承关系，结果发现UI控件的继承关系是view-object，而activity是
 ContextThemeWrapper-ContextWrapper-Context-Object这样的层次关系，从上我们可以发现它们共同的只不过是Object这个类，这是一切的父类，然后我在这
-里没找到onSaveInstanceState()方法，然后我就想不明白了，这个意思是说它们分别定义了这个方法吗？于是我便在EditText中找onSaveInstanceState()方
-法，没有找到，，然后我去查找EditText的继承关系,发现它继承自TextView，于是我便在TextView中找，然后我找到了onSaveInstanceState()这个方法，然
-后这个是复写View的方法，先判断TextView中是否有数据，有的话就开始保存，返回一个parcelable对象，那么还有问题，在声明EditText控件时，
-是声明为EditText对象，并不是TextView对象，也就是说声明的EditText对象不能使用TextView的onSaveInstanceState()方法，那么它是如何做到保存的呢？
-然后我上网查询TextView和EditText可以相互转换吗？然后没看到类似的结果，然后我突发奇想，我在eclipse中定义一个EditText对象，然后看它能否调用
-onSaveInstanceState()方法，结果可以。。。那么为什么呢？
-既然能调用，那么EditText对象是什么时候会调用onSaveInstanceState()这个方法呢？当在activity中调用onSaveInstanceState()方法时，EditText对象会
-调用onSaveInstanceState()方法吗？如果会，这两个方法之间怎么联系呢？整个保存数据和恢复数据的过程是什么？等下实验一下如何让EditText对象调用
-onSaveInstanceState()方法。实验的结果是直接用EditText对象调用onSaveInstanceState()方法，返回一个parcelable对象，然后直接打印出来的结果就是
-你在EditText中输入的内容，输出结果是：TextView.SavedState{53e150e start=5end=5 text=dhjvg},其中的dhjvg是自己在EditText输入的内容，可是后面
-两个我还是不知道，以我的知识很难弄明白它。
+里没找到onSaveInstanceState()方法，然后我就想不明白了，这个意思是说它们分别定义了这个方法吗？（于是我便回到activity.java这个类中在看一下这
+个方法，发现它没有使用@Override标记，也就是说这是自己的方法，然后我去view.java中看，发现这也没有@Override标记，也就是说也是自己的方法，也就
+是说这是两个不同的方法，果然，它们的方法标签都不相同。--这是我自己回过头来看自己写的博客时重新写的话，这时的我已经回头重新看了一下java，收益
+良多，发现自己的java知识很薄弱，感觉学android并不像网上说的那样，说什么java会基础的就行，不过也没说错，毕竟他们没说基础的范围。。。）
+于是我便在EditText中找onSaveInstanceState()方法，没有找到，，然后我去查找EditText的继承关系,发现它继承自TextView，于是我便在TextView中找，然
+后我找到了onSaveInstanceState()这个方法，然后这个是复写View的方法，先判断TextView中是否有数据，有的话就开始保存，返回一个parcelable对象，那么
+还有问题，在声明EditText控件时，是声明为EditText对象，并不是TextView对象，也就是说声明的EditText对象不能使用TextView的onSaveInstanceState()方
+法，那么它是如何做到保存的呢？然后我上网查询TextView和EditText可以相互转换吗？然后没看到类似的结果，然后我突发奇想，我在eclipse中定义一个
+EditText对象，然后看它能否调用onSaveInstanceState()方法，结果可以。。。那么为什么呢？（这也是我后面看自己博客时写的，对于上面自己写的话表示汗
+颜，因为一个类继承了父类后也就继承了父类所有的public和protected修饰的变量，当然如果在同一个包中，那么默认的也会被继承，而这个方法是protected
+修饰的，自然edittext能用。）既然能调用，那么EditText对象是什么时候会调用onSaveInstanceState()这个方法呢？当在activity中调用onSaveInstanceState()
+方法时，EditText对象会调用onSaveInstanceState()方法吗？如果会，这两个方法之间怎么联系呢？整个保存数据和恢复数据的过程是什么？等下实验一下如何
+让EditText对象调用onSaveInstanceState()方法。实验的结果是直接用EditText对象调用onSaveInstanceState()方法，返回一个parcelable对象，然后直接打
+印出来的结果就是你在EditText中输入的内容，输出结果是：TextView.SavedState{53e150e start=5end=5 text=dhjvg},其中的dhjvg是自己在EditText输入的
+内容，可是后面两个我还是不知道，以我的知识很难弄明白它。（关于这些问题，其实上面解答了一部分，在控件中的onSaveInstanceState()方法其实就是用几
+个if语句来判断，首先判断是否为空，不为空就把boole型变量save赋值成true，然后再保存，保存是用SavedState类来实现的，然后返回这个类类型的变量，恢
+复数据应该是在textview的构造函数中恢复的，）
