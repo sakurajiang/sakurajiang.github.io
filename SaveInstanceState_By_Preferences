@@ -1,6 +1,6 @@
 this.getPreferences(MODE_PRIVATE).edit().putString("name", myEditText.getText().toString()).apply();（apply()也可以用commit()代替），这行代
-码从调用完getPreferences（）方法后，后面的所有方法都是SharedPreferences接口中的，关键是这个接口没有被任何类实现，那么调用这些方法怎么能够保
-存EditText的信息到一个xml文件中的呢？而且用这个方式保存数据的activity不管是按back，home，系统自动销毁，自己主动关闭这个activity都会保存数据
+码从调用完getPreferences（）方法后，后面的所有方法都是SharedPreferences接口中的，关键是这个接口没有被任何类实现，（这是我后面看自己博客时写
+的这个，接口被SharedPreferencesImpl类实现，），那么调用这些方法怎么能够保存EditText的信息到一个xml文件中的呢？而且用这个方式保存数据的activity不管是按back，home，系统自动销毁，自己主动关闭这个activity都会保存数据
 并且恢复，那么也就是说这中方式适合永久保存数据。然后我就想到如何删除这些数据呢？通过上网查询，发现是用this.getPreferences(MODE_PRIVATE).
 edit().remove("name").commit();其中的"name"是你用putString()方法放进数据时的键，然后在试验的时候我发现一个很有趣的现象，因为一开始我的
 activity只是实现了onPause(),onCreate(),onDestroy()，onResume()方法，所以我把删除数据的程序放在onDestroy()方法中，但是结果就是无法删除，这时
@@ -10,4 +10,6 @@ activity是被销毁了，但是很明显onDestroy语句没有实现完，如果
 了onDestroy()方法的运行，但是删除程序也是实现了SharedPreferences这个接口的，这个接口没有被继承，我搞不懂是如何实现的额，如果我是按back键返
 回的话，那么所有的Log语句都会打印出来，而且数据也会被删除，我是用真机测试的，用的是红米note2，我清除活动时是直接按菜单键，在弹出的界面中直
 接删了的，然后我复写onStop()方法，也是两条Log语句，发现这个Log语句打印出来了，而且也删除了，这就说明onPause()方法比onDestroy()方法更适合处
-理操作。可是对于SharedPreferences接口是怎么做到这些的我还是不明白，以及onDestroy()怎么实现的我也不懂，看这段源码看不懂。
+理操作。（这里的我清除活动时是直接按菜单键，在弹出的界面中直接删了的这个做法，可能是miui系统自己写的删除，不是原生的android系统，并且
+onPause()方法的确比onDestrory()方法更适合处理这种保存的工作，但是onStop()方法应该更适合）。可是对于SharedPreferences接口是怎么做到这些的我
+还是不明白，以及onDestroy()怎么实现的我也不懂，看这段源码看不懂。
