@@ -5,25 +5,25 @@
   
   
   
-  <title>测试保存activity状态用preference的方式 | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <title>inline_assembly | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
   
   
-  <meta name="keywords" content="Android,干货">
-  <meta name="description" content="这是一篇干货">
-<meta name="keywords" content="Android,干货">
+  <meta name="keywords" content="干货,汇编">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="干货,汇编">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试保存activity状态用preference的方式">
-<meta property="og:url" content="http://sakurajiang.github.io/2016/07/21/Android-测试保存activity状态用preference的方式/index.html">
+<meta property="og:title" content="inline_assembly">
+<meta property="og:url" content="http://sakurajiang.github.io/2020/06/19/inline_assembly/index.html">
 <meta property="og:site_name" content="sakurajiang的个人博客">
-<meta property="og:description" content="这是一篇干货">
+<meta property="og:description" content="这是一篇比较干货的文章">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-06T09:20:42.079Z">
+<meta property="og:updated_time" content="2020-07-06T12:44:05.924Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试保存activity状态用preference的方式">
-<meta name="twitter:description" content="这是一篇干货">
+<meta name="twitter:title" content="inline_assembly">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
   
     <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
   
@@ -120,7 +120,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">测试保存activity状态用preference的方式</div>
+        <div class="flex-col header-title ellipsis">inline_assembly</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -142,7 +142,7 @@
 <header class="content-header post-header">
 
     <div class="container">
-        <h1 class="title">测试保存activity状态用preference的方式</h1>
+        <h1 class="title">inline_assembly</h1>
         
         
 
@@ -155,14 +155,21 @@
 
 <div class="container body-wrap">
     
-<article id="post-Android-测试保存activity状态用preference的方式" 
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#why"><span class="post-toc-text">why</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#how"><span class="post-toc-text">how</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-inline_assembly" 
   class="post-article article-type-post" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">测试保存activity状态用preference的方式</h1>
+        <h1 class="post-card-title">inline_assembly</h1>
         <div class="post-meta">
-            <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-07-21
+            <time datetime="2020-06-18T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2020-06-19
 </time>
 
             
@@ -170,16 +177,28 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p> this.getPreferences(MODE_PRIVATE).edit().putString(“name”, myEditText.getText().toString()).apply();（apply()也可以用commit()代替），<br>这行代码从调用完getPreferences（）方法后，后面的所有方法都是SharedPreferences接口中的，</p>
-<p>（这是我后面看自己博客时写的这个，接口被SharedPreferencesImpl类实现，）</p>
-<p>那么调用这些<br>方法怎么保存EditText的信息到一个xml文件中的呢？而且用这个方式保存数据的activity不管是按back，home，系统自动销毁，自己主动关闭这<br>个activity都会保存数据并且恢复，那么也就是说这中方式适合永久保存数据。然后我就想到如何删除这些数据呢？通过上网查询，发现是用<br>this.getPreferences(MODE_PRIVATE).edit().remove(“name”).commit();其中的”name”是你用putString()方法放进数据时的键，然后在试验的时候<br>我发现一个很有趣的现象，因为一开始我的activity只是实现了onPause(),onCreate(),onDestroy()，onResume()方法，所以我把删除数据的程序放在<br>onDestroy()方法中，但是结果就是无法删除，这时我就纳闷了，为什么呀？难道删除不是这么做的？然后我就又去网上搜索，发现是这样的，<br>我就在onDestroy()方法中输入两条Log语句，将删除程序放在中间，结果发现两条Log语句只会输出第一条，第二条不会输出，但是当你再<br>打开这个应用程序时，它又会输出我在onCreate()方法中的Log语句，也就是说这个activity是被销毁了，但是很明显onDestroy语句没有实现完，<br>如果我把onDestroy()方法中的删除程序去掉，那么Log语句都会打印出来，这说明删除程序阻碍了onDestroy()方法的运行，但我搞不懂是如何实现的额，如果我是按back键返回的话，那么所有的Log语句都会打印出来，而且数据也会被删除，我是用真机测<br>试的，用的是红米note2，我清除活动时是直接按菜单键，在弹出的界面中直接删了的，然后我复写onStop()方法，也是两条Log语句，发现这个Log语句打印出来了，而且也删除了，这就说明<br>onPause()方法比onDestroy()方法更适合处理操作。（这里的我清除活动时是直接按菜单键，在弹出的界面中直接删了的这个做法，可能是miui系统自己写的删除，不是原生的android系统，<br>并且onPause()方法的确比onDestrory()方法更适合处理这种保存的工作，但是onStop()方法应该更适合）。</p>
-<p>可是对于SharedPreferences接口是怎么做到这些的我还是不明白，以及onDestroy()怎么实现的我也不懂，看这段源码看不懂。</p>
+            <h3 id="why"><a href="#why" class="headerlink" title="why"></a>why</h3><p>当你的项目的主要语言是C/C++的时候，你需要进行极致的优化或者想实现的代码需要高度的硬件定制性时，就需要使用到内连汇编。</p>
+<h3 id="how"><a href="#how" class="headerlink" title="how"></a>how</h3><p>我们通过使用<code>asm</code>关键字，语法如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">asm</span> ( assembler <span class="keyword">template</span></span><br><span class="line">    : output operands                   (optional)</span><br><span class="line">    : input operands                    (optional)</span><br><span class="line">    : clobbered registers <span class="built_in">list</span>          (optional)</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+<p>assembler template:：汇编语言，比如”movl %%eax, %%ebx” ，这句话的意思是将eax寄存器的值拷贝到ebx寄存器中。</p>
+<p>output operands:：为assembler template中的汇编代码提供输出参数(指定assembler template中汇编代码输出到C/C++的哪个变量)，并且指定这个变量存在哪个寄存器中，比如”=a”(b)，表示将结果写到b这个变量中（当然需要先声明变量b），该变量存储在eax寄存器。=表示该操作数是只写的，之前的数据被抛弃。注意，<strong>如果你在assembler template中对eax寄存器赋值，那么也就修改了b变量的值</strong>。举个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">asm</span> (<span class="string">"movl $6,%0; movl $9,%%eax;"</span></span><br><span class="line">        :<span class="string">"=a"</span>(a)</span><br><span class="line">        :</span><br><span class="line">        :);</span><br></pre></td></tr></table></figure>
+<p>最后，a的值为9，而不是6。</p>
+<p>input operands：为assembler template中的汇编代码提供输入参数(指定assembler template中汇编代码需要使用到C/C++的哪个变量)，并且指定该变量存储在哪个寄存器中，比如”a”(a)，表示将a变量的值存储在eax寄存器。此时在assembler template中访问eax寄存器，也就是访问a变量</p>
+<p>clobbered registers list：告诉gcc，asm里的汇编代码会使用到这些寄存器，所以gcc不能使用这里面的寄存器。当然在input或者output列出的寄存器不需要在这里重复列出，如果asm里的汇编代码会以不可预知的方式修改内存，那么还需要将”m”加到clobbered registers list。</p>
+<p>看完了语法之后，下面以例子开始说明：</p>
+<p>先举一个简单的例子，即将变量a的值赋值给b:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> b,a=<span class="number">10</span>;</span><br><span class="line"><span class="keyword">asm</span>(<span class="string">"movl %1, %%eax; movl %%eax, %0;"</span></span><br><span class="line">     :<span class="string">"=r"</span>(b)        <span class="comment">/* output */</span></span><br><span class="line">     :<span class="string">"r"</span>(a)         <span class="comment">/* input */</span></span><br><span class="line">     :         <span class="comment">/* clobbered register */</span></span><br><span class="line">     );</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"a := "</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"b := "</span> &lt;&lt; b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中0%表示参数b，%1表示参数a，如果是output operands中有多个参数，那么%index就会顺延，比如如果output operands是:”=r”(b),”=r”(c) 而input operands是”r(a), r(b)”，那么%0表示b，%1表示c，%2表示a，%3表示b。</p>
+<p>写下一个例子之前，我们先了解一下cmpxchgl指令，根据<a href="http://heather.cs.ucdavis.edu/~matloff/50/PLN/lock.pdf" target="_blank" rel="noopener">文档</a>解释，cmpxchgl有两个参数，分别是source_operand和dest。cmpxchgl会比较eax寄存器和dest中的值，如果相等，就将source_operand的值赋给dest，否则，就把dest的值赋值给eax寄存器。还有一个需要注意的是，如果在assembler template中加了lock，那么dest就必须存储在memory中。下面我们以例子说明：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">testCmpxchg</span><span class="params">(<span class="keyword">int</span> compareValue,<span class="keyword">int</span> exchangeValue,<span class="keyword">int</span> dest)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">     __asm__ __volatile__(<span class="string">"lock;\n"</span></span><br><span class="line">                          <span class="string">"cmpxchg %1, %3;\n"</span></span><br><span class="line">                 :<span class="string">"=a"</span>(result)</span><br><span class="line">                 :<span class="string">"r"</span>(exchangeValue),<span class="string">"a"</span>(compareValue),<span class="string">"m"</span>(dest)</span><br><span class="line">                 :<span class="string">"memory"</span>,<span class="string">"cc"</span>);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"result ="</span>&lt;&lt;result&lt;&lt;<span class="string">"compareValue="</span>&lt;&lt;compareValue&lt;&lt;<span class="string">"exchangeValue="</span>&lt;&lt;exchangeValue&lt;&lt;<span class="string">"dest="</span>&lt;&lt;dest&lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输入参数是4,5,4，则输出4,4,5,5。输入参数是4,5,5，输出5,4,5,5。</p>
 
         </div>
         
         <blockquote class="post-copyright">
             <div class="content">
-               转载请注明出处：<a href="/2016/07/21/Android-测试保存activity状态用preference的方式/" target="_blank" rel="external">http://sakurajiang.github.io/2016/07/21/Android-测试保存activity状态用preference的方式/</a>
+               转载请注明出处：<a href="/2020/06/19/inline_assembly/" target="_blank" rel="external">http://sakurajiang.github.io/2020/06/19/inline_assembly/</a>
             </div>
             <footer>
                 <a href="http://sakurajiang.github.io">
@@ -197,7 +216,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/汇编/">汇编</a></li></ul>
 
 
             
@@ -248,21 +267,14 @@
     </div>   
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2016/07/21/Android-写一个简单的加载多张图片的自定义view/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">写一个简单的加载多张图片的自定义View</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2016/07/21/Android-测试保存activity状态/" id="post-next" class="post-nav-link">
+      <a href="/2018/10/30/gradle介绍和实战/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">测试保存activity状态</h4>
+        <h4 class="title">gradle</h4>
       </a>
     </div>
   
@@ -272,7 +284,7 @@
             
     
 <div class="duoshuo">
-	<div class="ds-thread" data-thread-key="Android-测试保存activity状态用preference的方式" data-title="测试保存activity状态用preference的方式" data-url="http://sakurajiang.github.io/2016/07/21/Android-测试保存activity状态用preference的方式/"></div>
+	<div class="ds-thread" data-thread-key="inline_assembly" data-title="inline_assembly" data-url="http://sakurajiang.github.io/2020/06/19/inline_assembly/"></div>
 </div>
 <script src="/js/embed.min.js?v=1.1.7"></script>
 <script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
@@ -317,10 +329,10 @@ var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
 
 <script>var BLOG = { ROOT: '/' };
 BLOG.SHARE = {
-title: "测试保存activity状态用preference的方式",
+title: "inline_assembly",
 pic: "/img/logo.jpg",
 summary: document.getElementsByName('summary')[0].content,
-url: "http://sakurajiang.github.io/2016/07/21/Android-测试保存activity状态用preference的方式/" }
+url: "http://sakurajiang.github.io/2020/06/19/inline_assembly/" }
 </script>
 <div class="global-share" id="global-share">
     <div class="tit">分享到：</div>
