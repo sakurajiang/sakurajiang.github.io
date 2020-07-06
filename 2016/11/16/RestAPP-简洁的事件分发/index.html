@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>RestAPP-简洁的事件分发 | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Android,干货,RestApp">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="Android,干货,RestApp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RestAPP-简洁的事件分发">
+<meta property="og:url" content="http://sakurajiang.github.io/2016/11/16/RestAPP-简洁的事件分发/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/伪代码-20161116.png">
+<meta property="og:updated_time" content="2020-07-06T09:35:18.720Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RestAPP-简洁的事件分发">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+<meta name="twitter:image" content="http://oaz1z7cqt.bkt.clouddn.com/伪代码-20161116.png">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">RestAPP-简洁的事件分发</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">RestAPP-简洁的事件分发</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#说在前面的话"><span class="post-toc-text">说在前面的话</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关于事件分发"><span class="post-toc-text">关于事件分发</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重要的知识点-大家拿本子记一下，高考必考啊"><span class="post-toc-text">重要的知识点(大家拿本子记一下，高考必考啊)</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-RestAPP-简洁的事件分发" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">RestAPP-简洁的事件分发</h1>
+        <div class="post-meta">
+            <time datetime="2016-11-15T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-11-16
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="说在前面的话"><a href="#说在前面的话" class="headerlink" title="说在前面的话"></a>说在前面的话</h3><p>事件分发是一个重点也是难点，所以，本篇幅有点长，如果耐心看完本篇，相信读者会有收获的。同时，读者也可以自己写例子测试，毕竟，<strong>纸上得来终觉浅，绝知此事要躬行</strong>。但是，对于水平高的读者，其实<strong>最好的方式是看源代码，因为一切原因都可以从源头找到答案</strong>。</p>
+<h3 id="关于事件分发"><a href="#关于事件分发" class="headerlink" title="关于事件分发"></a>关于事件分发</h3><p>   关于事件分发，其实主要就是理解三个函数，这三个函数分别是<code>dispatchTouchEvent(MotionEvent ev)</code>，<code>onInterceptTouchEvent(MotionEvent ev)</code>以及<code>onTouchEvent(MotionEvent ev)</code>，这里直接上一张图：</p>
+<p>   <img src="http://oaz1z7cqt.bkt.clouddn.com/伪代码-20161116.png" alt="伪代码-20161116"></p>
+<p>   这张图将分发事件中的重要的三个函数之间的关系表达的比较清晰，这里再简单的解释一下上面的伪代码:一个点击事件产生后，会从外到内传递，传递到根ViewGroup后，会调用根ViewGroup的dispatchTouchEvent方法，然后如果自己的onInterceptTouchEvent方法返回true，表示拦截事件，那么这个事件就会自己处理，也就是调用自己的onTouchEvent方法，如果返回false，就表示自己不拦截这个事件，事件就会传递给子元素，也就是调用子元素的dispatchTouchEvent方法，如此传递下去，直到事件被处理。</p>
+<p>知道了关系以后，我们还需要了解这三个函数，了解一个函数，<strong>其实无非就是理解它的作用，传入的参数以及返回值。</strong><br>先说<code>dispatchTouchEvent(MotionEvent ev)</code>:<br>这个函数的作用是分发事件，不管是ViewGroup还是View都有这个方法，它的返回值受本身的<code>onInterceptTouchEvent(MotionEvent ev)</code>和<code>child.dispatchTouchEvent(MotionEvent ev)</code>共同影响（从上面那张图就可以看出来），返回的各个值的意义如下:<br><code>return true</code> ：表示该View内部消化掉了所有事件。  </p>
+<p><code>return false</code> ：事件在本层不再继续进行分发，这个<code>false</code>也就是本身的<code>dispatchTouchEvent(MotionEvent ev)</code>返回值，而这个返回值会回溯给上层控件的<code>dispatchTouchEvent(MotionEvent ev)</code>，表示自己没有接受这个事件，不管上层控件是<code>view</code>还是<code>viewGroup</code>，都是交由上层控件的<code>onTouchEvent(MotionEvent ev)</code>方法进行消费（如果本层控件已经是Activity，那么事件将被系统消费或处理）。  　</p>
+<p>如果事件分发返回系统默认的 <code>super.dispatchTouchEvent(ev)</code>，事件将分发给本层的事件拦截<code>onInterceptTouchEvent(MotionEvent ev)</code>方法进行处理，而不是super的onInterceptTouchEvent。因为<code>return super.dispatchTouchEvent(ev)</code>会去运行父viewGroup的<code>dispatchTouchEvent(ev)</code>，然后运行onInterceptTouchEvent，那么这个onInterceptTouchEvent是谁的呢？根据方法是基于对象的，所以就会运行child的<code>onInterceptTouchEvent(MotionEvent ev)</code>也就是本层的事件拦截器，而不是super的onInterceptTouchEvent。详情可以参考规则中的第十条。</p>
+<p>然后是<code>onInterceptTouchEvent(MotionEvent ev)</code>:<br>这个函数的作用是拦截事件，只有<code>ViewGroup</code>有这个方法，返回的各个值的意义如下:<br><code>return true</code> ：表示将事件进行拦截，并将拦截到的事件交由本层控件 的 onTouchEvent 进行处理；<br><code>return false</code> ：则表示不对事件进行拦截，事件得以成功分发到子View。并由子View的dispatchTouchEvent进行处理。　<br>如果返回<code>super.onInterceptTouchEvent(ev)</code>，默认false，即表示不拦截该事件，这样事件才能以分发下去。<br>最后是<code>onTouchEvent(MotionEvent ev)</code>:<br>这个函数的作用是处理触摸事件，<code>ViewGroup</code>和<code>View</code>都有这个方法，返回值的意义如下:<br>如果return true，表示onTouchEvent处理完事件后消费了此次事件。此时事件终结；</p>
+<p>如果return fasle，则表示不响应事件，如果是ACTION_DOWN事件，那么该事件将会不断向上层View的onTouchEvent方法传递，直到某个View的onTouchEvent方法返回true，如果到了最顶层View还是返回false，那么事件就会交给Activity处理。且在同一个事件系列中，当前View无法再次接收到该事件序列，如果不是ACTION_DOWN事件，那么不会返回给父view的onTouchEvent处理，而是给Activity处理，并且该view可以继续接收该事件序列；　　</p>
+<p>如果return super.onTouchEvent(event);，默认是true，即表示处理事件。那这个和return true有什么区别呢？从代码就可以看出来，return super.onTouchEvent(event)会执行super.onTouchEvent(event)这个方法。比如，当你继承EditText后，重写onTouchEvent(MotionEvent event)方法，如果你将return super.onTouchEvent(event);换成return true，就会发现当你按返回取消输入框，再次点击自定义EditText时就会无法弹出输入框，解决办法可以是将return true修改成return super.onTouchEvent(event)，或者是在之前调用一次super.onTouchEvent(event)方法，<strong>弹出输入框是在action为ACTION_UP的时候弹出的。</strong>  </p>
+<h3 id="重要的知识点-大家拿本子记一下，高考必考啊"><a href="#重要的知识点-大家拿本子记一下，高考必考啊" class="headerlink" title="重要的知识点(大家拿本子记一下，高考必考啊)"></a>重要的知识点(大家拿本子记一下，高考必考啊)</h3><p>1.一个viewGroup一旦决定拦截事件(这里分两种情况，一个是拦截了ACTION_DOWN事件，还有一个是没有子View满足分发事件的条件或者子view在ACTION_DOWN时返回了false)，那么后面的事件序列都会交给它处理，并且不会再调用<code>onInterceptTouchEvent(ev)</code>方法， 当ACTION_DOWN事件成功传入子view的时候， 那么父ViewGroup在别的事件分发的时候，比如ACTION_MOVE，每次都会调用onInterceptTouchEvent来判断是否拦截当前事件。 <strong>也就是说，父ViewGroup的onInterceptTouchEvent不会再次调用的时机只是自己来处理这个事件，也就是自己的onTouchEvent被调用，只有这个时候才不会再次调用onInterceptTouchEvent，当事件传入子view来处理事件的时候，父ViewGroup都会每次都调用onInterceptTouchEvent来决定是否拦截当前事件。</strong>   </p>
+<p>2.dispatchTouchEvent无论返回true还是false，事件都不再进行分发，<strong>只有当其返回super.dispatchTouchEvent(ev)，才表明其具有向下层分发的愿望</strong>，但是是否能够分发成功，则需要经过事件拦截onInterceptTouchEvent的审核。事件是否向上传递处理是由onTouchEvent的返回值决定的。  </p>
+<p>3.正常情况下，一个事件序列只能被一个view拦截且消耗，因为，一旦决定拦截事件，那么这个事件只能被这个view消耗,并且它的onInterceptTouchEvent(ev)方法也不会<strong>再次调用</strong>(这里的<strong>拦截</strong>和规则一中的拦截是一样的。这里的<strong>再次调用</strong>是指当确定拦截事件后，除了在ACTION_DOWN时调用onInterceptTouchEvent(ev)，后面都不调用，其实跟规则一中说的一样)，如果你想这个事件序列被多个view拦截消耗，那么你可以在拦截事件的那个view中的onTouchEvent()方法中调用你想让其拦截事件的那个view的onTouchEvent()方法来实现。  </p>
+<p>4.view一旦用onTouchEvent()开始处理事件，如果没有处理ATION_DOWN事件，那么同一个事件序列中的事件也不会交给他处理，会回溯给他的父控件，<strong>如果你处理了ACTION_DOWN但是没有处理ACTION_MOVE或者ACTION_UP，那么这个事件还是被你消耗，不会调用父控件的onTouchEvent方法，最后会是Activity处理，后面的事件还是继续交给你处理</strong>。其实，这就类似现实，如果别人第一次叫你做事，你没做好，那么后面就都不会放心叫你做了，如果你第一次做好了，后面没做好，别人还是会给你做的，所以，第一次很重要。</p>
+<p>5.view的onTouchEvent默认都是消费事件的(返回true)，除非是不可点击的，也就是longClickable和clickable都为false，只有这个属性会影响view的onTouchEvent的返回值，别的属性不会，比如，Enabled属性，<strong>就算是Enabled属性为false，也就是disable状态，view的onTouchEvent默认返回的还是true。</strong>  </p>
+<p>6.事件传递是由外向内的，即事件总是传递给父元素，再由父元素分发给子控件，通过requestDisallowInterceptTouchEvent();方法可以在子元素中干预父元素的事件分发过程，<strong>但是不能干预ACTION_DOWN事件</strong>，因为当时ACTION_DOWN事件的时候，父元素会重置FLAG_DISALLOW_INTERCEPT标志位。  </p>
+<p>7.使用内部拦截法的时候，为了弄清楚顺序，我就直接调试，结果，运行到父元素的dispatchTouchEvent后，不会去调用父元素的onInterceptTouchEvent方法，直接就到了子元素的dispatchTouchEvent，依然会运行到子view的onTouchEvent，等到ACTION_UP的时候才会又跑到父元素中的dispatchTouchEvent和onInterceptTouchEvent去判断是否拦截ACTION_UP事件。我倒腾了一天，才发现是需要移动，也就是让move多次调用才行，因为事件是由外向内的，当第一次ACTION_MOVE事件到的时候，先运行父ViewGroup的dispatchTouchEvent方法，此时FLAG_DISALLOW_INTERCEPT依然是设置成true，所以，不会运行父ViewGroup的onInterceptTouchEvent方法，直接就会运行子view的dispatchTouchEvent方法，然后FLAG_DISALLOW_INTERCEPT被设置成false，于是当第二次的ACTION_MOVE到来的的时候，才会去运行父viewGroup的onInterceptTouchEvent方法，然后子view收到ACTION_CANCEL事件，<strong>等到第三个ACTION_MOVE的时候父viewGroup才开始拦截事件。</strong>但是因为我之前是调试，所以都只有一次move事件，结果就不一样了。也是醉了。并且使用内部拦截法的时候，ACTION_UP事件也会被父view拦截，不会传递到子view中，也就意味着子view的onClick事件不会响应，这一点要记住。</p>
+<p>8.内部拦截法和外部拦截法的区别:内部拦截法需要到该事件的第三个的时候才有用，也就是该事件的第一个依然被子view得到，外部拦截法则是到第二个就有用了，子view不会得到该事件的任何一个，比如，拦截ACTION_MOVE的时候，<strong>使用内部拦截法在拦截第三个ACTION_MOVE的时候才拦截了</strong>，因为第一个ACTION_MOVE会被子view得到，<strong>而使用外部拦截法则是第二个ACTION_MOVE的时候就拦截了</strong>，因为子view不会得到ACTION_MOVE中的任何一个。详情可以见9，10。所以，使用外部拦截法要好点。  </p>
+<p>9.当viewGroup没有拦截ACTION_DOWN而拦截了ACTION_MOVE或者ACTION_UP的时候，那么，第一个被拦截的动作不会在viewGroup中的onTouchEvent中触发，也不会在子view的onTouchEvent中触发，而是子view会受到ACTION_CANCEL事件。该事件序列后面的事件都会被拦截，并且下一个同类型的事件传来时，不会再调用viewGroup的onInterceptTouchEvent方法，直接就调用viewGroup的onTouchEvent方法，这里解释一下，什么是第一个被拦截的动作，比如，多个move的时候，第一个move就不会被父view或者子view执行，感觉是这个事件变成了ACTION_CANCEL事件传递到了子view。也就是说，一旦在这种情况下，ACTION_UP事件永远不会被子view接收。<strong>也就意味着，不管是使用外部拦截法还是内部拦截法，只要拦截了，那么子view就收不到ACTION_UP事件。</strong>还有就是ViewGroup就不要拦截ACTION_UP了，因为这样大家都得不到ACTION_UP事件，何必呢？  </p>
+<p>10.为了讲述方便，当从一个ViewGroup分发事件到子ViewGroup时，在子ViewGroup的dispatchTouchEvent方法中调用父类的dispatchTouchEvent，发现不会继续调用父类的onInterceprTouchEvent，而是直接调用子ViewGroup的onInterceptTouchEvent，为什么在这里调用父类的dispatchTouchEvent不会跟着调用父类的onInterceptTouchEvent？我调试和看源码发现当运行到findChildWithAccessibilityFocus()方法时，view会变成接受到事件的view，然后就不知道了。水平还是看不懂源代码。其实这是因为我对java的理解有错误，基于方法都是基于对象的，所以在子viewGroup中调用父类的dispatchTouchEvent，也就是super.dispatchTouchEvent()时，这时会运行到父viewGroup的dispatchTouchEvent里，会调用onInterceptTouchEvent方法，<strong>这时的onInterceptTouchEvent其实就已经是子viewGroup的onInterceptTouchEvent方法，而不是父ViewGroup的dispatchTouchEvent方法，因为方法是基于对象的。</strong> </p>
+<p>11.onClick发生的前提就是可点击，并且收到了<strong>ACTION_DOWN和ACTION_UP事件</strong>。这里解释一下，这里的收到了用词不是那么准确，<strong>应该是能接收到事件，并且return super.onTouchEvent()了，记住是return super.onTouchEvent()，如果是return true都不行</strong>，因为return true没有执行view的onTouchEvent方法，而点击事件是在ACTION_UP中设置的。即在ACTION_UP的时候源码中调用了<code>performClick()</code>方法。这里贴一部分源代码 </p>
+<p>  TextView的源代码:</p>
+<pre><code>final boolean superResult = super.onTouchEvent(event);
+</code></pre><p>  View的源代码:</p>
+<pre><code>case MotionEvent.ACTION_UP:
+              boolean prepressed = (mPrivateFlags &amp; PFLAG_PREPRESSED) != 0;
+              if ((mPrivateFlags &amp; PFLAG_PRESSED) != 0 || prepressed) {
+                  // take focus if we don&apos;t have it already and we should in
+                  // touch mode.
+                  boolean focusTaken = false;
+                  if (isFocusable() &amp;&amp; isFocusableInTouchMode() &amp;&amp; !isFocused()) {
+                      focusTaken = requestFocus();
+                  }
+
+                  if (prepressed) {
+                      // The button is being released before we actually
+                      // showed it as pressed.  Make it show the pressed
+                      // state now (before scheduling the click) to ensure
+                      // the user sees it.
+                      setPressed(true, x, y);
+                 }
+
+                  if (!mHasPerformedLongPress &amp;&amp; !mIgnoreNextUpEvent) {
+                      // This is a tap, so remove the longpress check
+                      removeLongPressCallback();
+
+                      // Only perform take click actions if we were in the pressed state
+                      if (!focusTaken) {
+                          // Use a Runnable and post this rather than calling
+                          // performClick directly. This lets other visual state
+                          // of the view update before click actions start.
+                          if (mPerformClick == null) {
+                              mPerformClick = new PerformClick();
+                          }
+                          if (!post(mPerformClick)) {
+                              performClick();
+                          }
+                      }
+                  }
+</code></pre>
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2016/11/16/RestAPP-简洁的事件分发/" target="_blank" rel="external">http://sakurajiang.github.io/2016/11/16/RestAPP-简洁的事件分发/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RestApp/">RestApp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/12/15/AReview-超简单的Binder，AIDL和Messenger的原理及使用流程/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">AReview-超简单的Binder，AIDL和Messenger的原理及使用流程</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/11/10/RestAPP-fragment生命周期/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">RestAPP-fragment生命周期</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="RestAPP-简洁的事件分发" data-title="RestAPP-简洁的事件分发" data-url="http://sakurajiang.github.io/2016/11/16/RestAPP-简洁的事件分发/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "RestAPP-简洁的事件分发",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2016/11/16/RestAPP-简洁的事件分发/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

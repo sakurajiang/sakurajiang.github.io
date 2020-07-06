@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>RestAPP-viewPager下fragment的生命周期 | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Android,干货,RestApp">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="Android,干货,RestApp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RestAPP-viewPager下fragment的生命周期">
+<meta property="og:url" content="http://sakurajiang.github.io/2016/11/10/RestAPP-viewPager下fragment的生命周期/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/showFirstFragment&&limite1-2016116.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/showFirstFragment&&limite1-2016118.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/showFirstFragment&&limite1-2016118.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/first-%20two-20161110.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/two-three-2016116.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/three-four-2016116.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/four-three-2016116.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/three-two-2016116.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/two-first-2016116.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/first-two&&onPause-2016116.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/first%20showfragmentlist-20161110.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/showFragmentList&&first&&curr0,limit1,%20not%20order-20161110.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/showFirstFragment&&curr1limit2-2016116.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/firstShowFragmentcurr1limit1-2016116.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/two-three&&curr1limit1-2016116.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/three-two&&curr1limit1-2016116.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/two-three&&curr1limit1loadallfragment-2016117.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/thrid-second&&%20curr3,limit1-20161110.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/second-thrid&&first，curr3，limit1-2016118.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/showSecondFragment&&%20curr0%20limit1-2016118.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/first-second&&second,curr0,limit1-2016117.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/second-thrid&&%20second,curr0,limit1-20161110.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/thrid-fouth&&second,curr0,limit1-2016117.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/fouth-thrid&&second,curr0,limit1-2016117.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/thrid-second&&second,curr0,limit1-2016117.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/second-first&&second,curr0,limit1-2016117.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/first-second&&second,curr0,limit1,pause-2016117.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/first-secondShowFragmentList&&second,curr0,limit1,-2016117.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/two-threeShowFragmentList&&%20%20second,curr0,limit1-20161110.png">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/thrid-secondShowFragmentList&&%20Second,curr0,limit1-20161110.png">
+<meta property="og:updated_time" content="2020-07-06T09:32:15.149Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RestAPP-viewPager下fragment的生命周期">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+<meta name="twitter:image" content="http://oaz1z7cqt.bkt.clouddn.com/showFirstFragment&&limite1-2016116.png">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">RestAPP-viewPager下fragment的生命周期</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">RestAPP-viewPager下fragment的生命周期</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么写这个"><span class="post-toc-text">为什么写这个</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#先吐槽一下"><span class="post-toc-text">先吐槽一下</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#当Adapter继承FragmentPagerAdapter"><span class="post-toc-text">当Adapter继承FragmentPagerAdapter</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#当Adapter继承FragmentStatePagerAdapter"><span class="post-toc-text">当Adapter继承FragmentStatePagerAdapter</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#当使用懒加载的时候呢？"><span class="post-toc-text">当使用懒加载的时候呢？</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-RestAPP-viewPager下fragment的生命周期" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">RestAPP-viewPager下fragment的生命周期</h1>
+        <div class="post-meta">
+            <time datetime="2016-11-09T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-11-10
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="为什么写这个"><a href="#为什么写这个" class="headerlink" title="为什么写这个"></a>为什么写这个</h2><p>  在网上也有很多这个例子，但是感觉讲的都不很清楚，于是想自己跑一遍来看看整个过程，话不多说，下面就直接开始，我们知道ViewPager对fragment的管理其实是通过Adapter来管理的，下面我就分情况一一介绍，首先是Adapter继承FragmentPagerAdapter时的情况。</p>
+<h3 id="先吐槽一下"><a href="#先吐槽一下" class="headerlink" title="先吐槽一下"></a>先吐槽一下</h3><p>我之前其实已经快写好了博客，但是，后面突然发现我设置Log的位置不对，设置在了super之前，这个时候方法还没执行完，只是开始执行，这时就会产生一些偏差，就是一点不同，就是在启动程序的时候的setUserVisibleHint()方法的执行时间上不同，如下:</p>
+<p>Log语句放在super之前</p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/showFirstFragment&amp;&amp;limite1-2016116.png" alt="showFirstFragment&amp;&amp;limite1-2016116">  </p>
+<p>Log语句放在super之后  </p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/showFirstFragment&amp;&amp;limite1-2016118.png" alt="showFirstFragment&amp;&amp;limite1-2016118">  </p>
+<p>别的时候都是一样的。</p>
+<p><strong>以下的测试都是将Log语句放在super后面的时候的生命周期</strong></p>
+<h3 id="当Adapter继承FragmentPagerAdapter"><a href="#当Adapter继承FragmentPagerAdapter" class="headerlink" title="当Adapter继承FragmentPagerAdapter"></a>当Adapter继承FragmentPagerAdapter</h3><p>  先上Adapter的代码    </p>
+<pre><code>  public class MyAdapter extends FragmentPagerAdapter{
+    public MyAdapter(FragmentManager fm) {
+        super(fm);
+    }
+
+    @Override
+    public int getCount() {
+        return list.size();
+    }
+
+    @Override
+    public Fragment getItem(int position) {
+        return list.get(position);
+    }
+}  
+</code></pre><p>在我们使用的时候Adapter一般都是这么写的，测试的时候，我在viewpager中加了四个fragment，主要代码如下  </p>
+<pre><code>myAdapter=new MyAdapter(getSupportFragmentManager());
+viewPager.setOffscreenPageLimit(1);
+viewPager.setAdapter(myAdapter);
+viewPager.setCurrentItem(0);
+fragmentManager=getSupportFragmentManager();  
+</code></pre><p>我们直接看结果：<br><strong>当程序启动的时候，生命周期如下：</strong>    </p>
+<p> <img src="http://oaz1z7cqt.bkt.clouddn.com/showFirstFragment&amp;&amp;limite1-2016118.png" alt="showFirstFragment&amp;&amp;limite1-2016118"></p>
+<p><strong>当从第一个fragment滑到第二个fragment的时候</strong>      </p>
+<p> <img src="http://oaz1z7cqt.bkt.clouddn.com/first-%20two-20161110.png" alt="first- two-20161110"></p>
+<p><strong>当从第二个滑到第三个的时候</strong></p>
+<p>   <img src="http://oaz1z7cqt.bkt.clouddn.com/two-three-2016116.png" alt="two-three-2016116"></p>
+<p><strong>当从第三个滑到第四个的时候</strong></p>
+<p>   <img src="http://oaz1z7cqt.bkt.clouddn.com/three-four-2016116.png" alt="three-four-2016116"></p>
+<p><strong>当从第四个滑到第三个的时候</strong></p>
+<p>   <img src="http://oaz1z7cqt.bkt.clouddn.com/four-three-2016116.png" alt="four-three-2016116"></p>
+<p><strong>当从第三个滑到第二个的时候</strong> </p>
+<p>   <img src="http://oaz1z7cqt.bkt.clouddn.com/three-two-2016116.png" alt="three-two-2016116"></p>
+<p><strong>当从第二个滑到第一个的时候</strong></p>
+<p>   <img src="http://oaz1z7cqt.bkt.clouddn.com/two-first-2016116.png" alt="two-first-2016116"></p>
+<p>由上图，我们可以得出，当程序执行的时候，<strong>viewpager加载fragment的顺序是，先onAttach当前的fragment，再向左遍历左边的fragment，遍历右完后，再向遍历，但这只是onAttach和onCreate的执行顺序，然后当OnCreateView和onActivityCreated的时候则是先遍历加载左边的，再遍历加载右边的，最后才是当前页。</strong>然后第一次的onStart、onResume的时候则是又按照onAttach和onCreate的顺序执行。为什么要说第一次的onStart、onResume，因为当屏幕关闭的时候，执行顺序还是按照OnCreateView和onActivityCreated的顺序，这里选的时间是从第一个fragment滑到第二个fragment之后，关闭屏幕，生命周期如下: </p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/first-two&amp;&amp;onPause-2016116.png" alt="first-two&amp;&amp;onPause-2016116"></p>
+<p>看到这里，估计很多人就很乱了，就想问fragment的加载顺序到底是什么呢？这时，我通过如下代码得到fragment的list表，代码如下:</p>
+<pre><code>getfragmentList=getSupportFragmentManager().getFragments();
+   Log.e(&quot;log&quot;, &quot;getfragmentlist&quot;  + getfragmentList);
+   if(getfragmentList!=null) {
+       for (int i = 0; i &lt;getfragmentList.size();i++)
+           Log.e(&quot;log&quot;, &quot;getfragmentlist&quot; +i  + getfragmentList.get(i));
+   }
+</code></pre><p>这时，运行程序，加载完所有的fragment后的list顺序，如下：  </p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/first%20showfragmentlist-20161110.png" alt="first showfragmentlist-20161110"></p>
+<p>由于屏幕原因，list中的后面看不到，但是通过for循环中的输出，还是可以看出fragment加载顺序其实是<br><strong>fragment2 fragment1 fragment3 fragment4</strong>，也就是onCreateView、onActivityCreated时的顺序，也就是说在onCreateView的时候建立了fragment的顺序，除了第一次，后面的生命周期都是按照这个顺序走的(除了滑动的时候)，就像上面的关闭屏幕时候的生命周期一样，细心的朋友可能注意到了图片后面的<strong>1 0 2 3</strong>，那这个是什么呢？这是各个fragment对应的下标，这个是你在list中添加fragment的顺序，如代码:  </p>
+<pre><code>public void addFragment(){
+    list.add(myfragment1);
+    list.add(myfragment2);
+    list.add(myfragment3);
+    list.add(myfragment4);
+}
+</code></pre><p>也就是fragemnt2对应1，fragemnt1对应0，fragemnt3对应2，fragemnt4对应3，这个顺序控制着fragment在页面中的顺序，也就是fragment1，fragment2，fragment3，fragment4。这里验证一下，修改代码，如下:</p>
+<pre><code>public void addFragment(){
+    list.add(myfragment2);
+    list.add(myfragment1);
+    list.add(myfragment3);
+    list.add(myfragment4);
+}
+</code></pre><p>运行程序，加载完所有的fragment后的list的顺序，如下:</p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/showFragmentList&amp;&amp;first&amp;&amp;curr0,limit1,%20not%20order-20161110.png" alt="showFragmentList&amp;&amp;first&amp;&amp;curr0,limit1, not order-20161110"></p>
+<p>这里就是fragment1对应1，fragment2对应0，fragment3对应2，fragment4对应3，页面中的fragment顺序是fragment2，fragment1，fragment3，fragment4。  </p>
+<p>还是拿之前的在list中添加fragment的顺序来进行下面的测试，也就是fragemnt2对应1，fragemnt1对应0，fragemnt3对应2，fragemnt4对应3，即fragment在页面中的顺序，也就是fragment1，fragment2，fragment3，fragment4来继续说，因为我们设置了<strong>  viewPager.setCurrentItem(0);</strong>，所以我们先onAttach ，onCreate fragemnt1，又设置了 viewPager.setOffscreenPageLimit(1);，所以再<br>onAttach ，onCreate fragemnt2，那么为什么先onCreateView onActivityCreated fragment2呢？这是因为viewpager的加载机制，会自动的将左右两边加载出来，所以，一下子就会加载两个，为了确保所有的view都创建，所以，将最开始要显示的view放在最后，即把fragment2的onCreateView，onActivityCreated放在fragment1的后面，那么，为什么fragment1的onStart，onResume先执行呢？这是为了用户体验，即将当前需要显示的先显示，因为这个时候是fragment1先显示。这里有一个奇怪的地方，就是<strong>第二个滑到第三个和第三个滑到第二个的图片</strong>，第二个滑到第三个的时候，fragment1是先执行onPause，onStop，onDestroy方法，再执行fragment4的onCreateView，onActivityCreated，onStart，onResume方法，而第三个滑到第二个的时候，则是先执行fragment1的onCreateView，onActivityCreated再执行fragemnt4的onPause，onStop，onDestroy方法，最后再执行onStart，onResume方法。为什么呢？这里先放一下，先验证上面的猜想，将代码修改一下   </p>
+<pre><code>myAdapter=new MyAdapter(getSupportFragmentManager());
+   viewPager.setOffscreenPageLimit(2);
+   viewPager.setAdapter(myAdapter);
+   viewPager.setCurrentItem(1);
+   fragmentManager=getSupportFragmentManager();
+</code></pre><p>结果如下：<br><img src="http://oaz1z7cqt.bkt.clouddn.com/showFirstFragment&amp;&amp;curr1limit2-2016116.png" alt="showFirstFragment&amp;&amp;curr1limit2-2016116"><br>所以，这个顺序也验证了我们之前的想法，但是那个奇怪的地方还没解决，我们再修改代码：</p>
+<pre><code>myAdapter=new MyAdapter(getSupportFragmentManager());
+  viewPager.setOffscreenPageLimit(1);
+  viewPager.setAdapter(myAdapter);
+  viewPager.setCurrentItem(1);
+  fragmentManager=getSupportFragmentManager();
+</code></pre><p>程序运行结果如下：  </p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/firstShowFragmentcurr1limit1-2016116.png" alt="firstShowFragmentcurr1limit1-2016116"></p>
+<p>因为我们显示的就是第二个页面，所以从第二个页面滑到第三个，效果如下：</p>
+<p>   <img src="http://oaz1z7cqt.bkt.clouddn.com/two-three&amp;&amp;curr1limit1-2016116.png" alt="two-three&amp;&amp;curr1limit1-2016116"></p>
+<p>从第三个滑到第二个，效果如下：<br><img src="http://oaz1z7cqt.bkt.clouddn.com/three-two&amp;&amp;curr1limit1-2016116.png" alt="three-two&amp;&amp;curr1limit1-2016116"><br>我们再加载完所有的fragment，再从第二个滑到第三个试试，就是不执行onAttach和onCreate，这样看的舒服一点，结果如下：<br>  <img src="http://oaz1z7cqt.bkt.clouddn.com/two-three&amp;&amp;curr1limit1loadallfragment-2016117.png" alt="two-three&amp;&amp;curr1limit1loadallfragment-2016117"></p>
+<p>可以看到，执行顺序其实是类似的。也就是，当fragemnt3滑到fragemnt2的时候，fragemnt1的onCreateView和onActivityCreated会在fragemnt4的onPause，onStop，onDestroyView，先执行，然后再执行fragment1的onStart，onResume，为什么呢？我觉得，<strong>为了便以理解，可以将fragment的生命周期分成四部分，第一部分就是onAttach，onCreate。第二部分是onCreateView，onActivityCreated。第三部分是onStart，onResume。第四部分就是onPause，onStop，onDestroyView。因为，fragmentPagerAdapter只会销毁视图，所以后面的onDestroy，onDetach就不用管，当onAttach，onCreate之后，会先确定一个顺序，这里称为顺序2，也就是中左右，但是当onCreateView执行后，就确定了顺序3，这个顺序3就是<code>getSupportFragmentManager().getFragments();</code>得到的list的顺序，后面的生命周期(除了第一次启动以及左右滑动时的生命周期)都是按照这个顺序执行的，也就是左右中，为什么说除了第一次启动以及左右滑动时的生命周期，这里先说第一次启动，因为，在第一次启动后的onStart和onResume都是按照onAttach的顺序，而不是按照fragment的顺序，左右滑动的生命周期是按照你在viewPager中给添加fragment的顺序，这一点后面解释，确定了fragment顺序后，排在链表前面的fragment的方法肯定在排在后面的fragment方法之前，这一点很重要，举个例子，就比如上面的关闭屏幕那张生命周期图片，因为链表的顺序，所以生命周期会是这样。这里再解释上面的滑动顺序，这里贴上我添加fragment的代码</strong>  </p>
+<pre><code>list.add(myfragment1);
+list.add(myfragment2);
+list.add(myfragment3);
+list.add(myfragment4);
+</code></pre><p><strong>可以看出顺序是fragment1，2，3，4。这个顺序就是顺序1，顺序1是在滑动的情况会用到。为什么我会将之前的顺序命名为顺序2，因为这个顺序是最开始你在程序中通过add(fragment)确定的顺序，在滑动的时候，谁在前面谁先生成视图或者先销毁，也就是谁在前面谁先执行，这里需要明确一点就是，任何fragment的第一部分生命周期肯定运行在别的fragment的除第一部分生命周期的生命周期前面，这一点很重要，同时还有一点，当既有fragment视图生成又有fragment视图销毁的时候，其实就是滑动的时候，对于生成视图的那个fragment的第一部分生命周期和第二部分的生命周期不会同时进行，</strong>这里解释后面一点，修改代码:</p>
+<pre><code>myAdapter=new MyAdapter(getSupportFragmentManager());
+    viewPager.setOffscreenPageLimit(1);
+    viewPager.setAdapter(myAdapter);
+    viewPager.setCurrentItem(3);
+</code></pre><p>当第一次从3滑到2的时候生命周期如图:</p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/thrid-second&amp;&amp;%20curr3,limit1-20161110.png" alt="thrid-second&amp;&amp; curr3,limit1-20161110"></p>
+<p>因为顺序1是fragment1，2，3，4。所以应该是fragment1先执行第一部分，再执行第二部分生成视图，再fragment4执行销毁视图，再fragment1执行第三部分。但是结果却是这个，说明<strong>当既有fragment视图生成又有fragment视图销毁的时候，其实就是滑动的时候，对于生成视图的那个fragment的第一部分生命周期和第二部分的生命周期不会同时进行。</strong></p>
+<p> <strong>看第二个滑到第三个，第三个滑到第二个这个情况，先看第一次第二个滑到第三个的情况，因为，任何fragment的第一部分生命周期肯定运行在别的fragment的除第一部分生命周期的生命周期前面，同时哦，对于生成视图的那个fragment的第一部分生命周期和第二部分的生命周期不会同时进行，又因为在顺序1中，fragment1在fragment4的前面，所以，fragment1先销毁，fragment4再生成和显示，所以，先执行fragment1的onAttach，onCreate，再执行fragment1的onPause，onStop，onDestroyView，再执行fragment4的onCreateView，onActivityCreated。而在第三个滑到第二个时，因为，不需要onAttach和onCreate，又因为在顺序1中，fragment1在fragment4的前面，所以，会先执行fragment1的onCreateView，onActivityCreated，再执行fragment4的onPause，onStop，onDestroyView。然后到显示的时候，再执行fragment1的onStart，onResume。为什么不会直接运行fragment1的onCreateView，onActivityCreated，onStart，onResume呢？因为viewPager.setOffscreenPageLimit(1);方法的限制，所以只有先将销毁视图的fragment的视图销毁，才能显示，所以接下来执行fragment4的onPause，onStop，onDestroyView，最后执行fragment1的onStart，onResume。然后，再一次从第二个滑到第三个的情况，因为，不需要onAttach和onCreate，又因为在顺序1中，fragment1在fragment4的前面，所以，fragment1先销毁，fragment4再生成和显示，所以，先执行fragment1的onPause，onStop，onDestroyView，再执行fragment4的onCreateView，onActivityCreated，onStart，onResume。这里可能有人会说，为什么不是按照顺序2来判断，因为在顺序2中，fragment1也是在fragment4之前呀</strong>，这里还是原来的代码:</p>
+<pre><code>myAdapter=new MyAdapter(getSupportFragmentManager());
+  viewPager.setOffscreenPageLimit(1);
+  viewPager.setAdapter(myAdapter);
+  viewPager.setCurrentItem(3);
+</code></pre><p>这时，顺序1是fragment1，2，3，4.而顺序2变成fragment4，3，2，1。这两个顺序中fragment1和fragment4顺序不一样，看从2滑到3的生命周期，如图：<br>   <img src="http://oaz1z7cqt.bkt.clouddn.com/second-thrid&amp;&amp;first，curr3，limit1-2016118.png" alt="second-thrid&amp;&amp;first，curr3，limit1-2016118"></p>
+<p><strong>因为fragment1先销毁fragment4再生成显示，所以是按照顺序1，不是顺序2。为了验证我的猜想，然后我去翻源代码，找了好久，但是没有找到，原谅我是个彩笔，如果有大神找到，请告诉我。不胜感激。 同时，这里还有一点，那就是setUserVisibleHint()方法执行的时间，这个方法不是属于生命周期的范围，我觉得这个方法调用的时间是如果是都要生成视图，也就是第一次显示的时候，那么就和onAttach的顺序是一样的，如果显示后移动的情况，那么看移动到当前位置时是否需要生成新的fragment视图，如果需要先生成，即先执行生成页的setUserVisibleHint()方法，然后再执行先前页的这个方法，在执行当前页的这个方法就像当从第二页滑到第三页的时候setUserVisibleHint()方法执行的顺序一样，即先执行fragment4的setUserVisibleHint()方法，再执行fragment2的setUserVisibleHint()方法，最后再是fragment3的setUserVisibleHint()方法。</strong><br>总的来说，为了便以理解，可以将fragment的生命周期分成四部分，第一部分就是onAttach，onCreate。第二部分是onCreateView，onActivityCreated。第三部分是onStart，onResume。第四部分就是onPause，onStop，onDestroyView。因为，fragmentPagerAdapter只会销毁视图，所以后面的onDestroy，onDetach就不用管，，**顺序1是由viewpager中的添加fragment时设置的，顺序2是根据顺序1和viewPager.setCurrentItem();，以及viewPager.setOffscreenPageLimit(1);共同决定的，顺序2就是在顺序1中先找出viewPager.setCurrentItem()的fragment，然后向左遍历fragment，然后向右遍历fragment。这就是onAttach，onCreate的顺序，举个例子，顺序1是1，2，3，4。viewPager.setCurrentItem(0)，viewPager.setOffscreenPageLimit(1);，那么顺序2就是fragment2，1，3，4。如果viewPager.setCurrentItem(2)，viewPager.setOffscreenPageLimit(1);不变，顺序2就是2，3，4，1。如果是viewPager.setCurrentItem(2)，viewPager.setOffscreenPageLimit(2);，顺序2就是fragment2，1，4，3。顺序3也是顺序1和viewPager.setCurrentItem();，以及viewPager.setOffscreenPageLimit(1);共同决定的，只是先遍历viewPager.setCurrentItem();，再遍历viewPager.setCurrentItem();右边的，最后再 遍历viewPager.setCurrentItem();，顺序3使用最广泛，除了顺序1和顺序2，别的都是顺序3。<br>更简单的说，为了便以理解，可以将fragment的生命周期分成四部分，第一部分就是onAttach，onCreate。第二部分是onCreateView，onActivityCreated。第三部分是onStart，onResume。第四部分就是onPause，onStop，onDestroyView。因为，fragmentPagerAdapter只会销毁视图，所以后面的onDestroy，onDetach就不用管记住几个规则:  </p>
+<p><strong>1.有三个顺序，分别是顺序1，顺序2，顺序3。顺序1就是添加fragment的顺序，顺序2就是中左右，顺序3就是左右中。</strong>  </p>
+<p><strong>2.第一次启动的时候，生命周期的第一，三部分按照顺序2，第二部分按照顺序3</strong>  </p>
+<p><strong>3.滑动的时候按照顺序1，并且谁在前面谁先生成视图或者先销毁，也就是谁在前面谁先执行，但是，生命周期的第一部分和第二部分不会在一起执行。也就是说当生成视图的fragment在销毁视图的fragment之前，但是同时，生成视图的fragment的第一部分要执行，这时，执行顺序就是，生成视图的fragment的第一部分，销毁视图的fragment第四部分，生成视图的fragment的第二部分，第三部分。如果，这时，生成视图的fragment的第一部分不用执行，那么就会先执行生成视图的fragment的第二部分，当要执行第三部分的之后，由于viewPager.setOffscreenPageLimit(1);方法的限制，所以只有先将销毁视图的fragment的视图销毁，才能显示，所以第三部分没有直接跟着第二部分执行，而是最后执行。</strong>  </p>
+<p><strong>4.剩下的时候都是按照顺序3，比如关闭屏幕，重新显示之类的。</strong>  </p>
+<p><strong>5.因为setUserVisibleHint()这个方法，不算生命周期，所以这个执行的时间就是谁先显示谁先调用，并且，当isVisibleToUser为false的时候执行在第一部分之前，isVisibleToUser为true的时候执行在第一部分之后</strong>    </p>
+<p>说的很啰嗦，其实看图片的结果就知道了，为了验证上面的结果，我去翻源码，找了好久，但是没找到，原谅我水平不够，如果有大神找到的话，请告诉我，不胜感激。**  </p>
+<h3 id="当Adapter继承FragmentStatePagerAdapter"><a href="#当Adapter继承FragmentStatePagerAdapter" class="headerlink" title="当Adapter继承FragmentStatePagerAdapter"></a>当Adapter继承FragmentStatePagerAdapter</h3><p>先上Adapter代码</p>
+<pre><code> public class MyAdapter extends FragmentStatePagerAdapter{
+    public MyAdapter(FragmentManager fm) {
+        super(fm);
+    }
+
+    @Override
+    public int getCount() {
+        return list.size();
+    }
+
+    @Override
+    public Fragment getItem(int position) {
+        return list.get(position);
+    }
+}
+</code></pre><p>程序主要代码如下：</p>
+<pre><code>myAdapter=new MyAdapter(getSupportFragmentManager());
+    viewPager.setOffscreenPageLimit(1);
+    viewPager.setAdapter(myAdapter);
+    viewPager.setCurrentItem(0);
+    fragmentManager=getSupportFragmentManager();  
+</code></pre><p>程序运行结果：</p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/showSecondFragment&amp;&amp;%20curr0%20limit1-2016118.png" alt="showSecondFragment&amp;&amp; curr0 limit1-2016118"></p>
+<p>第一个滑到第二个</p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/first-second&amp;&amp;second,curr0,limit1-2016117.png" alt="first-second&amp;&amp;second,curr0,limit1-2016117"></p>
+<p>第二个滑到第三个</p>
+<p> <img src="http://oaz1z7cqt.bkt.clouddn.com/second-thrid&amp;&amp;%20second,curr0,limit1-20161110.png" alt="second-thrid&amp;&amp; second,curr0,limit1-20161110"></p>
+<p>第三个滑到第四个  </p>
+<p> <img src="http://oaz1z7cqt.bkt.clouddn.com/thrid-fouth&amp;&amp;second,curr0,limit1-2016117.png" alt="thrid-fouth&amp;&amp;second,curr0,limit1-2016117"></p>
+<p>第四个滑到第三个</p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/fouth-thrid&amp;&amp;second,curr0,limit1-2016117.png" alt="fouth-thrid&amp;&amp;second,curr0,limit1-2016117"></p>
+<p>第三个滑到第二个</p>
+<p> <img src="http://oaz1z7cqt.bkt.clouddn.com/thrid-second&amp;&amp;second,curr0,limit1-2016117.png" alt="thrid-second&amp;&amp;second,curr0,limit1-2016117"></p>
+<p>第二个滑到第一个</p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/second-first&amp;&amp;second,curr0,limit1-2016117.png" alt="second-first&amp;&amp;second,curr0,limit1-2016117"></p>
+<p>第一个滑到第二个后按Pause</p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/first-second&amp;&amp;second,curr0,limit1,pause-2016117.png" alt="first-second&amp;&amp;second,curr0,limit1,pause-2016117"></p>
+<p>第一个滑到第二个后的fragemntList</p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/first-secondShowFragmentList&amp;&amp;second,curr0,limit1,-2016117.png" alt="first-secondShowFragmentList&amp;&amp;second,curr0,limit1,-2016117"></p>
+<p>第二个滑到第三个后的fragemntList</p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/two-threeShowFragmentList&amp;&amp;%20%20second,curr0,limit1-20161110.png" alt="two-threeShowFragmentList&amp;&amp;  second,curr0,limit1-20161110"></p>
+<p>第三个滑到第二个后的fragmentList</p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/thrid-secondShowFragmentList&amp;&amp;%20Second,curr0,limit1-20161110.png" alt="thrid-secondShowFragmentList&amp;&amp; Second,curr0,limit1-20161110"></p>
+<p>从上图可以看出，跟FragmentPagerAdapter相比，<strong>FragmentStatePagerAdapter每次销毁的时候是直接remove，所以会在销毁之后重新显示的话，就会执行fragment的所有周期函数来显示。</strong>  </p>
+<p>  FragmentPagerAdapter的destroyItem()方法  </p>
+<pre><code> @Override
+public void destroyItem(ViewGroup container, int position, Object object) {
+    if (mCurTransaction == null) {
+        mCurTransaction = mFragmentManager.beginTransaction();
+    }
+    if (DEBUG) Log.v(TAG, &quot;Detaching item #&quot; + getItemId(position) + &quot;: f=&quot; + object
+            + &quot; v=&quot; + ((Fragment)object).getView());
+    mCurTransaction.detach((Fragment)object);
+}  
+</code></pre><p>   FragmentStatePagerAdapter的destroyItem()方法</p>
+<pre><code>@Override
+public void destroyItem(ViewGroup container, int position, Object object) {
+    Fragment fragment = (Fragment) object;
+
+    if (mCurTransaction == null) {
+        mCurTransaction = mFragmentManager.beginTransaction();
+    }
+    if (DEBUG) Log.v(TAG, &quot;Removing item #&quot; + position + &quot;: f=&quot; + object
+            + &quot; v=&quot; + ((Fragment)object).getView());
+    while (mSavedState.size() &lt;= position) {
+        mSavedState.add(null);
+    }
+    mSavedState.set(position, fragment.isAdded()
+            ? mFragmentManager.saveFragmentInstanceState(fragment) : null);
+    mFragments.set(position, null);
+
+    mCurTransaction.remove(fragment);
+}
+</code></pre><p><strong>注意最后两张图片中的list，分别有一个是空的，这也就说明，这里的fragment为空，但是依然占着位置，下次生成这个的时候，直接插入到这个位置，所以顺序2还是不会改变。同时，也没有后面的1 0 2 3，同时，上面划分的Fragment生命周期四部分也不一样，最后一部分应该再加上onDestroy，onDetach。生命周期的差异就体现在当有销毁又有生成fragment的视图的时候，这个时候跟FragmentPagerAdapter不一样，都是生成视图的fragment的第一部分先执行，再销毁视图的fragment去销毁视图，再生成视图的fragment显示。其实这就是上面的规则3。</strong>  </p>
+<h3 id="当使用懒加载的时候呢？"><a href="#当使用懒加载的时候呢？" class="headerlink" title="当使用懒加载的时候呢？"></a>当使用懒加载的时候呢？</h3><p><strong>很明显生命周期会是一样的，因为设置懒加载的操作，并没有影响生命周期，所以生命周期是一样的，只是懒加载保证了显示哪页加载哪页的数据，有兴趣的朋友可以自己测试一下，毕竟纸上得来终觉浅，绝知此事要躬行。</strong></p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2016/11/10/RestAPP-viewPager下fragment的生命周期/" target="_blank" rel="external">http://sakurajiang.github.io/2016/11/10/RestAPP-viewPager下fragment的生命周期/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RestApp/">RestApp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/11/10/RestAPP-fragment生命周期/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">RestAPP-fragment生命周期</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/09/27/RestAPP-传递参数的单例模式/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">RestAPP-传递参数的单例模式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="RestAPP-viewPager下fragment的生命周期" data-title="RestAPP-viewPager下fragment的生命周期" data-url="http://sakurajiang.github.io/2016/11/10/RestAPP-viewPager下fragment的生命周期/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "RestAPP-viewPager下fragment的生命周期",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2016/11/10/RestAPP-viewPager下fragment的生命周期/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

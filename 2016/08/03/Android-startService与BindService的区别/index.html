@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>startService与BindService的区别 | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Android,Service">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="Android,Service">
+<meta property="og:type" content="article">
+<meta property="og:title" content="startService与BindService的区别">
+<meta property="og:url" content="http://sakurajiang.github.io/2016/08/03/Android-startService与BindService的区别/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-06T09:19:07.588Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="startService与BindService的区别">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">startService与BindService的区别</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">startService与BindService的区别</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-Android-startService与BindService的区别" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">startService与BindService的区别</h1>
+        <div class="post-meta">
+            <time datetime="2016-08-02T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-08-03
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>我们做几个实验：<br>1，启动<code>service</code>后，按back键返回。<br>  一开始我没在<code>service</code>中用子线程来调用方法，结果导致点击屏幕没有响应，但是菜单按钮和会主界面的<br>按钮可以按，因为，<code>service</code>还是运行在主线程中的，后面我用子线程调用方法，测试的结果是：<br>  用<code>startService()</code>启动之后，按<code>back</code>键，<code>activity</code>被destroy，但是<code>service</code>继续在运行，也就是说，当<br><code>activity</code>被销毁后，主线程并没有被销毁，并且程序运行完后，<code>service</code>也没有destroy。而用<code>bindService()</code><br>启动之后，按back键，<code>activity</code>被销毁，然后<code>onUnbindService</code>，然后<code>ServiceDestroy</code>，但是程序还是一直<br>运行，也就是说<code>bindServic</code>e和a<code>ctivity</code>是绑定的，当<code>activity</code>消亡时，这个service也消亡。同时这里得提一下，<br>当这个<code>service</code>消亡时，是只运行<code>service</code>中的<code>onUnbind()</code>方法，不会去运行<code>activity</code>中的<code>onServiceDisconnected()</code><br>方法。<br>2，分别多次按<code>startService</code>按钮和<code>BoundService</code>按钮，看看情况<br> 结果是<code>startService</code>按钮是第一次创建<code>service</code>后，后面每次按都不会再创建，但是都会执行<code>onStartCommand()</code>方法，<br>而对于bindService而言，按一次之后再按不会有变化，但是如果将<code>conn</code>这个变量在<code>BoundService</code>按钮的<br>方法体中再次赋值（之前是在onCreate中赋值），那么结果就不同，当按下一次后再按，结果就会再次执行，再按，再执行，<br>当然如果你调用的方法的执行需要时间，比如打印1-100的数，那么两次结果会穿插输出，而当你按unBound按钮时，就会发现<br>当你按一次时，它不会调用<code>service</code>中的onUnbind()方法，<code>service</code>也不会被destroy，但是再按一次就会报错，内容大概是<br><code>service</code>没有registered（发生这种情况的原因是这里的conn会跟最后一个按BoundService按钮时候生成的conn一致。）。这与按一次BoundService按钮，再按一次unBoundService按钮结果不<br>同，这时按unBoundService的结果是会调用<code>service</code>中的<code>onUnbind()</code>方法，<code>service</code>也会被<code>destroy</code>。为什么多按几次BoundButton再按一次unBoundButton不会调用service中的onUnbind()方法，<br><code>service</code>也不会被<code>destroy</code>呢？但是这个<code>service</code>应该是被unBind的了的，不然的话第二次按的话为什么会出现这个<code>service</code>没有registered的错误呢，那么如何被onunBind的呢？而后，我想到<br>将所产生的conn全部存储起来，然后分别当作参数传递给<code>activity</code>中的<code>unbindService(conn)</code>方法，<br>于是我将点击bindButton按钮产生的所有S<code>erviceConnection</code>的对象全都存储到一个<br><code>ServiceConnnection</code>的数组中，然后在unBindButton中将数组的值分别赋值给conn，这样的话当你点击bindButton<br>产生多个<code>ServiceConnection</code>对象后，点击unBindButton按钮就会依次解除绑定，当你解除最后一个service时，就会调用<br><code>onUnbind</code>和<code>destroy</code>方法，也就是说，其实<code>onUnbind</code>方法是等所有的<code>service</code>解除绑定后才调用，所以之前只解除一个<code>service</code><br>时并没有调用这个方法，也就没有<code>destroy</code>，因为这个<code>service</code>和<code>activity</code>还是处在绑定的状态。</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2016/08/03/Android-startService与BindService的区别/" target="_blank" rel="external">http://sakurajiang.github.io/2016/08/03/Android-startService与BindService的区别/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Service/">Service</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/08/03/Android-service中有关于stopselfResult()方法的一些问题/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Service中有关于stopselfResult()方法的一些问题</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/08/03/Android-关于使用BroadCastReceiver的一些问题/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">关于使用BroadCastReceiver的一些问题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="Android-startService与BindService的区别" data-title="startService与BindService的区别" data-url="http://sakurajiang.github.io/2016/08/03/Android-startService与BindService的区别/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "startService与BindService的区别",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2016/08/03/Android-startService与BindService的区别/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>布局阶段 | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Android,AA,干货">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="Android,AA,干货">
+<meta property="og:type" content="article">
+<meta property="og:title" content="布局阶段">
+<meta property="og:url" content="http://sakurajiang.github.io/2016/08/04/AA-布局阶段/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/1.png">
+<meta property="og:updated_time" content="2020-07-06T09:14:33.608Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="布局阶段">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+<meta name="twitter:image" content="http://oaz1z7cqt.bkt.clouddn.com/1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">布局阶段</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">布局阶段</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-AA-布局阶段" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">布局阶段</h1>
+        <div class="post-meta">
+            <time datetime="2016-08-03T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-08-04
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>这一阶段是对于布局的设置，因为对于一般的软件而言，当你点击进去某个<code>activity</code>时，往往这个activity与之前的activity有一些地方的显示<br>是相同的，比如，头部和尾部，那么这时为了减少工作量，我们可以使用<code>include</code>标签，对于<code>include</code>标签的使用，在这里提一下需要注意的地方，<br>如果你要在include标签中重新指定布局参数(android:layout_*属性)，，就必须覆盖android:layout_height和android:layout_width。因为这<br>样才会生效，不然会提示错误。如果你是想指定过一个<code>id</code>，那么重新指定的id会覆盖原来的id。同时这里需要提一下很重要的一点，如果你想在<br>代码中为include标签重新指定内容，那么如果你直接通过id找到这个include标签，然后将view添加到这个标签中，这样是得不到的，可能就是<br>你通过id的确找到了这个标签，但是这个并不是真正的viewgroup，所以你无法将自己的view添加到上面，代码如下: </p>
+<pre><code>public void setActivityTitle(int RLayoutId,int account){  
+//找到include标签  
+ LinearLayout linearLayout1= (LinearLayout) findViewById(R.id.include1);  
+//找到要附在include标签上的view  
+ LinearLayout linearLayout= (LinearLayout) LayoutInflater.from(this).inflate(RLayoutId, null);  
+ TextView textView= (TextView) linearLayout.findViewById(R.id.usertitlt_tv);  
+ textView.setText(getString(R.string.useractivitytitle_name) + &quot;(&quot; + account + &quot;)&quot;);  
+//附在include标签上  
+ linearLayout1.addView(linearLayout);  
+ }  
+</code></pre><p>这样是得不到的，那么我们应该怎么做呢？代码如下：  </p>
+<pre><code> public void setActivityTitle(int RLayoutId,int account){  
+ //找到include标签  
+    LinearLayout linearLayout1= (LinearLayout) findViewById(R.id.include1);  
+  //将这个标签设置为不可见，注意这里设置为不可见，而不是GONE，因为如果是GONE就意味着这个include标签不存在，那么可能会影响整个布局  
+    linearLayout1.setVisibility(View.INVISIBLE);  
+//找到这个include标签在的那个整个布局，之所以这里通过id来找，而不是通过inflate来生成，是因为生成之后你还需要再setcontextview()。  
+    RelativeLayout relativeLayout= (RelativeLayout) findViewById(R.id.mainRelativeLayout);  
+    LinearLayout linearLayout= (LinearLayout) LayoutInflater.from(this).inflate(RLayoutId, null);  
+    TextView textView= (TextView) linearLayout.findViewById(R.id.usertitlt_tv);  
+    textView.setText(getString(R.string.useractivitytitle_name) + &quot;(&quot; + account + &quot;)&quot;);    
+ //将要附加的view附加在整个布局上。    
+    relativeLayout.addView(linearLayout);    
+}
+</code></pre><p>这就是使用include标签需要注意的一些地方。<br>在这里也需要说一下布局的各个属性问题，由于篇幅问题，这里就提一个，就是<code>layout_margin</code>和<code>padding</code>的区别，<code>layout_margin</code>是控件在布局显<br>示的样子，<code>padding</code>则是控件的内容在控件中的位置，同时，<code>Layout_grivaty</code>与<code>grivaty</code>这两者与之相似，<code>layout_grivaty</code>与<code>layout_margin</code>对应，<br>而<code>grivaty</code>与<code>padding</code>对应，那么，layout_margn与layout_grivaty有什么区别呢？grivaty与padding又有什么区别呢？layout_grivaty与grivaty<br>的值都是给定的，我们只能在这些给定的属性中选择，而layout_margn与padding的值我们可以任意给，相对于layout_grivaty和grivaty更灵活，<br>我们根据需要选择合适的属性。<br>总之有layout的就是跟控件在布局中显示有关，没有的则是控制控件的内容的位置。  </p>
+<p>今天在设置布局时，因为我们想将所有的title去掉，那么如果我们去每一个activity中找，并且去掉，这样是非常不合理的，因此我们需要在<br>一个activity中管理一下，因此我定义了一个<code>activityFrame</code>继承了activity，这样我真正的activity都可以继承自定义的activity，这样管理<br>起来就很方便，那么我们可以requestWindowFeature(Window.FEATURE_NO_TITLE);来让它没有标题，同时因为我们需要动态的添加布局，我们可以这么办，步骤可以分为三步:<br>1.先找到我们需要插入的位置的布局，如我要插入到下面布局中的<code>relativeLayout</code>布局中</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;
+android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;
+android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;
+android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;
+tools:context=&quot;com.example.jdk.myaa.MainActivity&quot;&gt;
+&lt;include layout=&quot;@layout/title_layout&quot; android:id=&quot;@+id/include1&quot;&gt;&lt;/include&gt;
+&lt;include layout=&quot;@layout/buttom_layout&quot; android:id=&quot;@+id/include2&quot;&gt;&lt;/include&gt;
+&lt;RelativeLayout
+android:id=&quot;@+id/main_bodyRelativeLayout&quot;
+android:layout_below=&quot;@id/include1&quot;
+android:layout_above=&quot;@id/include2&quot;
+android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;&gt;
+&lt;/RelativeLayout&gt;
+&lt;/RelativeLayout&gt;
+</code></pre><p>我们如何找到这个布局呢？通过代码: <code>RelativeLayout relativeLayout= (RelativeLayout) findViewById(R.id.main_bodyRelativeLayout);</code><br>这样就找到了这个布局。<br>2.找到我们需要插入的布局，如我要插入如下布局：  </p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+&gt;
+&lt;GridView
+    android:id=&quot;@+id/gv&quot;
+    android:paddingLeft=&quot;20dp&quot;
+    android:paddingRight=&quot;20dp&quot;
+    android:paddingTop=&quot;130dp&quot;
+    android:horizontalSpacing=&quot;10dp&quot;
+    android:verticalSpacing=&quot;100dp&quot;
+    android:numColumns=&quot;3&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;200dp&quot;
+    android:listSelector=&quot;@drawable/myselector&quot;
+    &gt;&lt;/GridView&gt;
+&lt;/LinearLayout&gt;
+</code></pre><p>这个如何寻找呢？通过下面代码:<br><code>ViewGroup v= (ViewGroup) LayoutInflater.from(this).inflate(R.layout.main_bodylayout, null);</code>其中<code>R.layout.main_bodylayout</code>是上面<br>布局的名字。<br>3.将这个布局添加到对应的位置的布局中：<br><code>relativeLayout.addView(v);</code><br>这样就完成了动态添加，当然所添加的布局的属性会与你需要插入的布局属性相同，也就是跟第二步骤的布局相同，但是你也可以自己设置，设置的代码如下：  </p>
+<pre><code>RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
+relativeLayout.addView(v,layoutParams);
+</code></pre><p>这样就行了。  上面是添加一个布局到对应位置中去，那么如何添加一个控件到对应的位置中去呢？<br>这个步骤与上述类似<br>1.与上面一致<br>2.找到我们需要插入的控件，比如我想插入这个布局中的GridView控件，如下：  </p>
+<pre><code> &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+android:orientation=&quot;vertical&quot; android:layout_width=&quot;match_parent&quot;
+android:layout_height=&quot;match_parent&quot;
+&gt;
+&lt;GridView
+    android:id=&quot;@+id/gv&quot;
+    android:paddingLeft=&quot;20dp&quot;
+    android:paddingRight=&quot;20dp&quot;
+    android:paddingTop=&quot;130dp&quot;
+    android:horizontalSpacing=&quot;10dp&quot;
+    android:verticalSpacing=&quot;100dp&quot;
+    android:numColumns=&quot;3&quot;
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;200dp&quot;
+    android:listSelector=&quot;@drawable/myselector&quot;
+    &gt;&lt;/GridView&gt;
+&lt;TextView
+    android:layout_width=&quot;wrap_content&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:text=&quot;hahaha&quot;/&gt;
+&lt;/LinearLayout&gt;
+</code></pre><p>那么我们该如何找到呢？代码如下：  </p>
+<pre><code>ViewGroup v= (ViewGroup) LayoutInflater.from(this).inflate(LayoutId, null);
+GridView g= (GridView) v.findViewById(R.id.gv);
+v.removeView(g);
+</code></pre><p>这里说一下第三行代码的作用，如果你没有这行代码，那么就会报错：<br><code>The specified child already has a parent. You must call removeView() on the child&#39;s parent first.</code><br>也就是说这个控件已经有一个<code>parent</code>了，我们要使用这个控件，就必须使用这个<code>parent</code>，如果你要强制使用这个<br>控件，那么你就需要让这个控件与这个<code>parent</code>脱离父子关系，也就是用这行代码，要理解这个，我们先理一下<br><code>activity</code>和<code>window</code>，<code>view</code>的关系其实我们可以这么理解，假设activity是一个工人，他做了一个window，而这个<br>window需要玻璃，玻璃就是这个view，更准确是viewgroup，也就是根视图，然后我们需要打扮这个窗户，也就是<br>往窗户上贴窗花，假设我们的窗花是需要贴在纸上，然后让纸贴在玻璃上，因为这样我们以后要清除的时候，只要<br>把纸撕了就行，也就是说方便管理，然后这个窗花就是控件，纸就是view，也就是各种子视图，然后我们这里的情<br>况是要在这张纸上贴别的纸上的窗花，我们当然得把它撕下来先，也就是去掉父子关系，这就是第三行代码的作用<br>。不知道这么说你们是不是理解了呢？这里再加一些内容，其中的窗户实际上是<code>phonewindow</code>，而玻璃是<code>viewgroup</code>,<br>那么这个玻璃是怎么创建的呢？是通过<code>activity</code>方法中的<code>attach()</code>方法创建的，通过源代码你也可以看的到这是一个<br><code>phonewindow</code>对象，那么什么时候调用的<code>attach()</code>方法呢？是在<code>ActivityThread</code>中 <code>performLaunchActivity</code>中调用了，<br>那么这里的纸是怎么创建的呢？是通过<code>LayoutInflater</code>的<code>inflate()</code>方法创建的，原料就是那些<code>layout</code>布局文件，而<br>这里的窗花就是控件，这个是在layout中写出来的或者用代码动态生成。将窗花贴在纸上是通过addview()方法，将<br>纸贴在玻璃上，是通过setcontentview()方法。那么玻璃(viewgroup)怎么生成的呢？实际上是通过installDecor();<br>方法得到的，这里的viewgroup更准确的说是DecorView，而installDecor();方法是生成DecorView，并且根据窗口属<br>性加载顶级视图布局、获取mContentParent、设置一些基本属性等。接下来还是放一张图片来说一下:<br><img src="http://oaz1z7cqt.bkt.clouddn.com/1.png" alt="1"><br>一、DecorView为整个Window界面的最顶层View。<br>二、DecorView只有一个子元素为LinearLayout。代表整个Window界面，包含通知栏，标题栏，内容显示栏三块区域。<br>三、LinearLayout里有两个FrameLayout子元素。<br> (20)为标题栏显示界面。只有一个TextView显示应用的名称。也可以自定义标题栏，载入后的自定义标题栏View将加入FrameLayout中。<br> (21)为内容栏显示界面。就是setContentView()方法载入的布局界面，加入其中。<br>这样是不是清晰点了。<br>3.与上面一样。<br> <code>relativeLayout.addView(g);</code>至于这里为什么事g而不是v应该理解吧。  </p>
+<p>这里还需要说一下，<code>setcontentview()</code>方法的作用，作用其实就是将纸贴在玻璃上，但是这里需要提一下：<br> 当<code>activity</code> 调用 <code>setContentView()</code> 时，Android 才会去绘制 layout 上的各个元素，并为其分配内存。<br>只有分配了内存以后,才能继续执行findViewById(); 才能得到引用，不然得到空引用。空引用意味着，<br>后面使用相应变量时就会发生访问的对象不存在的问题。当<code>Activity</code>重新<code>setContentView()</code>以后，那些之前<br>绘制的控件，内存都被灭掉了。这也就是说，你需要先setcontentview，然后再将布局动态添加上去。不然<br>就白费了。</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2016/08/04/AA-布局阶段/" target="_blank" rel="external">http://sakurajiang.github.io/2016/08/04/AA-布局阶段/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AA/">AA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/08/04/AA-对于做AA项目时对于view的重新理解/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">对于做AA项目时对于view的重新理解</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/08/04/AA-设置监听器的问题/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">设置监听器的问题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="AA-布局阶段" data-title="布局阶段" data-url="http://sakurajiang.github.io/2016/08/04/AA-布局阶段/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "布局阶段",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2016/08/04/AA-布局阶段/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

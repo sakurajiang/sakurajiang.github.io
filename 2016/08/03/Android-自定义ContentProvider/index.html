@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>自定义ContentProvider | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Android,干货,ContentProvider">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="Android,干货,ContentProvider">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义ContentProvider">
+<meta property="og:url" content="http://sakurajiang.github.io/2016/08/03/Android-自定义ContentProvider/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-06T09:20:59.489Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自定义ContentProvider">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">自定义ContentProvider</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">自定义ContentProvider</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-Android-自定义ContentProvider" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">自定义ContentProvider</h1>
+        <div class="post-meta">
+            <time datetime="2016-08-02T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-08-03
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>对于<code>ContentProvider</code>，我想大家应该都不算陌生，因为它是android四大组件之一，相对而言，它比activity和service要简单挺多，这个contentprovider<br>的作用就是实现各个应用程序之间的（跨应用）数据共享，比如联系人应用中就使用了ContentProvider,你在自己的应用中可以读取和修改联系人的数据，<br>不过需要获得相应的权限。其实它也只是一个中间人，真正的数据源是文件或者SQLite等。那么我们直接开始自定义自己的<code>contentprovider</code>吧<br>1.我们先定义一个类来继承<code>contentprovider</code>，然后复写它的方法，在这里我就复写了一下query()方法，代码如下:</p>
+<pre><code>public Cursor query(Uri uri, String[] projection, String selection,
+        String[] selectionArgs, String sortOrder) {
+    // TODO Auto-generated method stub
+    mySqliteOpenHelper =new MySqliteOpenHelper(getContext(), &quot;myDataBase&quot;, null, 1);
+    sqLiteDatabase=mySqliteOpenHelper.getReadableDatabase();
+    cursor=sqLiteDatabase.query(&quot;user&quot;, null, null, null, null, null, null);
+    return cursor;
+}
+</code></pre><p>其中数据库<code>myDataBase</code>我已经建好，表也建好并且插入了数据，由于我们这里只是说<code>contentprovider</code>的自定义，就不赘述<code>sqlite</code>的用法了，这个<br>方法返回的是一个<code>cursor</code>对象，这样的话，<code>contentprovider</code>就算建好了，接下来我们要在<code>Manifest</code>文件中声明这个<code>contentprovider</code>，代码如下:</p>
+<pre><code>&lt;provider android:exported=&quot;true&quot; android:multiprocess=&quot;true&quot; 
+android:authorities=&quot;com.example.android_textsqlit.MyContentProvider&quot; 
+android:name=&quot;.MyContentProvider&quot;&gt; &lt;/provider&gt;
+</code></pre><p>其中<code>authorities</code>就是你的<code>contentprovider</code>的地址，这里需要说明一下，<code>contentprovider</code>是在你这个应用程序安装的时候就会注册到<code>providerManager</code><br>中，这就像是有一个链表，其中放着很多的URI，当你使用<code>contentResolver</code>去调用这个<code>contentprovider</code>时的各个方法时，就会通过传入的URI来<br>寻找到对应的进程，然后启动这个进程(注意是进程，而不是包括这个进程的整个应用程序)，这里的启动是通过<code>contentprovider</code>来启动的，而不是通过<code>mainactivity</code>来启动，启动之后，当我们的<br><code>contentprovider</code>用完之后，客户端也退出后，服务器端(也就是<code>contentprovider</code>)就会变为<code>emptyprocess</code>，等待回收。<br>2.我们创建一个客户端来调用<code>contentprovider</code>，主要代码如下:</p>
+<pre><code>public void LinkContentProvider(){
+ContentResolver _resolver=getContentResolver();
+Log.i(&quot;Logcat&quot;, &quot;Link&quot;);
+cursor = _resolver.query(Uri.parse(&quot;content://com.example.android_textsqlit.MyContentProvider/user&quot;), null, null, null, null);
+Log.i(&quot;Logcat&quot;, &quot;Link1&quot;);
+</code></pre><p> }<br>这是得到<code>contentresolver</code>对象，并且通过<code>resolver</code>对象的<code>query()</code>方法来调用<code>contentprovider</code>的<code>query()</code>方法，然后将返回的<code>cursor</code>对象赋值给<br>变量<code>cursor</code>，得到<code>cursor</code>后就很好办了。代码如下:</p>
+<pre><code>public void Show(View v){
+ list=new ArrayList&lt;HashMap&lt;String,String&gt;&gt;();
+ while(cursor.moveToNext()){
+     map=new HashMap&lt;String, String&gt;();
+     int userid=cursor.getInt(cursor.getColumnIndex(&quot;userid&quot;));
+     String username=cursor.getString(cursor.getColumnIndex(&quot;username&quot;));
+     map.put(&quot;userid&quot;, &quot;&quot;+userid);
+     map.put(&quot;username&quot;, username);
+     list.add(map);
+ }
+ SimpleAdapter simpleAdapter=new SimpleAdapter(MainActivity.this, list, android.R.layout.simple_list_item_2, new String[]{&quot;userid&quot;,&quot;username&quot;}, new int[]{android.R.id.text1,android.R.id.text2});
+ myListView.setAdapter(simpleAdapter);
+</code></pre><p>  }<br>这样就将内容显示在了<code>listview</code>上，这里说一下我为什么不使用<code>SimpleCursorAdapter</code>，因为使用<code>SimpleCursorAdapter</code>必须要求主键为<code>_id</code>，而<br>我定义表的时候主键不是这样的，所以我就只好用 <code>SimpleAdapter</code>了。<br>这样我们就实现了简单的自定义的<code>contentprovider</code>了。</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2016/08/03/Android-自定义ContentProvider/" target="_blank" rel="external">http://sakurajiang.github.io/2016/08/03/Android-自定义ContentProvider/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ContentProvider/">ContentProvider</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/08/03/Android-点击listview时得到item中的数据/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">点击listview时得到item中的数据的方式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/07/27/Android-初试Rxjava/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">初试Rxjava</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="Android-自定义ContentProvider" data-title="自定义ContentProvider" data-url="http://sakurajiang.github.io/2016/08/03/Android-自定义ContentProvider/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "自定义ContentProvider",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2016/08/03/Android-自定义ContentProvider/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

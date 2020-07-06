@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>AReview-超简单的Binder，AIDL和Messenger的原理及使用流程 | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Android,干货,AReview">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="Android,干货,AReview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AReview-超简单的Binder，AIDL和Messenger的原理及使用流程">
+<meta property="og:url" content="http://sakurajiang.github.io/2016/12/15/AReview-超简单的Binder，AIDL和Messenger的原理及使用流程/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-06T09:23:02.580Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AReview-超简单的Binder，AIDL和Messenger的原理及使用流程">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">AReview-超简单的Binder，AIDL和Messenger的原理及使用流程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">AReview-超简单的Binder，AIDL和Messenger的原理及使用流程</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Binder的原理"><span class="post-toc-text">Binder的原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#AIDL"><span class="post-toc-text">AIDL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Messenger的原理及使用"><span class="post-toc-text">Messenger的原理及使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重点"><span class="post-toc-text">重点</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-AReview-超简单的Binder，AIDL和Messenger的原理及使用流程" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">AReview-超简单的Binder，AIDL和Messenger的原理及使用流程</h1>
+        <div class="post-meta">
+            <time datetime="2016-12-14T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-12-15
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="Binder的原理"><a href="#Binder的原理" class="headerlink" title="Binder的原理"></a>Binder的原理</h3><p> 要想了解<code>AIDL</code>就需要先了解<code>Binder</code>的原理，所以这里先说一下<code>Binder</code>原理，<code>Binder</code>的原理大概是这样：</p>
+<p>服务器端：当我们在服务端创建好了一个Binder对象后，内部就会开启一个线程用于接收binder驱动发送的消息，收到消息后会执行相关的服务器代码。</p>
+<p>Binder驱动：当服务端成功创建一个Binder对象后，Binder驱动也会创建一个mRemote对象，该对象的类型也是Binder类，客户就可以<strong>借助</strong>这个mRemote对象来访问远程服务，注意这里是借助，真正调用的时候需要将这个转换成对应的对象，比如使用<code>AIDL</code>的时候就要转换成<code>AIDL</code>对象。</p>
+<p>客户端：客户端要想访问Binder的远程服务，就必须获取远程服务的Binder对象在binder驱动层对应的mRemote引用。当获取到mRemote对象的引用后，就可以调用相应Binder对象的暴露给客户端的方法(如果有方法的话)。 </p>
+<h3 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h3><p><code>AIDL</code>的本质其实就是系统为我们提供了一种快速实现<code>Binder</code>的工具，我们完全可以不用<code>AIDL</code>，自己去写代码实现<code>Binder</code>，但是当你写出来的时候会发现其实和<code>AIDL</code>自动生成的代码一模一样。我们接下来来分析一下原理，因为<code>AIDL</code>的实现其实就是快速实现<code>Binder</code>，所以原理自然离不开<code>Binder</code>。但是在分析原理之前，我们先将系统根据我们定义的<code>AIDL</code>文件自动生成的java文件分析一下。比较重要的就是<code>Stub</code>和它的内部代理类<code>Proxy</code>。我们说一下重要的方法：   </p>
+<p><code>asInterface(android.os.IBinder obj)</code><br>用于将服务器的Binder对象转换成客户端所需的<code>AIDL</code>接口类型的对象，这种转换过程是区分进程的，如果客户端和服务端位于统一进程，那么返回服务器的<code>Stub</code>对象本身，否则返回的是系统封装后的<code>Stub.proxy</code>对象。</p>
+<p><code>onTransact(int code,android.os.Parcel data,android.os.Parcel reply,int flags)</code><br>这个方法运行在服务端的Binder线程池中，当客户端发起跨进程请求时，远程请求会通过系统底层封装后交由<strong>服务端</strong> 的<code>onTransact</code>方法来处理。这个方法有四个参数，分别是<code>code</code> ，<code>data</code>，<code>reply</code>，<code>flags</code>.code是确定客户端请求的方法是哪个，data是目标方法所需的参数，reply是服务器端执行完后的返回值。如果这个方法返回<code>false</code>，那么客户端的请求会失败。 </p>
+<p><code>Proxy#getBookList</code><br>这里的<code>getBookList</code>方法就是在自定义的<code>AIDL</code>文件中定义的方法，这个方法运行在客户端，当客户端远程调用此方法的时候，内部实现是这样的：首先在代理类中创建该方法所需要的输入型Parcel对象_data，输出型Parcel对象_reply和返回值对象List;然后把该方法的参数信息写入<code>_data</code>中，接着<code>mRemote</code>调用<code>transact</code>方法来发起RPC(远程过程调用)请求， 同时<strong>当前线程挂起</strong>，然后服务端的<code>onTransact</code>方法会被调用，直到RPC返回后，当前线程继续执行，并从<code>_reply</code>中取出RPC过程的返回结果并返回(如果有返回值的话)，之前创建的参数其实就是<code>onTransact()</code>方法需要的参数。   </p>
+<p>说完了重要方法，接下来分析<code>AIDL</code>原理：</p>
+<p>服务端：因为要实现<code>Binder</code>，必须在服务器端创建一个<code>Binder</code>对象，如何创建呢？就是new<code>AIDL</code>接口中的<code>Stub</code>内部类，代码示例如：</p>
+<pre><code>Binder mBinder=new IBookManager.Stub(){接口方法实现}
+</code></pre><p>其中<code>IBookManager</code>是系统根据我们自己定义的<code>IBookManager.AIDL</code>所生成的类。</p>
+<p>Binder驱动：在<code>AIDL</code>中，Binder驱动其实就是<code>AIDL</code>，在<code>AIDL</code>的<code>Proxy</code>类中会传入一个Binder参数，生成一个<code>mRemote</code>引用。</p>
+<p>客户端：要实现客户端跨进程和服务端通信，必须获得服务端的<code>Binder</code>对象在binder驱动层对应的mRemote引用，如何获得呢？首先绑定远程服务，绑定成功后的<code>ServiceConnection</code>中的<code>IBinder service</code>其实就是<code>mRemote引用</code>，但是因为是使用<code>AIDL</code>方式，所以需要在客户端中调用<code>IBookManager.Stub.asInterface(android.os.IBinder obj)</code>方法将服务器返回的Binder对象转换成<code>AIDL</code>接口，然后就可以通过这个接口去调用服务器的远程方法了。 </p>
+<p>根据原理，我们得出<code>AIDL</code>的使用流程，其实很简单，大致就是在服务端创建一个<code>Service</code>，然后创建一个<code>Binder</code>对象，最后在客户端得到这个<code>Binder</code>对象。</p>
+<p><code>AIDL</code>使用流程：<br>先建立<code>AIDL</code>，如果在你建立的<code>AIDL</code>接口中，有自定义的类，那么，也需要建立这个类的AIDL，并且名字要完全相同。同时在使用的时候，一定要显示的导入这个类。接下来的流程就是跟Binder的一样了。</p>
+<p>服务器端：创建<code>Binder</code>对象，并且实现接口中的方法。</p>
+<p>客户端：绑定service，得到<code>Binder</code>对象在驱动层对应的mRemote引用。  </p>
+<p>####重点<br>1.当你在客户端调用服务器的方法的时候，其实是通过代理去访问，详情可以看上面的重点方法介绍里的<code>Proxy#getBookList</code>，所以你在客户端连续调用两次服务器的同一个方法的时候，比如，这里的getBookList，你会发现，里面的对象都不一样。因为每次在调用方法的时候，在代理类中都会创建该方法所需要的参数对象，所以里面的对象会变化。</p>
+<p>2.<code>AIDL</code>中无法使用普通的接口，只能使用<code>AIDL</code>接口，并且实现<code>AIDL</code>接口的时候不能用<code>implements</code>，因为需要实现的接口其实是<code>自定义接口.Stub</code>，而不是自己定义的那个接口。使用<code>implements</code>无法实现。  </p>
+<p>3.解注册的时候需要使用到<code>RemoteCallbackList</code>，需要注意的是这个类的<code>beginBroadcast()</code>和<code>finishBroadcast()</code>一定要配对使用，否则会出现异常<code>java.lang.IllegalStateException: beginBroadcast() called while already in a broadcast</code>，特别是在使用<code>for</code>循环的时候。</p>
+<p>4.对于<code>AIDL</code>中的<code>in</code>，<code>out</code>，<code>inout</code>这里就直接附上一篇别人写的<a href="http://blog.csdn.net/luoyanglizi/article/details/51958091" target="_blank" rel="noopener">博客</a>，这篇博客讲的很详细，而且我也赞同他的观点，纸上得来终觉浅，绝知此事要躬行。  </p>
+<p>5.当使用客户端调用服务器的方法的时候，被调用的方法运行在服务器的Binder线程池中，同时客户端会被挂起，如果此时服务端方法执行耗时的话，就会导致客户端线程长时间阻塞，如果客户端线程是UI线程的话，就会导致客户端ANR，注意的是<code>onServiceConnected(ComponentName name, IBinder service)</code>和<code>onServiceDisconnected(ComponentName name)</code>都运行在UI线程，所以不能在这里调用服务端耗时的方法。同理，对于服务端调用客户端的方法的情况，比如服务端调用客户端的<code>listener</code>中的方法的时候也是一样。即服务端挂起，方法运行在客户端的Binder线程池中。  </p>
+<p>6.当服务端因为某种异常原因停止，我们需要重新启动服务端，这里有两种方式，因为<code>AIDL</code>的底层是<code>Binder</code>，所以可以使用<code>Binder</code>的<code>linkToDeath</code>和<code>unlinkToDeath</code>方法。还有一种方式是在<code>onServiceDisconnected(ComponentName name)</code>重新绑定。这两个区别就是第二种方式可以访问UI，第一种不行，因为像之前说的，<code>onServiceDisconnected(ComponentName name)</code>是运行在UI线程里的。而第一种方式使用的时候需要设置一个<code>IBinder.DeathRecipient</code>接口用于接收服务端<code>binder</code>因为特殊原因消失的通知，当收到通知的时候就会回调<code>binderDied()</code>方法，我们在这里<code>unlinkToDeath</code>并且重新绑定service。而这个<code>binderDied()</code>方法是运行在客户端的<code>Binder</code>线程池中的。</p>
+<h3 id="Messenger的原理及使用"><a href="#Messenger的原理及使用" class="headerlink" title="Messenger的原理及使用"></a>Messenger的原理及使用</h3><p>Messenger大致的原理是这样的，因为Messenger的底层还是<code>AIDL</code>，所以，原理和<code>AIDL</code>差不多。</p>
+<p>服务器：首先需要在服务器创建Binder对象，如何创建呢？通过<code>Messenger</code>来创建，所以我们需要先构造<code>Messenger</code>对象,对于<code>Messenger</code>的构造方法有两种，如下:</p>
+<pre><code>public Messenger(IBinder target) {
+    mTarget = IMessenger.Stub.asInterface(target);
+}
+
+
+ public Messenger(Handler target) {
+    mTarget = target.getIMessenger();
+}
+</code></pre><p>所以我们需要先构造一个Handler，这个Handler的作用其实就是处理消息。然后我们再通过这个<code>Handler</code>来构造<code>Messenger</code>对象，这个Messenger对象其实就是将客户端发送来的消息传递给Handler来处理，然后我们需要得到Binder对象，通过在<code>Service</code>的<code>onBind</code>方法中<code>return Messenger.getBinder()</code>，这样就得到了<code>Binder</code>对象。  </p>
+<p>Binder驱动：跟<code>AIDL</code>一样，还是<code>Service</code>。</p>
+<p>客户端：也是需要得到服务端的<code>Binder</code>对象在binder驱动层对应的mRemote引用，获得的方式是将<code>ServiceConnection</code>中的<code>IBinder service</code>当做参数传入Messenger的构造函数中，如:</p>
+<pre><code>Messenger mService=new Messenger(service)；
+</code></pre><p>然后就可以用<code>mService.send(msg)</code>给服务器发消息。实现跨进程通信。<br>因为这里是借助<code>Messenger</code>，所以无法调用服务器端的方法，只能通过message来传递消息。而当服务器需要回应客户端的时候，就需要客户端提供一个<code>Messenger</code>，然后服务器得到这个<code>Messenger</code>，因为在就像客户端向服务端发送请求的时候，也是服务器提供一个<code>Messenger</code>，然后客户端得到这个<code>Messenger</code>。那么如何实现呢？因为客户端和服务器已经建立了连接，所以只需要在客户端发送消息的时候，通过消息的<code>replyTo</code>参数向服务器传入一个<code>Messenger</code>，然后服务器在接收到客户端的消息的时候得到通过<code>message</code>的<code>replyTo</code>参数得到这个<code>Messenger</code>，然后利用这个向客户端发送消息就可以了。主要代码如下:<br>在客户端发送消息给服务器的时候:  </p>
+<pre><code>message.replyTo=clientMessenger;
+</code></pre><p>服务器接收消息的时候</p>
+<pre><code>Messenger clientMessenger=msg.replyTo;
+</code></pre><p>这样就在服务器端得到了客户端的<code>Messenger</code>，然后在服务器端通过<code>clientMessenger.send(message);</code>就向客户端发送了消息。</p>
+<h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><p>1.对于使用<code>Messenger</code>而言，底层其实是<code>AIDL</code>，但是没有<code>AIDL</code>灵活，因为这是借助<code>Messenger</code>来发送消息从而进行消息的传递，不能直接调用服务端的方法，而使用<code>AIDL</code>是直接可以调用服务端的方法。<br>2.对于服务端的<code>Messenger</code>的作用是将客户端传递的消息传递给<code>Handler</code>来处理，而客户端的是发送消息给服务端。<br>3.<code>Messenger</code>是以串行的方式处理客户端发来的消息，当消息多的时候就就不合适了。而<code>AIDL</code>是可以并发处理客户端传来的消息。</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2016/12/15/AReview-超简单的Binder，AIDL和Messenger的原理及使用流程/" target="_blank" rel="external">http://sakurajiang.github.io/2016/12/15/AReview-超简单的Binder，AIDL和Messenger的原理及使用流程/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AReview/">AReview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/02/12/AReview-消息机制/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">AReview-消息机制</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/11/16/RestAPP-简洁的事件分发/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">RestAPP-简洁的事件分发</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="AReview-超简单的Binder，AIDL和Messenger的原理及使用流程" data-title="AReview-超简单的Binder，AIDL和Messenger的原理及使用流程" data-url="http://sakurajiang.github.io/2016/12/15/AReview-超简单的Binder，AIDL和Messenger的原理及使用流程/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "AReview-超简单的Binder，AIDL和Messenger的原理及使用流程",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2016/12/15/AReview-超简单的Binder，AIDL和Messenger的原理及使用流程/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

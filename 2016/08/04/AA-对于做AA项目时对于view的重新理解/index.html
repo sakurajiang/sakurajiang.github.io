@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>对于做AA项目时对于view的重新理解 | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Android,AA,干货">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="Android,AA,干货">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对于做AA项目时对于view的重新理解">
+<meta property="og:url" content="http://sakurajiang.github.io/2016/08/04/AA-对于做AA项目时对于view的重新理解/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-06T09:14:20.496Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对于做AA项目时对于view的重新理解">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">对于做AA项目时对于view的重新理解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">对于做AA项目时对于view的重新理解</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-AA-对于做AA项目时对于view的重新理解" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">对于做AA项目时对于view的重新理解</h1>
+        <div class="post-meta">
+            <time datetime="2016-08-03T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-08-04
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>做这个AA项目时，本着尽可能将不懂得东西搞明白的想法，我对于<code>view</code>有了更深的理解，下面是我打的一个比方。<br>假设<code>activity</code>是工人，那么这个工人开始工作时通过<code>attach()</code>方法启动了一个<code>phoneWindow</code>对象，这个对象就是一个窗户，然后有了窗户就应该装<br>一块玻璃，而<code>installDecor()</code>方法就是得到玻璃的，这是一个<code>DecorView</code>，在系统的视图树中，这是根视图，下面就是一个<code>linearLayout</code>，然后在<br>这个<code>LinearLayout</code>下面是两个<code>FrameLayout</code>，其中一个下面直接放入一个<code>TextView</code>，这个<code>TextView</code>用于显示标题，另一个<code>FrameLayout</code>下面再接一个<br><code>LinearLayout</code>，而这个<code>LinearLayout</code>就是我们真正开始放入内容的布局。然后有了窗户后我们应该贴窗花，因为这样才会显得有内容，那么，什么<br>是窗花呢？窗花就是各种控件，也就是在布局<code>xml</code>中定义的各种控件，当然，有<code>xml</code>方式就有代码的方式，大同小异。那么如何将窗花贴到玻璃上<br>呢？这里需要说明，你将窗花贴到玻璃上，并不是说直接贴在玻璃上，而是贴在一张纸上再贴在玻璃上，因为这样方便管理(包括撤销和添加的位<br>置等)，这一点很重要，这也就意味着，显示出来的控件一定是贴在纸上的，不管是窗户上原来的纸还是你新创建的纸，同时，如果你要寻找到窗<br>花，可以通过<code>findViewById()</code>方法来寻找到，但是如果你要对窗花进行修改和使用，那么这个窗花一定是要在纸上的，而且你找到的窗花一定要是<br>这个纸上的窗花，也就是在<code>findViewById()</code>方法前加上<code>view</code>来指定是哪张纸，也就是说这张纸一定要加载出来，比如，一下代码:  </p>
+<pre><code>   ViewGroup  viewGroup1= (ViewGroup) LayoutInflater.from(this).inflate(R.layout.activity_main,null);          
+    RelativeLayout r= (RelativeLayout) viewGroup1.findViewById(R.id.r);   
+  Button b=new Button(this);   
+b.setText(&quot;b1&quot;);   
+r.addView(b);  
+setContentView(r);   
+</code></pre><p>这个代码是没有问题的，但是，如果将第一行代码删了，变成：  </p>
+<pre><code>RelativeLayout r= (RelativeLayout) findViewById(R.id.r);  
+  Button b=new Button(this);  
+  b.setText(&quot;b1&quot;);  
+  r.addView(b);  
+  setContentView(r);  
+</code></pre><p>那么，就会报错，内容大概是调用<code>addView(b)</code>方法的对象是空的。<br>那么纸是什么呢?纸其实就是<code>view</code>，是通过<code>LayoutInflater</code>的<code>inflate()</code>方法生成的，同时这里还需要提一点，如果你想将一张纸上的窗花黏在另一<br>张纸上，那么，你首先需要将这个窗花从原来的纸上撕下来，然后再将这个窗花贴在另一张纸上，这里的撕就是原来纸调用<code>removeView()</code>方法，<br>然后黏在另一张纸上，就是另一张纸调用<code>addview()</code>方法，那么这样能实现什么呢？<br>1.动态的将布局呈现<br>2.将布局的一部分替换掉<br>3.实现类似侧滑菜单的效果<br>这里还要提一点，因为窗口的大小是有限的，所以可能你的纸上的控件没有显示完全，如果你将这个纸上边的控件清除再调整纸的位置，或者直<br>接通过调整纸的位置将纸上边的控件挤掉，来达到让这张纸完全显示的结果，那么这意味着什么呢?<br>意味着可以通过这种方式实现侧滑菜单的效果。<br>其实说到底，侧滑菜单的效果的实现实际上就是实现将布局的一部分替换掉和动态呈现布局的功能，要掌握替换布局和动态呈现布局的原理，并<br>且灵活运用。比如实现侧滑菜单就有几种方式，不过原理都是一样的，下面列举一下我的两种方式：<br>1.在主布局中就有侧滑时需要的布局，只是一开始不让它呈现出来(设置高度等属性)，然后当点击时呈现出来(往往是通过替换掉原来呈现出来的控件)<br>2.在主布局中没有侧滑时需要的布局，当点击时让它自己动态加载出来，然后贴在相应的位置的纸上。</p>
+<p>同时需要注意一下，<code>setcontentView()</code>方法是将纸黏在玻璃上，那么这张纸是哪张纸呢？这张纸就是你传入的参数，比如下面两种代码的区别: </p>
+<pre><code> super.onCreate(savedInstanceState);                       super.onCreate(savedInstanceState);  
+RelativeLayout r= (RelativeLayout) findViewById(R.id.r);   RelativeLayout r= (RelativeLayout) findViewById(R.id.r);       
+TextView t1= (TextView) r.findViewById(R.id.t);            TextView t1= (TextView) r.findViewById(R.id.t);  
+t1.setText(&quot;t1&quot;);                                           t1.setText(&quot;t1&quot;)
+b.setText(&quot;b1&quot;);                                              b.setText(&quot;b1&quot;);
+r.addView(b);                                                r.addView(b);  
+setContentView(r);                                            setContentView(R.layout.activity_main);
+</code></pre><p>这两代码就是最后一行不同，左边的代码显示出来是一个内容为t1的TextView和B1的Button，    右边的代码显示出来的是只有一个内容为hello world的TextView<br>  这也就说明了显示出来的内容就是你传入的纸的内容，有人可能觉得这是废话，但是你写代码的时候可能就会搞混了，所以在这里提出来，一定要记住。     </p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2016/08/04/AA-对于做AA项目时对于view的重新理解/" target="_blank" rel="external">http://sakurajiang.github.io/2016/08/04/AA-对于做AA项目时对于view的重新理解/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AA/">AA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/08/04/AA-做AA项目时的一些封装心得及一些技巧/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">做AA项目时的一些封装心得以及一些技巧</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/08/04/AA-布局阶段/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">布局阶段</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="AA-对于做AA项目时对于view的重新理解" data-title="对于做AA项目时对于view的重新理解" data-url="http://sakurajiang.github.io/2016/08/04/AA-对于做AA项目时对于view的重新理解/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "对于做AA项目时对于view的重新理解",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2016/08/04/AA-对于做AA项目时对于view的重新理解/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

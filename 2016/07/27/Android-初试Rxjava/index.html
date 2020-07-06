@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>初试Rxjava | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Android,干货">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="Android,干货">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初试Rxjava">
+<meta property="og:url" content="http://sakurajiang.github.io/2016/07/27/Android-初试Rxjava/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/A.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/B.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/C.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/D.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/E.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/F.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/G.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/H.PNG">
+<meta property="og:updated_time" content="2020-07-06T12:11:01.538Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初试Rxjava">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/A.PNG">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">初试Rxjava</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">初试Rxjava</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置环境"><span class="post-toc-text">配置环境</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开始理解Rxjava"><span class="post-toc-text">开始理解Rxjava</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Android-初试Rxjava" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">初试Rxjava</h1>
+        <div class="post-meta">
+            <time datetime="2016-07-26T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-07-27
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><p> 只需要在项目中的<code>build.gradle</code>中加入<br> <code>compile &#39;io.reactivex:rxjava:1.0.14&#39;</code><br> <code>compile &#39;io.reactivex:rxandroid:1.0.1&#39;</code><br>这两行代码就行。</p>
+<h3 id="开始理解Rxjava"><a href="#开始理解Rxjava" class="headerlink" title="开始理解Rxjava"></a>开始理解Rxjava</h3><p>Rxjava采用的是观察者模式，由于我之前知道回调模式，而且我觉得回调模式是比较特殊的观察者模式，它只有一个观察者，所以我拿回调模式进行类比，首先，对于回调模式而言，它一般是暴露一个方法和接口，这里我就直接拿我自己写的一个回调机制来做比较，代码如下:<br>被观察者类:<br><img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/A.PNG" alt="Github"></p>
+<p>订阅:<br><img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/B.PNG" alt="Github"><br>开始类比，由上面的代码知道，被观察者是定义了发生怎样的事件和何时发生，看<code>onBindViewHolder(参数)</code>这个方法，这就类比于<img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/C.PNG" alt="Github"><br>这个代码，这里的<code>onBindViewHolder(参数)</code>方法和<code>rx.Observable.OnSubscribe&lt;Bitmap&gt;</code>抽象类的作用是一样的，就是设置了发生了什么事以及何时发生(记住是发生以及何时发生，而不是处理了)，然后再加上<code>Observable observable = Observable.create(OnSubscribe类型参数)</code>就是创建了一个被观察者，这里需要记住的就是发生怎样的事件和何时发生是在被观察者中的。然后就是订阅这个，这里完成了两个过程，首先是创建观察者，就是：<br><img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/D.PNG" alt="Github"><br>这其实就是定义(不是声明)了接口中的两个方法，就是建立了观察者，同时通过<code>myRecyclerViewAdapter.setOnItemClickListener(参数)</code>来订阅，建立观察者就是：<br><img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/E.PNG" alt="Github"><br>整个过程类比Rxjava就是:<br><img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/F.PNG" alt="Github"><br>这里就是建立了观察者，同时订阅了，建立观察者就是<br><img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/G.PNG" alt="Github"><br>订阅就是<code>subscribe(参数)</code>完成，这里需要记住的就是定义事件是发生在观察者中，然后通过subscribe(参数)来订阅。observable，observer，subscribe，OnSubscribe的关系可以用下图表示:<br><img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%88%9D%E8%AF%95RxJava/H.PNG" alt="Github"></p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2016/07/27/Android-初试Rxjava/" target="_blank" rel="external">http://sakurajiang.github.io/2016/07/27/Android-初试Rxjava/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/08/03/Android-自定义ContentProvider/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">自定义ContentProvider</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/07/26/Android-listView的简单使用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">listview的简单使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="Android-初试Rxjava" data-title="初试Rxjava" data-url="http://sakurajiang.github.io/2016/07/27/Android-初试Rxjava/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "初试Rxjava",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2016/07/27/Android-初试Rxjava/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

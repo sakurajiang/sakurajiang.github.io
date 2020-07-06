@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>Activity Window View的关系 | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Android,干货">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="Android,干货">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Activity Window View的关系">
+<meta property="og:url" content="http://sakurajiang.github.io/2016/07/21/Android-activity window view的关系/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-06T09:16:06.230Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Activity Window View的关系">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Activity Window View的关系</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">Activity Window View的关系</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-Android-activity window view的关系" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Activity Window View的关系</h1>
+        <div class="post-meta">
+            <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-07-21
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>activity.java的attach()方法，这个方法传入多个参数，有Context,ActivityThread<br>，Instrumentation等等，我们先不管他们，我们直接找到mWindow = PolicyManager.makeNewWindow(this);<br>这一行代码，也就意味着我们需要找PolicyManager.java，这时我们需要找的是policy这个类，而不是Ipoliy<br>，因为Ipolicy是一个接口，这时看到的是new PhoneWindow(context);也就是说attach()方法是得到一个phonewindow对象，<br>那么这个对象是怎么得到的呢？<br>我们继续跟踪，去看PhoneWindow.java<br>看这个类的构造函数，需要调用父类的构造函数，而父类是window，我们看一下，发现mContext = context;<br>于是我们回到phonewindow.java中，看到mLayoutInflater = LayoutInflater.from(context);我们进入到<br>LayoutInflater.java中，这是一个抽象类，我们找到from()方法，这个方法类似于得到<br>一个系统服务，并且得到LayoutInflater类型的变量，如果LayoutInflate这个类型的<br>变量为空，就会抛出错误LayoutInflate not found.。<br>然后返回LayoutInflate类型的变量，<br>也就是说phonewindow的得到其实就是根据Context得到一个系统服务而已，然后我们回<br>到activity.java中，我们去看setContentView()方法，我们可以看到它调用的是window<br>的setContentView()方法，我们进入看一下，会发现其实就是说根据你传入的值来设置<br>view的样子，有两种参数，一种是int layoutResID，还有一种是View view, ViewGroup.LayoutParams params，<br>这两种参数都行。第一种就会调用LayoutInflater中的inflate()，这个方法至少传入两个参数，如果viewgroup类型的<br>参数为null，就会返回一个view对象，如果不是null，就会调用viewGroup的addview()方法，而第二个就会直接调用<br>ViewGroup的addView()方法。也就是说我们可以直接使用以下一些代码来替代eclipse给我们的<br>  <strong>setContentView(R.layout.activity_main);<br>比如: LayoutInflater LayoutInflater1 =<br>                (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);<br>        getWindow().setContentView(LayoutInflater1.inflate(R.layout.activity_main, null));<br>或者:<br>    LayoutInflater LayoutInflater1 =<br>                (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);<br>        getWindow().setContentView(LayoutInflater1.inflate(R.layout.activity_main, null),new ViewGroup.LayoutParams(-1, -1));</strong></p>
+<p>这一种与上一种类似，不过我们就是使用了传入两个参数的setContentView(view arg0,layoutparas arg1)的方法，这里就需要提一下后面的这个参数，<br>在phoneWindow.java的传入一个参数的setconteneView()方法的源码中是这样的setContentView(view, new ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT));<br>这里的MATCH_PARENT其实是viewgroup的public static  int类型的变量，值是-1，之所以这里能直接使用是因为在phoneWindow.java类中导入了，我也是后面反应过来的，语句是<br>import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;这是java的基础知识，就不解释了。<br>或者：<br>getWindow().setContentView(LayoutInflater.from(getBaseContext()).inflate(R.layout.init, null),new ViewGroup.LayoutParams(-1, -1));<br>当然还有很多种搭配方式，这里就不一一赘述了。<br>总之，LayoutInflater中的inflate()方法的作用是返回一个不为空的view对象，或者是调用addview()方法并返回传入的viewGroup参数，这个根据你传入的ViewGroup类型的变量是否为空，<br>若为空就返回一个不为空的view对象，若不为空就调用addview方法并返回传入的viewGroup参数，也就是说如果我们能提供一个不为空的viewgroup类型的参数，那么我们就可以直接使用inflate()方法来设置view<br>（但是我提供了一个不为null的viewgroup对象，，下面是我的代码<br> Button b=new Button(this);<br>        b.setText(“b”);<br>        LinearLayout linearLayout=new LinearLayout(this);<br>    linearLayout.addView(b);<br>    linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));<br>   LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_main, linearLayout);但是布局是一片空白，我也不知道为什么？），<br>类似于  LayoutInflater.from(this).inflate(R.layout.activity_main,new AbsoluteLayout(this,null,R.id.myButton) );<br>但是我并不知道如何构造一个不为空的viewgroup对象，然后<br>我们利用返回的view对象当参数传入phoneWindow.java中的setContentView(View view);方法中，然后这个方法调用addview()方法来设置view，至于后面那个可有可无的参数，若不传入，<br>则是宽度高度都是match_parent，也就是为-1，若传入自己设置值，只有-1，-2两个选项有意义，但是我把-1变为-2好像没影响，这个参数应该是控制这个view的宽度和高度呀，但是为什<br>么没影响。。。<br>一个activity构造的时候一定会构造一个phonewindow对象，并且只有一个，activity是控制单元，window是承载单元，view是显示视图，打个比方就是，activity是工匠，他做了一个窗户，<br>而窗户需要贴窗花才好看，layout的那个xml文件就是剪窗花，剪完窗花需要贴上去，而addView就是将窗花贴到窗户上去。</p>
+<p>不过这里有一点搞不太明白，就是得到一个LayoutInflater的引用时，由于这个方法是一个抽象方法，也就是意味着不能直接new，<br>我们可以使用两种方式，一种是使用这个LayoutInflater类中的静态方法from()，还有一种就是<br>  LayoutInflater LayoutInflater =<br>                (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);<br>(其实这就是from()方法中的主要代码)，可是怎么实现的呢？通过对源码的跟踪我发现当你使用from这个方法时，<br>你会发现当你传入不同的context参数，显示的效果会不同，对于一个button控件而言，用这个参数会是浅黑色的，用getbasecontext是白色的，但是不管你用什么参数，最后应该都会到contextthemewrapper.java中，<br>而这里的代码是这样的：<br>if (LAYOUT_INFLATER_SERVICE.equals(name)) {<br>            if (mInflater == null) {<br>                mInflater = LayoutInflater.from(getBaseContext()).cloneInContext(this);<br>            }<br>            return mInflater;<br>        }<br>        return getBaseContext().getSystemService(name);<br>这里我就蒙圈了，也就是说它会回到from方法中，可是也没有看到有构造这个对象呀，回到from的话不就又开始周而复始的调用吗？</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2016/07/21/Android-activity window view的关系/" target="_blank" rel="external">http://sakurajiang.github.io/2016/07/21/Android-activity window view的关系/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/07/21/Android-RecyclerView的简单使用/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">使用RecyclerView遇到的一些问题</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/07/21/Android-activity源码分析准备阶段/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Activity源码分析准备阶段</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="Android-activity window view的关系" data-title="Activity Window View的关系" data-url="http://sakurajiang.github.io/2016/07/21/Android-activity window view的关系/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "Activity Window View的关系",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2016/07/21/Android-activity window view的关系/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

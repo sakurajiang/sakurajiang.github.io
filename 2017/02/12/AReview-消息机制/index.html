@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>AReview-消息机制 | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Android,干货,AReview">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="Android,干货,AReview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AReview-消息机制">
+<meta property="og:url" content="http://sakurajiang.github.io/2017/02/12/AReview-消息机制/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://oaz1z7cqt.bkt.clouddn.com/TestThreadLocal-20161219.PNG">
+<meta property="og:updated_time" content="2020-07-06T09:22:03.164Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AReview-消息机制">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+<meta name="twitter:image" content="http://oaz1z7cqt.bkt.clouddn.com/TestThreadLocal-20161219.PNG">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">AReview-消息机制</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">AReview-消息机制</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#消息机制概述"><span class="post-toc-text">消息机制概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#MessageQueue"><span class="post-toc-text">MessageQueue</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Looper"><span class="post-toc-text">Looper</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#ThreadLocal"><span class="post-toc-text">ThreadLocal</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Handler"><span class="post-toc-text">Handler</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#从使用流程分析"><span class="post-toc-text">从使用流程分析</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-AReview-消息机制" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">AReview-消息机制</h1>
+        <div class="post-meta">
+            <time datetime="2017-02-11T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2017-02-12
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="消息机制概述"><a href="#消息机制概述" class="headerlink" title="消息机制概述"></a>消息机制概述</h3><p>  从开发角度而言，<code>Handler</code>是<code>Android</code>消息机制的上层接口，所以，消息机制主要就是<code>Handler</code>的运行机制，<code>Handler</code>的作用就是在一个线程中发送消息，然后在另一个线程中处理，通过在消息中存放数据达到线程间通信。如果你想在哪个线程中接收消息，那你就要在那个线程中生成一个<code>Handler</code>对象（当然实际上是在哪个线程中调用了Looper.loop()方法，那么就会在哪个线程中接收消息）。Handler的运行需要<code>Looper</code>，<code>MessageQueue</code>的支撑。所以接下来就分别分析这三个类。  </p>
+<h5 id="MessageQueue"><a href="#MessageQueue" class="headerlink" title="MessageQueue"></a><code>MessageQueue</code></h5><p>这个类翻译过来就是消息队列，但是这其实是一个链表，因为对于这个类而言，它的作用就是存取<code>handler</code>发送的消息，它包含的主要操作就是<strong>插入和读取</strong>，读取的时候也会涉及<strong>删除操作</strong>，意思就是一个消息只能被处理一次，所以使用链表的结构会更好，因为链表在插入和删除上有优势。这个类的对象是在<code>Looper</code>的构造函数中生成的，<strong>也就是说一个<code>Looper</code>对象就对应自己的一个<code>MessageQueue</code>对象</strong>，代码如下:  </p>
+<pre><code> private Looper(boolean quitAllowed) {
+    mQueue = new MessageQueue(quitAllowed);
+    mThread = Thread.currentThread();
+}
+</code></pre><p> 而对于一个线程而言，就只有一个<code>Looper</code>对象，所以<strong>一个线程就只有一个<code>MessageQueue</code>对象</strong>。为什么一个线程就只有一个<code>Looper</code>对象，我们继续往下看。</p>
+<h4 id="Looper"><a href="#Looper" class="headerlink" title="Looper"></a><code>Looper</code></h4><p>这个类的作用就是管理<code>handler</code>发送的消息，也就意味着它需要和<code>MessageQueue</code>一起使用，这可能就是在源码里为什么会将<code>MessageQueue</code>的构造放在<code>Looper</code>的构造函数里。在<code>Looper</code>的构造函数里，会构造一个<code>MessageQueue</code>对象，同时会得到当前的线程，代码如下:</p>
+<pre><code>private Looper(boolean quitAllowed) {
+    mQueue = new MessageQueue(quitAllowed);
+    mThread = Thread.currentThread();
+}
+</code></pre><p>这也就意味着<code>Looper</code>的操作都是基于当前线程的，那我们是如何实现线程切换的呢？其实说起来很简单，我们只需要得到每个线程中的<code>Looper</code>对象就可以了。那么，如何得到呢？接下来就介绍一个重要的类:ThreadLocal,掌声欢迎。</p>
+<h5 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a><code>ThreadLocal</code></h5><p>ThreadLocal是一个线程内部的数据存储类，通过它可以在指定的线程中存储数据，数据存储以后，只有在指定的线程中可以获取到存储的数据，对于其他线程则无法获取到数据。这样说太抽象了，直接上代码:</p>
+<pre><code>  public class MainActivity extends Activity {
+  private ThreadLocal&lt;String&gt; stringThreadLocal;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    TestThreadLocal();
+}
+public void TestThreadLocal(){
+    stringThreadLocal=new ThreadLocal&lt;&gt;();
+    stringThreadLocal.set(&quot;main&quot;);
+    Log.e(&quot;log&quot;, &quot;main=&quot; + stringThreadLocal.get());
+    new Thread(&quot;thread1&quot;){
+        @Override
+        public void run() {
+            super.run();
+            stringThreadLocal.set(&quot;thread1&quot;);
+            Log.e(&quot;log&quot;,&quot;thread1=&quot;+stringThreadLocal.get());
+        }
+    }.start();
+    new Thread(&quot;thread2&quot;){
+        @Override
+        public void run() {
+            super.run();
+            stringThreadLocal.set(&quot;thread2&quot;);
+            Log.e(&quot;log&quot;,&quot;thread2=&quot;+stringThreadLocal.get());
+        }
+    }.start();
+}
+}
+</code></pre><p>运行结果如下:</p>
+<p><img src="http://oaz1z7cqt.bkt.clouddn.com/TestThreadLocal-20161219.PNG" alt="TestThreadLocal-20161219"><br>从上面的Log可以看出，在不同的线程中访问同一个<code>ThreadLocal</code>对象，<code>ThreadLocal</code>获取到的值是不一样的。这就是<code>ThreadLocal</code>的奇妙之处。<code>ThreadLocal</code>之所以有这么奇妙的效果，是因为不同线程访问同一个<code>ThreadLocal</code>的get方法，<code>ThreadLocal</code>内部会从各自的线程中取出一个数组，然后再从数组中根据当前的<code>ThreadLocal</code>的索引去查找对应的value值。而不同的线程中的数组是不同的，这就是为什么通过<code>ThreadLocal</code>可以在不同的线程中维护一套数据的副本并且彼此互不干扰。   </p>
+<p>这样的话就很简单了，通过这个<code>ThreadLocal</code>类我们就可以轻松的得到各个线程中的<code>Looper</code>对象了，从源码中我们也可以看出来:</p>
+<pre><code>static final ThreadLocal&lt;Looper&gt; sThreadLocal = new ThreadLocal&lt;Looper&gt;();
+</code></pre><p>这里就贴这一段了，贴多了看着不好看，有兴趣的同学可以下去自己看一下<code>Looper</code>的源码，其实很简单。既然我们可以得到各个线程中的<code>Looper</code>对象，那么也就意味着其实我们就已经实现了线程切换。然后我们再看一下<code>Loope</code>对象中的重要方法：  </p>
+<p><code>prepare()</code>：这个方法的作用是构造一个<code>Looper</code>对象，调用的顺序是先调用<code>prepare(boolean quitAllowed)</code>方法，然后调用<code>sThreadLocal.set(new Looper(quitAllowed));</code>方法，其中<code>quitAllowed</code>的值的作用就是区分主线程和其他线程，区分的作用是设置<strong>主线程不允许退出的</strong>。</p>
+<p><code>loop()</code>：这个方法的作用是循环遍历整个消息队列，将handler发送的消息送给<code>msg.target.dispatchMessage(msg);</code><br>处理，这是一个死循环，退出的唯一方式就是<code>MessageQueue</code>的<code>next()</code>方法返回null，<code>msg.target</code>其实就是你定义的<code>handler</code>对象，这样就实现了将消息又返回给<code>handler</code>自身来处理。而且，实现了线程的切换。</p>
+<p><code>quie()和quitSafely()</code>:这两个方法的作用就是退出<code>loop()</code>循环，两个的区别就是，第一个是立即退出，第二个时等消息队列中的<strong>已有消息</strong>处理完毕再退出。所以，当我们手动创建<code>Looper</code>的时候注意在合适的时候把<code>loop</code>退出。</p>
+<h4 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a><code>Handler</code></h4><p>这个类的作用就是发送消息和处理消息，当你在创建一个<code>Handler</code>对象的时候，在<code>Handler</code>的构造函数中会得到当前的线程的<code>Looper</code>对象，按照之前的分析，得到了<code>Looper</code>对象其实就得到了<code>MessageQueue</code>对象，这里注意是<strong>当前线程</strong>，当我们调用<code>sendMessage(message)</code>方法的时候，会将一个消息发送到调用<code>Looper.loop()</code>方法所在的线程的消息队列中，跟在哪个线程里调用<code>sendMessage(message)</code>方法没有关系，然后创建<code>Handler</code>的线程的<code>Looper</code>对象的<code>Loop()</code>方法就会将消息返回给<code>handler</code>对象的<code>dispatchMessage(msg);</code>来处理。也就是说将<code>sendMessage(message)</code>在别的线程中调用，最后<code>message</code>会在调用<code>Looper.loop()</code>方法的线程中来执行。使用<code>Handler</code>发送消息有两种方式，一个是<code>post(runnable)</code>，还有一个是<code>sendMessage(message)</code>，在调用第一个的时候，会调用<code>getPostMessage(Runnable r)</code>方法，将<code>Runnable</code>对象存储到<code>Message</code>对象中，所以第一个还是调用第二个，下面看一下<code>Handler</code>的<code>dispatchMessage(Message msg)</code>，代码如下:</p>
+<pre><code>   public void dispatchMessage(Message msg) {
+    if (msg.callback != null) {
+        handleCallback(msg);
+    } else {
+        if (mCallback != null) {
+            if (mCallback.handleMessage(msg)) {
+                return;
+            }
+        }
+        handleMessage(msg);
+    }
+}
+</code></pre><p>其中的<code>msg.callback</code>就是<code>Runnable</code>对象，而<code>mCallback</code>就是当你创建<code>Handler</code>是通过传递一个<code>Handler.Callback</code>对象的时候的<code>Handler.Callback</code>对象。 </p>
+<pre><code>public Handler(Callback callback) {
+    this(callback, false);
+}
+</code></pre><p>最后就是<code>Handler</code>自身的<code>handleMessage(msg)</code>。这就是<code>Handler</code>的<code>dispatchMessage(Message msg)</code>的执行顺序，也就是先执行<code>Runnable</code>对象，然后是<code>Handler.Callback</code>对象，最后是<code>Handler</code>自身的<code>handleMessage(msg);</code>。</p>
+<h3 id="从使用流程分析"><a href="#从使用流程分析" class="headerlink" title="从使用流程分析"></a>从使用流程分析</h3><p>当我们创建一个<code>Handler</code>的时候，在<code>Handler</code>的构造函数里会调用<code>Looper.myLooper();</code>来得到当前的线程的<code>Looper</code>对象，得到了<code>Looper</code>对象也就得到了当前线程的<code>MessageQueue</code>对象，注意这里是<strong>当前线程</strong>，然后用创建好了的<code>Handler</code>对象来发送消息，一般来说发送消息都会在别的线程，因为这样才有意义，然后当调用<code>Handler</code>的<code>sendMessage(message)</code>后，就会调用<code>MessageQueue</code>的<code>enqueueMessage(msg, uptimeMillis)</code>;方法，这样就将消息发送到了调用<code>Looper.loop()</code>方法所在的线程的消息队列中，然后将消息发送给<code>msg.target.dispatchMessage(msg);</code>来处理，其中的<code>msg.target</code>就是你创建的<code>Handler</code>对象，然后消息就得到了处理。在实际的开发中，我们的发送消息都会在别的线程，并且在这个线程发送消息之前会完成一些耗时任务，比如下载，然后下载完成后发送消息，在<code>handleMessage(Message msg)</code>或者<code>run()</code>去执行操作，因为这两个方法的调用都是在创建<code>Handler</code>的线程中调用的，这样就完成了将下载任务指定到专门的下载线程中，并且能够在原来的线程中操作下载任务的结果。这也就是实现了<strong>将一个任务切换到指定的线程中工作</strong>。</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2017/02/12/AReview-消息机制/" target="_blank" rel="external">http://sakurajiang.github.io/2017/02/12/AReview-消息机制/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AReview/">AReview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/04/03/AReview-ANR/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">AReview-ANR</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/12/15/AReview-超简单的Binder，AIDL和Messenger的原理及使用流程/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">AReview-超简单的Binder，AIDL和Messenger的原理及使用流程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="AReview-消息机制" data-title="AReview-消息机制" data-url="http://sakurajiang.github.io/2017/02/12/AReview-消息机制/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "AReview-消息机制",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2017/02/12/AReview-消息机制/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

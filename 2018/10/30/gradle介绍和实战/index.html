@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>gradle | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Android,干货,gradle">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="Android,干货,gradle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gradle">
+<meta property="og:url" content="http://sakurajiang.github.io/2018/10/30/gradle介绍和实战/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E8%87%AA%E5%AE%9A%E4%B9%89Gradle%E6%8F%92%E4%BB%B6/%E6%A8%A1%E5%9D%97%E6%95%B0%E7%9B%AE.png">
+<meta property="og:updated_time" content="2020-07-06T12:11:10.433Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gradle">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E8%87%AA%E5%AE%9A%E4%B9%89Gradle%E6%8F%92%E4%BB%B6/%E6%A8%A1%E5%9D%97%E6%95%B0%E7%9B%AE.png">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">gradle</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">gradle</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是gradle"><span class="post-toc-text">什么是gradle</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么会有gradle"><span class="post-toc-text">为什么会有gradle</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何使用gradle"><span class="post-toc-text">如何使用gradle</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-gradle介绍和实战" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">gradle</h1>
+        <div class="post-meta">
+            <time datetime="2018-10-29T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2018-10-30
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="什么是gradle"><a href="#什么是gradle" class="headerlink" title="什么是gradle"></a>什么是gradle</h3><p>简单的说gradle是一套构建工具，所谓构建工具就是根据一堆输入信息，生成一系列产物，复杂的说gradle是一套框架，所有的参数配置其实都严格对应相应的API，我们没有必要可以记住这些API，我们需要掌握的是大体流程，然后借助官方SDK+API来完成自己的需求。</p>
+<h3 id="为什么会有gradle"><a href="#为什么会有gradle" class="headerlink" title="为什么会有gradle"></a>为什么会有gradle</h3><p>在Gradle爆红之前，常用的构建工具是ANT，然后又进化到Maven。ANT和Maven这两个工具其实也还算方便，现在还有很多地方在使用。但是二者都有一些缺点，所以让更懒得人觉得不是那么方便。比如，Maven编译规则是用XML来编写的。XML虽然通俗易懂，但是很难在xml中描述if{某条件成立，编译某文件}/else{编译其他文件}这样有不同条件的任务。于是gradle就应运而生，gradle采用的语言是groovy，groovy能让你写java语言像写脚本一样简单，同时gradle是一种DSL语言，即Domain Specific Language，领域相关语言。什么是DSL，说白了它是某个行业中的行话。在gradle的体现有很多，比如sourceSets代表源文件的集合等。</p>
+<h3 id="如何使用gradle"><a href="#如何使用gradle" class="headerlink" title="如何使用gradle"></a>如何使用gradle</h3><p>1.首先我们需要学习一下groovy，值得一提的是groovy语言在编译的时候已经编译为java类字节码，然后运行在JVM虚拟机中，可以理解为它扩展了Java语言，写法十分的奔放，比如定义变量使用<code>def</code>定义，但是这个关键字也不是必需的，语句结尾可以不使用<code>;</code>，单引号严格对应Java中的双引号，双引号则和脚本语言中的双引号类似，当含有<code>$</code>符号时，则它会<code>$</code>表达式先求值，三引号中的字符串支持换行。暂时先了解这些，详细的可以直接看<code>GDK</code>。<br>2.接下来我们就介绍一下gradle的行话，在gradle中，每一个待编译的工程都是一个<code>Project</code>对象，每个<code>Project</code>在编译的时候包含多个<code>Task</code>，比如一个<code>Android</code>项目的编译可能就包含<strong>Java源码编译Task</strong>、<strong>资源编译Task</strong>、<strong>JNI编译Task</strong>、<strong>lint检查的Task</strong>、<strong>打包生成APK的Task</strong>、<strong>签名Task</strong>等等。一个<code>Project</code>包含的<code>Task</code>的数量是由编译脚本执行的插件决定的，插件就是用来定义<code>Task</code>，并且具体执行这些<code>Task</code>的东西。而gradle作为一个框架，主要负责定义流程和规则，具体的编译工作则是通过编译插件来完成，比如编译Java有Java插件，编译Groovy有Groovy插件，编译Android APP有Android APP插件，编译Android Library有Android LIbrary插件。该<img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E8%87%AA%E5%AE%9A%E4%B9%89Gradle%E6%8F%92%E4%BB%B6/%E6%A8%A1%E5%9D%97%E6%95%B0%E7%9B%AE.png" alt="图片">中有两个<code>Project</code>，根据gradle设计，每一个<code>Project</code>都对应一个<code>build.gradle</code>对象，而<code>build.gradle</code>就是该<code>Project</code>的编译脚本，如果只有这些，那么你编译的就需要进入到每一个<code>Project</code>中，然后执行编译脚本，这样效率很低，于是gradle提供了<strong>Multi-Projects Build</strong>，即多个项目一起编译，实现很简单，就是再项目根目录增加一个<code>build.gradle</code>文件，然后再增加一个<code>settings.gradle</code>，前者可以什么都不写，后者就是通过<code>include</code>标签将所有的<code>Project</code>包含进来，如：<code>include &#39;:app&#39;, &#39;:buildsrc&#39;</code>，同时我们还可以在这里添加一些初始化的函数，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	def initSomeValue()&#123;</span><br><span class="line">    Properties properties = new Properties();</span><br><span class="line">    File fileProperties = new File(rootDir.getAbsolutePath()+&quot;/local.properties&quot;);</span><br><span class="line">    properties.load(fileProperties.newDataInputStream());</span><br><span class="line">    gradle.ext.myApi = properties.getProperty(&quot;sdk.dir&quot;);</span><br><span class="line">    println(&quot;init&quot;+gradle.myApi);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>该函数就是将<code>SDK</code>的目录赋值给gradle的额外属性<code>myApi</code>中，下次直接通过<code>gradle.myApi</code>获取该属性。目前我们了解的内容如下：<br><strong>每一个Project都必须设置一个build.gradle文件。<br>对于multi-projects build，需要在根目录下也放一个build.gradle，和一个settings.gradle。<br>一个Project是由若干tasks来组成的，当gradle xxx的时候，实际上是要求gradle执行xxx任务。这个任务就能完成具体的工作。</strong><br>下面说一下gradle的工作流程，简单地说就是先执行<code>settings.gradle</code>，完成初始化过程，然后解析每一个<code>build.gradle</code>，其中的<code>Task</code>会被添加到有向图中，用于解决依赖关系，最后就是执行阶段，执行gradle XXX，gradle就会将这个xxx任务链上的所有任务全部按依赖顺序执行一遍。接下来介绍几种对象：<br>1.Gradle对象，当执行gradle XXX的时候，gradle会从默认的配置脚本中构造一个Gradle对象，在整个构建过程中只有一个Gradle对象，Gradle对象的数据类型就是Gradle。我们一般很少去定制这个默认的配置脚本。<br>2.Project对象，每一个<code>build.gradle</code>对象都会生成一个<code>Project</code>对象，在gradle中，<code>Project</code>对象对应的是Build Script，在<code>build.script</code>中，我们一般需要做如下几件事，分别是：应用插件、设置属性等。<br>3.<code>Settings</code>对象，每个<code>settings.gradle</code>都会生成一个<code>Settings</code>对象，注意，对于其他gradle文件，除非定义了class，否则会转换成一个实现了Script接口的对象。这一点和3.5节中Groovy的脚本类相似。<br>讲了这么多，那么一般怎么用呢？<strong>对于Java和Groovy而言，我们一般会把公共的方法放在一个类中，然后在别的类中import该类，但是在Gradle中，一般都是通过在<code>build.gradle</code>中定义插件，然后在插件中定义<code>Task</code>来完成</strong>，定义<code>Task</code>可以通过task函数来定义，一个<code>Task</code>包含多个Action，所以<code>Task</code>有两个函数，分别是doFirst和doLast，即最先执行和最后执行。普及了基础知识，接下来直接看这个项目吧,代码里差不多都有注释。这里需要再补充的就是自定义gradle插件步骤：<br>1.新建一个module（我一般是选择Android Library）</p>
+<p>2.除了main文件夹和build.gradle全部删除，注意main文件夹下的内容也要删除</p>
+<p>3.在main下新建groovy文件夹</p>
+<p>4.在groovy新建package，名字自己随意取，跟包名类似</p>
+<p>5.在package下新建name.groovy文件，name自己取，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package com.sakurajiang.test</span><br><span class="line"></span><br><span class="line">import org.gradle.api.Plugin</span><br><span class="line">import org.gradle.api.Project</span><br><span class="line"></span><br><span class="line">public class MyPlugin implements Plugin&lt;Project&gt; &#123;</span><br><span class="line">    void apply(Project project) &#123;</span><br><span class="line">        def log = project.logger</span><br><span class="line">        log.error &quot;========================&quot;;</span><br><span class="line">        log.error &quot;精简的MyPlugin，开始修改Class!&quot;;</span><br><span class="line">        log.error &quot;========================&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>6.在main目录下新建resources文件夹</p>
+<p>7.在resources文件夹下新建META-INF文件夹</p>
+<p>8.在META-INF文件夹下新建gradle-plugins文件夹</p>
+<p>9.在gradle-plugins文件夹下新建name.properties文件，这里的文件名就是引用该插件时用到的名字。其中的内容是implementation-class=com.sakurajiang.test.MyPlugin，后面的值就是步骤5中的文件的包名加类名。</p>
+<p>10.在该module的build.gradle文件中配置如下属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: &apos;groovy&apos;</span><br><span class="line">apply plugin: &apos;maven&apos;</span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile gradleApi() //gradle sdk</span><br><span class="line">    compile localGroovy() //groovy sdk</span><br><span class="line">&#125;</span><br><span class="line">repositories &#123;</span><br><span class="line">    jcenter()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">group=&apos;sakurajiang&apos;</span><br><span class="line">version=&apos;1.0.0&apos;</span><br><span class="line"></span><br><span class="line">uploadArchives &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenDeployer &#123;</span><br><span class="line">            repository(url: uri(&apos;../repo&apos;))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>11.选择AS中右边的gradle，选择自定义的插件，选择upload中的uploadArchives</p>
+<p>12.在需要使用该插件的module中的build中添加如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        maven &#123;</span><br><span class="line">            url uri(&apos;../repo&apos;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath &apos;sakurajiang:buildsrc:1.0.0&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">apply plugin: &apos;Z&apos;</span><br></pre></td></tr></table></figure></p>
+<p>其中’Z’就是步骤9中的name，其中的classpath就是group：modulename：version。</p>
+<p>13.选择Make Project，至此就可以在Build中看到自定义插件中的信息了。自定义插件到此完成。</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2018/10/30/gradle介绍和实战/" target="_blank" rel="external">http://sakurajiang.github.io/2018/10/30/gradle介绍和实战/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gradle/">gradle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/10/10/校招总结/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">校招总结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="gradle介绍和实战" data-title="gradle" data-url="http://sakurajiang.github.io/2018/10/30/gradle介绍和实战/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "gradle",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2018/10/30/gradle介绍和实战/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货 | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Android,干货,RestApp">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="Android,干货,RestApp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货">
+<meta property="og:url" content="http://sakurajiang.github.io/2016/09/22/RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-22-16-18-10-310_com.example.jdk.restapp.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-22-16-44-10-168_com.example.jdk.restapp.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-22-16-43-27-729_com.example.jdk.restapp.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-22-16-19-26-208_com.example.jdk.restapp.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-19-16-52-33-905_com.jdk.gank.restapp%20-%20%E5%89%AF%E6%9C%AC.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-19-16-46-20-464_com.jdk.gank.restapp%20-%20%E5%89%AF%E6%9C%AC.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-22-16-27-38-611_com.example.jdk.restapp.png">
+<meta property="og:updated_time" content="2020-07-06T09:32:56.339Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-22-16-18-10-310_com.example.jdk.restapp.png">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#先给客官来几张项目部分截屏"><span class="post-toc-text">先给客官来几张项目部分截屏</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#主页面"><span class="post-toc-text">主页面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#搜索页面"><span class="post-toc-text">搜索页面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#搜索结果页面"><span class="post-toc-text">搜索结果页面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#大图页面"><span class="post-toc-text">大图页面</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么写这个客户端？"><span class="post-toc-text">为什么写这个客户端？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#这个项目用了什么？"><span class="post-toc-text">这个项目用了什么？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么用这些？"><span class="post-toc-text">为什么用这些？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#你能从这个项目中学到什么？"><span class="post-toc-text">你能从这个项目中学到什么？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#地址"><span class="post-toc-text">地址:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最后"><span class="post-toc-text">最后</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#摇一摇页面"><span class="post-toc-text">摇一摇页面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#抽屉页面"><span class="post-toc-text">抽屉页面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#关于作者页面"><span class="post-toc-text">关于作者页面</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货</h1>
+        <div class="post-meta">
+            <time datetime="2016-09-21T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-09-22
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="先给客官来几张项目部分截屏"><a href="#先给客官来几张项目部分截屏" class="headerlink" title="先给客官来几张项目部分截屏"></a>先给客官来几张项目部分截屏</h3><h4 id="主页面"><a href="#主页面" class="headerlink" title="主页面"></a>主页面</h4><p>   <img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-22-16-18-10-310_com.example.jdk.restapp.png" alt="主页面">   </p>
+<h4 id="搜索页面"><a href="#搜索页面" class="headerlink" title="搜索页面"></a>搜索页面</h4><p>   <img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-22-16-44-10-168_com.example.jdk.restapp.png" alt="搜索页面">   </p>
+<h4 id="搜索结果页面"><a href="#搜索结果页面" class="headerlink" title="搜索结果页面"></a>搜索结果页面</h4><p>   <img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-22-16-43-27-729_com.example.jdk.restapp.png" alt="搜索结果页面">   </p>
+<h4 id="大图页面"><a href="#大图页面" class="headerlink" title="大图页面"></a>大图页面</h4><p>   <img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-22-16-19-26-208_com.example.jdk.restapp.png" alt="大图页面">  </p>
+<h3 id="为什么写这个客户端？"><a href="#为什么写这个客户端？" class="headerlink" title="为什么写这个客户端？"></a>为什么写这个客户端？</h3><p>   我学习android也有一年多了，都说项目才是检验自己学习成果的最好方式，正好最近学习Material Design, RxJava &amp; Retrofit框架和MVVM设计架构也有一段时间了，正好，网络上有gank.io这个免费接口，虽然已经有不少人写过这个客户端，但是没有一个是用MVVM设计架构的，于是我便写了这个项目。这个项目是我的第一个上线项目，可以<strong>查看图片，视频，技术文章等，支持收藏，搜索等</strong>，界面是仿网易云音乐，用户可以选择观看模式和摇一摇模式，界面简洁大方，操作简单易懂。到现在，这是第一个也是唯一一个使用MVVM设计架构的Gank.io客户端，想想还是挺有成就感的。</p>
+<h3 id="这个项目用了什么？"><a href="#这个项目用了什么？" class="headerlink" title="这个项目用了什么？"></a>这个项目用了什么？</h3><p>   项目使用了Material Design, RxJava &amp; Retrofit框架和MVVM设计模式，图标是使用svg和icon.用的都是最新的东西。图片的加载是用picasso,显示是使用RecyclerView，控件用的几乎都是Material Design，并且遵从Material Design规格要求，使得整个界面看起来很有Material Design风格，页面架构采用的是少activity多fragment，减少资源的消耗和更快的响应页面间切换和交互，使得用户体验更好。</p>
+<h3 id="为什么用这些？"><a href="#为什么用这些？" class="headerlink" title="为什么用这些？"></a>为什么用这些？</h3><p>   关于这个问题，我先回答我特别喜欢RxJava和MVVM，先说RxJava，这个其实主要是为了解决异步问题，特别是对handler厌烦的人而言，RxJava的出现实在是太及时了，RxJava不算一种框架，它不能拿来就使用，但是它特别好，因为它所实现的大概就是，你输入一个东西，然后输出你想要的东西，这么说可能很宽泛，举个例子，比如在这个项目中，你的输入是通过Retrofit得到的数据，而这个数据是一个类，但是你只想要其中的url，怎么办？RxJava就可以，你只需要使用map操作符就可以(当然在这个项目中我没有这么写，因为我不只是想得到url)，而使用Retrofit就是因为它对RxJava进行了很好的支持，当然，它本身也很方便。然后就是MVVM了，这个框架也出现一阵子了，对于使用这个框架，就不得不介绍<code>Data Binding Library</code>这个库了，这个库和mvvm一起使用，简直爽的不行，<code>Data Binding Library</code>这个库能让你在xml中进行数据绑定，在没有使用这个库之前，每次我们写xml都只是为了加载一个布局，除了这个功能，xml几乎没有别的作用，这样就让代码变得复杂、繁琐。那么如何使用这个库呢？我的建议是去<a href="https://developer.android.com/topic/libraries/data-binding/index.html" target="_blank" rel="noopener">官网</a>，当然至于如何翻墙，我就不说了，毕竟僧多肉少(#阴险)，如果不会翻墙或者不想看英文的同学，这里我推荐去看<a href="http://www.jianshu.com/p/b1df61a4df77" target="_blank" rel="noopener">简书</a>。 而对于为什么<code>Material Design</code>，只能说，谁用谁知道，毕竟是官方的东西。</p>
+<h3 id="你能从这个项目中学到什么？"><a href="#你能从这个项目中学到什么？" class="headerlink" title="你能从这个项目中学到什么？"></a>你能从这个项目中学到什么？</h3><p>   1.<strong>RxJava和Retrofit结合进行网络请求</strong>，以及如何将请求<strong>和ProgressDialog结合，</strong>也就是展示网络请求的过程。   </p>
+<p>   2.如何更好的在项目中使用<strong>Data Binding Library这个库来实现MVVM</strong>设计架构。  </p>
+<p>   3.如何实现<strong>少Activity多Fragment页面架构</strong>，以及如何在一个Fragment中更好的嵌套另一个Fragment。 </p>
+<p>   4.在<code>Viewpager</code>下更好的使用<code>Fragment</code>，以及多重ViewPager嵌套下，各个Fragment的处理方式，几乎<strong>涵盖了Fragment的各种使用方式以及和activity交互方式</strong>，比如，优雅的控制让Fragment自己决定处理返回事件还是让<code>activit</code>y来处理。 </p>
+<p>   5.<strong>一些简单的自定义View</strong>，比如自定义Edittext实现带有清除效果的搜索框。</p>
+<p>   6.<strong>Material Design库中绝大部分控件的使用</strong>，遵从Material Design规格要求，使得整个界面看起来很有Material Design风格。   </p>
+<p>   7.如何让<strong>RecyclerView和Data Binding Library</strong>更好的结合。 </p>
+<p>   8.如何更好的封装程序以及继承，让业务层和逻辑层更好的分离。</p>
+<p>   9.这个项目用的都是最新最火的框架和设计模式，所以你以后肯定会用到，而且在很长的时间里都不会有”过期”这一说(当然，知识是没有过期这一说法的，原谅我语文不好)。</p>
+<p>   10.我现在大四，也就意味着我有很多自由的时间，如果你在看我项目的时候遇到任何问题都可以和我联系，我会尽快给你回复，而且由于我技术比较菜(#谦虚)，所以没有专家盲点(指对一个事务知道的越多，就越发不记得”不知道这个事”的情形)，也就能更好的回答你们的问题(第一次将自己技术菜说的这么清新脱俗#害羞)。</p>
+<h3 id="地址"><a href="#地址" class="headerlink" title="地址:"></a>地址:</h3><p>   Github：<a href="https://github.com/sakurajiang/RestAPP" target="_blank" rel="noopener">https://github.com/sakurajiang/RestAPP</a>   </p>
+<p>   应用宝 :<a href="http://sj.qq.com/myapp/detail.htm?apkName=com.example.jdk.restapp" target="_blank" rel="noopener">http://sj.qq.com/myapp/detail.htm?apkName=com.example.jdk.restapp</a></p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>   欢迎各位客官多多光临我的Github，喜欢这个项目的同学可以star一下，不胜感激，你的star是对我的肯定和鼓励(#调皮)。<br>   目前我只放在了应用宝上，喜欢的可以下载支持下，不方便在应用宝下载的，在Github上还有直接下载地址。<br>   如果你看到了这里，说明你已经看完这篇博客了，谢谢各位花时间看这篇博客，最后再来几张截屏，<strong>Good luck</strong>！    </p>
+<h4 id="摇一摇页面"><a href="#摇一摇页面" class="headerlink" title="摇一摇页面"></a>摇一摇页面</h4><p>   <img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-19-16-52-33-905_com.jdk.gank.restapp%20-%20%E5%89%AF%E6%9C%AC.png" alt="摇一摇页面">  </p>
+<h4 id="抽屉页面"><a href="#抽屉页面" class="headerlink" title="抽屉页面"></a>抽屉页面</h4><p>   <img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-19-16-46-20-464_com.jdk.gank.restapp%20-%20%E5%89%AF%E6%9C%AC.png" alt="抽屉页面">  </p>
+<h4 id="关于作者页面"><a href="#关于作者页面" class="headerlink" title="关于作者页面"></a>关于作者页面</h4><p>   <img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/RestAPP/Screenshot_2016-09-22-16-27-38-611_com.example.jdk.restapp.png" alt="关于作者页面"></p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2016/09/22/RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货/" target="_blank" rel="external">http://sakurajiang.github.io/2016/09/22/RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RestApp/">RestApp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/09/27/RestAPP-传递参数的单例模式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">RestAPP-传递参数的单例模式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/09/19/RestAPP-如何制作app图标以及logo/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">RestAPP-如何制作app图标以及logo</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货" data-title="RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货" data-url="http://sakurajiang.github.io/2016/09/22/RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2016/09/22/RestAPP-一款MVVM设计模式的Gank.io客户端——小憩干货/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

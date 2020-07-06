@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>AReview-ANR | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Android,干货,AReview">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="Android,干货,AReview">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AReview-ANR">
+<meta property="og:url" content="http://sakurajiang.github.io/2017/04/03/AReview-ANR/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-06T09:21:27.877Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AReview-ANR">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">AReview-ANR</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">AReview-ANR</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前记"><span class="post-toc-text">前记</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ANR分析"><span class="post-toc-text">ANR分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ANR流程"><span class="post-toc-text">ANR流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#什么是ANR"><span class="post-toc-text">什么是ANR</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#在源码中是如何体现的？"><span class="post-toc-text">在源码中是如何体现的？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-AReview-ANR" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">AReview-ANR</h1>
+        <div class="post-meta">
+            <time datetime="2017-04-02T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2017-04-03
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="前记"><a href="#前记" class="headerlink" title="前记"></a>前记</h2><p>发现好久没写博客了，主要是最近忙着春招，忙着看算法和将以前的知识重新回顾，所以很久没更了，其实一直在写，只是写的不系统，所以没更出来，今天抽空特地更一下。<br>ps:春招真难，还没找到工作。。。</p>
+<h2 id="ANR分析"><a href="#ANR分析" class="headerlink" title="ANR分析"></a>ANR分析</h2><h3 id="ANR流程"><a href="#ANR流程" class="headerlink" title="ANR流程"></a>ANR流程</h3><h4 id="什么是ANR"><a href="#什么是ANR" class="headerlink" title="什么是ANR"></a>什么是ANR</h4><p>ANR是指在Android中，当触摸或者按键事件以及特殊事件没有在规定的时间中完成，那么就会出现ANR(也有可能不会出现ANR)，这里的特殊事件就是指<code>Service</code>、<code>BroadCastReceiver</code>、<code>ContentProvider</code>。</p>
+<h4 id="在源码中是如何体现的？"><a href="#在源码中是如何体现的？" class="headerlink" title="在源码中是如何体现的？"></a>在源码中是如何体现的？</h4><p>以<code>Service</code>为例：<br>1.在<code>realStartServiceLocked</code>方法中会调用<code>bumpServiceExecutingLocked(r, execInFg, &quot;create&quot;);</code>方法，这个函数的作用就是延时发送消息，当在<code>Service</code>的<code>onCreate</code>方法回调之后，就会调用<code>AMS.serviceDoneExecuting(IBinder token, int type, int startId, int res)</code>来清除之前发送的消息。所以在<code>onCreate()</code>方法中不能超过20S。<br>2.在<code>AS.sendServiceArgsLocked</code>方法中也会<code>bumpServiceExecutingLocked(r, execInFg, &quot;start&quot;);</code>，然后当回调<code>onStartCommand();</code>方法后也会调用<code>AMS.serviceDoneExecuting(IBinder token, int type, int startId, int res)</code>方法来清除之前发送的消息。所以在<code>onStartCommand()</code>中也不能超过20S，同时因为在<code>onStartCommand()</code>会调用<code>onStart()</code>,所以在<code>onStart()</code>中也不能超过20S。<br>也就是说采用的手法是消息机制，就是在启动的时候延时发送一个消息，如果成功启动，那么就会移除这个消息，反之就会使用<code>AMS</code>中的<code>MainHandler</code>去发送<code>SERVICE_TIMEOUT_MSG</code>这个消息，在<code>MainHandler</code>中的<code>handleMessage</code>来处理消息，最后会调用到<code>AMS.appNotResponding()</code>。<br>以<code>BroadCastReceiver</code>为例：<br>在<code>processNextBroadcast</code>方法中调用<code>setBroadcastTimeoutLocked(timeoutTime);</code>方法设置超时时间，当没超时时，调用<code>cancelBroadcastTimeoutLocked();</code>超时时，由<code>BroadcastHandler</code>发送<code>BROADCAST_TIMEOUT_MSG</code>，在<code>BroadcastHandler</code>的<code>handleMessage</code>中调用<code>broadcastTimeoutLocked(false);</code>来强制结束广播。并且调用<code>mService.appNotResponding(mApp, null, null, false, mAnnotation);</code>使用的依然是<code>handler</code>消息机制。<br>以<code>ContentProvider</code>为例：<br><code>ContentProvider</code>发生<code>ANR</code>和其他的都不一样，当使用<code>ContentProvider</code>的时候，若是目标进程不存在，则会创建目标进程，在创建目标进程后会调用<code>AMS.attachApplicationLocked</code>，此时就会延时发送一个消息，延时也是10S，当<code>provider</code>成功<code>publish</code>之后，也就是在<code>AMS.publishContentProviders</code>中会移除这个消息，反之最后会调用到<code>AMS.removeProcessLocked</code>。杀掉<code>ContentProvider</code>所在的进程。<br>注意:关于<code>CONTENT_PROVIDER_PUBLISH_TIMEOUT</code>超时时机是指在<code>startProcessLocked</code>之后会调用<code>AMS.attachApplicationLocked</code>为起点，一直到<code>AMS.publishContentProviders</code>的过程。<br>所以对于<code>ContentProvider</code>而言，如果不需要创建新进程，那么就不会出现这个情况，在不需要创建新进程的时候，也可能会出现<code>ANR</code>，并且会调用<code>AMS.appNotResponding()</code>。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><code>ANR</code>发生的原因是，在Android的源码中规定了事件或者特殊事件需要在规定时间内完成，提升用户的体验，但是没有完成。在这里事件指触摸或者按键，特殊事件指<code>Service</code>、<code>BroadCastReceiver</code>、<code>ContentProvider</code>。 所采取的措施都是通过<code>Handler</code>消息机制。<br>对于<code>Service</code>而言：在<code>Service</code>的<code>onCreate</code>，<code>onStart</code>、<code>onStartCommnand</code>生命周期方法中超时20S。<br>对于<code>BroadCastReceiver</code>而言：在<code>onReceive()</code>超时10S。<br>对于<code>ContentProvider</code>而言：从<code>AMS.attachApplicationLocked</code>到<code>AMS.publishContentProviders</code>的过程中耗时超过10S。<br>对于<code>ContentProvider</code>而言，不会走<code>AMS.appNotResponding()</code>，其他的都走。<code>AMS.appNotResponding()</code>处理中主要是将CPU使用情况和进程的trace文件信息，保存到/data/system/dropbox；</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2017/04/03/AReview-ANR/" target="_blank" rel="external">http://sakurajiang.github.io/2017/04/03/AReview-ANR/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AReview/">AReview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/10/10/校招总结/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">校招总结</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/02/12/AReview-消息机制/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">AReview-消息机制</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="AReview-ANR" data-title="AReview-ANR" data-url="http://sakurajiang.github.io/2017/04/03/AReview-ANR/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "AReview-ANR",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2017/04/03/AReview-ANR/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

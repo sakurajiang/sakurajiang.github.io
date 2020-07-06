@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>如何在win8.1上搭建React-Native环境 | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="React-Native">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="React-Native">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在win8.1上搭建React-Native环境">
+<meta property="og:url" content="http://sakurajiang.github.io/2016/07/21/ReactNative-在win8上搭建ReactNative环境/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/A.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/B.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/C.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/%E8%BF%90%E8%A1%8Creact-native%20run-android%E9%94%99%E8%AF%AF.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/%E8%BF%90%E8%A1%8Creact-native%20run-android%E9%94%99%E8%AF%AF2.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/D.PNG">
+<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/E.PNG">
+<meta property="og:updated_time" content="2020-07-06T09:31:02.377Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何在win8.1上搭建React-Native环境">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/A.PNG">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">如何在win8.1上搭建React-Native环境</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">如何在win8.1上搭建React-Native环境</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-ReactNative-在win8上搭建ReactNative环境" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">如何在win8.1上搭建React-Native环境</h1>
+        <div class="post-meta">
+            <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-07-21
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>这么火的ReactNative让我也把持不住了，一言不合我就开始搭建环境了，之前在网上查，好多人都说在win上搭建好难，个人表示好方，于是我怀着忐忑的心情开始搭建，我按照<a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="noopener">this</a>开始搭建，由于之前我写android就是用AS，所以就跳过，接着VS我也有，感觉这都是程序员必备，Git也有，接下来问题来了，python？我很早就想学这门语言，但是最近都在学习android，所以就没时间，然后安装python没成功，我就自动下一步先，打算等会再说这个，接下来是node.js，不好意思，这个我也有，这么写着我的尴尬症都犯了，因为之前要搭建hexo来写博客，额，都是天意，接下来就是重点了，运行命令<br>  npm install -g react-native-cli，出现下面这张图片<br><img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/A.PNG" alt="Github">没毛病，再运行下面的命令react-native init MyProject，这个命令是创建你的ReactNative项目，再运行这行命令之前进入你想将项目存放的路径，出现下面这两张张图片没毛病，细心的同学会发现这两张图片其实就是运行完上面的命令之后的结果，之所以分成两张，是因为截不下来，然后进入你的项目的目录运行命令react-native start，注意是要进入项目的目录，出现下面两张图片<img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/B.PNG" alt="Github">,<img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/C.PNG" alt="Github">没毛病，然后保证这个窗口打开，重新打开一个命令窗口，一样先进入项目的目录，然后运行命令react-native run-android，如果出现下面图片的错误，<img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/%E8%BF%90%E8%A1%8Creact-native%20run-android%E9%94%99%E8%AF%AF.PNG" alt="Github">,<img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/%E8%BF%90%E8%A1%8Creact-native%20run-android%E9%94%99%E8%AF%AF2.PNG" alt="Github">那么，恭喜你，跟我一样踩坑了，讲道理，一直这么顺我都好方，终于出现问题了，那么我们如何解决呢？首先，你要明白这个问题产生可能是因为你没有将ANDROID_HOME环境变量设置为你sdk所在目录，也可能是platform-tools没有设到了PATH环境变量中，运行adb devices看不到设备，解决了这个问题之后，就离成功真的只差一步了，我们再次进入项目的目录，运行react-native run-android，接下来出现的应该是下图的画面了，<img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/D.PNG" alt="Github">,<img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E5%9C%A8window%E4%B8%8A%E6%90%AD%E5%BB%BAReact-Native/E.PNG" alt="Github">然后你就可以在你的Genymotion模拟器上看到了，如果你想修改显示的样子，只要在项目中找到文件index.android.jx，进入修改，然后问题又来了，并没有像网上说的那样，直接就显示了，而是需要把之前保证打开的哪个窗口关闭，其实就是关闭packager，然后重新运行执行react-native start和react-native run-android命令就可以了，同时这里需要说一下，因为react-native start执行需要时间，所以只有等它执行完后才能在Genymotion模拟器上看到修改后的样子，至此，整个搭建完成了，大家有问题，可以上React-Native中文社区<a href="React-Native中文社区">http://bbs.reactnative.cn/</a>看看</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2016/07/21/ReactNative-在win8上搭建ReactNative环境/" target="_blank" rel="external">http://sakurajiang.github.io/2016/07/21/ReactNative-在win8上搭建ReactNative环境/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React-Native</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/07/21/Javajava中的混合运算/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">java中的混合运算</h4>
+      </a>
+    </div>
+  
+
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="ReactNative-在win8上搭建ReactNative环境" data-title="如何在win8.1上搭建React-Native环境" data-url="http://sakurajiang.github.io/2016/07/21/ReactNative-在win8上搭建ReactNative环境/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "如何在win8.1上搭建React-Native环境",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2016/07/21/ReactNative-在win8上搭建ReactNative环境/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>RestAPP-RestAPP开发总结 | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Android,干货,RestApp">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="Android,干货,RestApp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RestAPP-RestAPP开发总结">
+<meta property="og:url" content="http://sakurajiang.github.io/2016/08/23/RestAPP-RestAPP开发总结/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-06T09:32:00.921Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RestAPP-RestAPP开发总结">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">RestAPP-RestAPP开发总结</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">RestAPP-RestAPP开发总结</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么做这个APP"><span class="post-toc-text">为什么做这个APP</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么使用这三者"><span class="post-toc-text">为什么使用这三者</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#从这个APP能学到什么"><span class="post-toc-text">从这个APP能学到什么</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#做完这款APP的反思"><span class="post-toc-text">做完这款APP的反思</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-RestAPP-RestAPP开发总结" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">RestAPP-RestAPP开发总结</h1>
+        <div class="post-meta">
+            <time datetime="2016-08-22T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-08-23
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="为什么做这个APP"><a href="#为什么做这个APP" class="headerlink" title="为什么做这个APP"></a>为什么做这个APP</h3><p>终于做完这个APP了，大概花了我20天，这个APP的功能的确很简单，我也不知道为什么会花这么久，之所以想着做这个APP，是因为我想将这三个<code>RxJava</code>、<code>Retrofit</code>和<code>MVVM</code>模式放在一起使用。  </p>
+<h3 id="为什么使用这三者"><a href="#为什么使用这三者" class="headerlink" title="为什么使用这三者"></a>为什么使用这三者</h3><p>关于这个问题，我先回答我特别喜欢RxJava和MVVM，先说RxJava，这个其实主要是为了解决异步问题，特别是对handler厌烦的人而言，RxJava的出现实在是太及时了，RxJava不算一种框架，它不能拿来就使用，但是它特别好，因为它所实现的大概就是，你输入一个东西，然后输出你想要的东西，这么说可能很宽泛，举个例子，比如在这个项目中，你的输入是通过Retrofit得到的数据，而这个数据是一个类，但是你只想要其中的url，怎么办？RxJava就可以，你只需要使用map操作符就可以(当然在这个项目中我没有这么写，因为我不只是想得到url)，而使用Retrofit就是因为它对RxJava进行了很好的支持，当然，它本身也很方便。然后就是MVVM了，这个框架也出现一阵子了，对于使用这个框架，就不得不介绍<code>Data Binding Library</code>这个库了，这个库和mvvm一起使用，简直爽的不行，<code>Data Binding Library</code>这个库能让你在xml中进行数据绑定，在没有使用这个库之前，每次我们写xml都只是为了加载一个布局，除了这个功能，xml几乎没有别的作用，这样就让代码变得复杂、繁琐。那么如何使用这个库呢？我的建议是去<a href="https://developer.android.com/topic/libraries/data-binding/index.html" target="_blank" rel="noopener">官网</a>，当然至于如何翻墙，我就不说了，毕竟僧多肉少(#阴险)，如果不会翻墙或者不想看英文的同学，这里我推荐去看<a href="http://www.jianshu.com/p/b1df61a4df77" target="_blank" rel="noopener">简书</a>。  </p>
+<h3 id="从这个APP能学到什么"><a href="#从这个APP能学到什么" class="headerlink" title="从这个APP能学到什么"></a>从这个APP能学到什么</h3><p>关于这个，我只能说我也是刚接触这三者没多久，由于专家效应，所以我觉得我写可能更适合初学者去看看，看一下刚接触这个应该怎么写，然后自己再试着改进，而不是直接去看别人写好的，毕竟，纸上得来终觉浅，觉知此事要躬行，这样就能学到更多的东西。其实大家主要就是要看<code>RecyclerViewDataBindingAdapter</code>这个Adapter和那几个<code>Fragment</code>，以及对应的<code>xml</code>文件，特别是<code>RecyclerViewDataBindingAdapter</code>。</p>
+<h3 id="做完这款APP的反思"><a href="#做完这款APP的反思" class="headerlink" title="做完这款APP的反思"></a>做完这款APP的反思</h3><p>关于这个问题，首先从布局上来考虑，由于我一开始不知道自己想做曾什么样子，只知道大概什么样子，然后想着边做边改，但是写着写着，我就后悔了，因为到最后发现有很多界面的布局类似，而我没有将这些布局整合成一个，而是写了好几个，而改的话又要重新制定，因为对于mvvm模式，使用<code>include</code>标签会比较困难，因为是将数据绑定直接绑定在xml中，而要使用<code>include</code>标签就会比较困难了。所以在做一个APP之前应该先想好这个APP具体该做成什么样子，而不能边做边看，想着能将一些好看的view加进去。然后就是对于使用mvvm的反思，由于这个APP有显示网络图片的功能，而一开始我看mvvm没有看那么仔细，结果导致我不知道如何使用<code>Data Binding Library</code>达到通过一个url给image设置图片，然后我就新建了一个Adapter，然后写完之后，我又看着很不爽，我就想着能把这两个整合到一起，于是我又回去重新看一遍<code>Data Binding Library</code>，结果发现自定义一个<code>setter</code>可以达到这个效果，于是我就将两者整合到一起，顺便将这个<code>Adapter</code>封装成自己的一个小框架，以后使用<code>RecyclerView</code>和<code>Data Binding Library</code>可以直接拿这个<code>Adapter</code>了(窃喜)，所以，我们应该在做一个项目前，将项目所需要的主要的技术都认真看一遍，而不能想着边做项目边学，因为如果这样，由于你的项目不单单是使用一个技术，所以在使用的时候，可能会因为整个项目太大，而不适合去在这个项目中练习如何使用这个框架，如果你重新建一个项目专门去练习使用这个框架(假设你那时还有另开一个专门练习这个框架的项目的心情，因为那时你往往只会想着去解决这个问题，而不会另开一个项目，而由于你是在一个项目中使用这个框架，而你对这个框架又不熟悉，那么你碰到的问题，可能就不只是单单这个框架的问题，还有可能跟框架结合这个项目有关系，那时候你可能在网上找不到答案)，由于你还做着这个项目，你就不会有那份认真的去练习这个框架，那样需要的时间可能就会很久，而且，你对这些框架不熟悉，当你整合到一起的时候，可能会出现各种bug，而那个时候你往往没有那份认真调试的心情，因为你对这些都不熟悉，然后就会比较虚，不知道如何下手。最后一个反思就是，一定要学会科学的、理性的进行调试，遇到问题<a href="http://www.google.cn/" target="_blank" rel="noopener">google</a>以及<a href="http://stackoverflow.com/" target="_blank" rel="noopener">stackoverflow</a>。</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2016/08/23/RestAPP-RestAPP开发总结/" target="_blank" rel="external">http://sakurajiang.github.io/2016/08/23/RestAPP-RestAPP开发总结/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RestApp/">RestApp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/09/17/RestAPP-如何通过自定义EditText来得到一个类似网易云音乐的带有清除功能的搜索框/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">RestAPP-如何通过自定义EditText来得到一个类似网易云音乐的带有清除功能的搜索框</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/08/23/RestAPP-webview和其他控件混合使用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">RestAPP-webview和其他控件混合使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="RestAPP-RestAPP开发总结" data-title="RestAPP-RestAPP开发总结" data-url="http://sakurajiang.github.io/2016/08/23/RestAPP-RestAPP开发总结/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "RestAPP-RestAPP开发总结",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2016/08/23/RestAPP-RestAPP开发总结/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
