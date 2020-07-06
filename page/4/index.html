@@ -303,7 +303,7 @@
         </li>
     
         <li class="post-list-item">
-            <article id="post-Android-RecyclerView的简单使用"
+            <article id="post-Android-activity源码分析准备阶段"
   class="article-card article-type-post" itemprop="blogPost">
      
     <div class="post-meta">
@@ -321,7 +321,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/21/Android-RecyclerView的简单使用/">使用RecyclerView遇到的一些问题</a>
+      <a class="post-title-link" href="/2016/07/21/Android-activity源码分析准备阶段/">Activity源码分析准备阶段</a>
     </h3>
   
 
@@ -331,10 +331,10 @@
     <div class="post-content" id="post-content" itemprop="postContent" >
 
     
-        ###1.无法使用RecyclerView，因为我们没有导入v7包　　我们如何导入呢？因为我使用的是AS，所以我这里说一下AS的导入，首先，你找到你项目中的build.gradle，注意这里有两个build.gradle，那么我们需要找哪个呢？下面我放了一张图片那么我们应该选哪个内容呢？我们应该选第二个，点进去第二个后，找到dependencies，如图：我们将这个修改为:这里需要注意版本要...
+        昨天装好了source insight，今天看了一下activity.java这个类，为什么看这个类呢，因为在我学习android过程中见过最多的就是这个，于是我先看了一下经常见到的oncreate方法，在看到onstart方法时，我发现一个叫mLoaderManager的对象，而这个对象是一个叫LoaderManagerImpl的类，并且调研了doStart这个方法，可是我并没有在这个类中...
     
     
-        <a href="/2016/07/21/Android-RecyclerView的简单使用/" class="post-more waves-effect waves-button">
+        <a href="/2016/07/21/Android-activity源码分析准备阶段/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
@@ -397,7 +397,7 @@
         </li>
     
         <li class="post-list-item">
-            <article id="post-Android-activity源码分析准备阶段"
+            <article id="post-Android-RecyclerView的简单使用"
   class="article-card article-type-post" itemprop="blogPost">
      
     <div class="post-meta">
@@ -415,7 +415,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/21/Android-activity源码分析准备阶段/">Activity源码分析准备阶段</a>
+      <a class="post-title-link" href="/2016/07/21/Android-RecyclerView的简单使用/">使用RecyclerView遇到的一些问题</a>
     </h3>
   
 
@@ -425,10 +425,57 @@
     <div class="post-content" id="post-content" itemprop="postContent" >
 
     
-        昨天装好了source insight，今天看了一下activity.java这个类，为什么看这个类呢，因为在我学习android过程中见过最多的就是这个，于是我先看了一下经常见到的oncreate方法，在看到onstart方法时，我发现一个叫mLoaderManager的对象，而这个对象是一个叫LoaderManagerImpl的类，并且调研了doStart这个方法，可是我并没有在这个类中...
+        ###1.无法使用RecyclerView，因为我们没有导入v7包　　我们如何导入呢？因为我使用的是AS，所以我这里说一下AS的导入，首先，你找到你项目中的build.gradle，注意这里有两个build.gradle，那么我们需要找哪个呢？下面我放了一张图片那么我们应该选哪个内容呢？我们应该选第二个，点进去第二个后，找到dependencies，如图：我们将这个修改为:这里需要注意版本要...
     
     
-        <a href="/2016/07/21/Android-activity源码分析准备阶段/" class="post-more waves-effect waves-button">
+        <a href="/2016/07/21/Android-RecyclerView的简单使用/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
+            <article id="post-Android-写一个简单的加载多张图片的自定义view"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-07-21
+</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/07/21/Android-写一个简单的加载多张图片的自定义view/">写一个简单的加载多张图片的自定义View</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        先说一下思路吧，其实很简单，就是将图片黏在视图上就可以，首先加载出显示的视图，然后加载出一个imageView，然后将这个imageView贴上去，这个贴的时候注意贴的位置，不要重复了，为了达到这个目的，我使用的是layoutParams.setMargins(left, 40 + top, right, bottom);方法，然后设置循环加载就可以实现加载多张图片，下面会贴出代码，由于代码...
+    
+    
+        <a href="/2016/07/21/Android-写一个简单的加载多张图片的自定义view/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
@@ -483,53 +530,6 @@
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item">
-            <article id="post-Android-写一个简单的加载多张图片的自定义view"
-  class="article-card article-type-post" itemprop="blogPost">
-     
-    <div class="post-meta">
-        <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-07-21
-</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/21/Android-写一个简单的加载多张图片的自定义view/">写一个简单的加载多张图片的自定义View</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-    
-        先说一下思路吧，其实很简单，就是将图片黏在视图上就可以，首先加载出显示的视图，然后加载出一个imageView，然后将这个imageView贴上去，这个贴的时候注意贴的位置，不要重复了，为了达到这个目的，我使用的是layoutParams.setMargins(left, 40 + top, right, bottom);方法，然后设置循环加载就可以实现加载多张图片，下面会贴出代码，由于代码...
-    
-    
-        <a href="/2016/07/21/Android-写一个简单的加载多张图片的自定义view/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </div>
     
