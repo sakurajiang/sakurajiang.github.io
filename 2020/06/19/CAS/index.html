@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>CAS | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="干货,并发">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="干货,并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CAS">
+<meta property="og:url" content="http://sakurajiang.github.io/2020/06/19/CAS/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-06T12:48:46.766Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CAS">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">CAS</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">CAS</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#what"><span class="post-toc-text">what</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#how"><span class="post-toc-text">how</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-CAS" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">CAS</h1>
+        <div class="post-meta">
+            <time datetime="2020-06-18T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2020-06-19
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="what"><a href="#what" class="headerlink" title="what"></a>what</h3><p>CAS全称是compare and swap，将内存中的值和一个给定的值对比，如果相等该内存的值修改为给定的新值。注意这一步是属于原子操作。</p>
+<h3 id="how"><a href="#how" class="headerlink" title="how"></a>how</h3><p>通过简单的例子看一下本质，版本是jdk8：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> AtomicInteger mAtomicInteger;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAdd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mAtomicInteger.getAndIncrement();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>直接看AtomicInteger.java代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Atomically increments by one the current value.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the previous value</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getAndIncrement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> unsafe.getAndAddInt(<span class="keyword">this</span>, valueOffset, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>看下unsafe变量：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// setup to use Unsafe.compareAndSwapInt for updates</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Unsafe unsafe = Unsafe.getUnsafe(); <span class="comment">//Unsafe是sun.misc.Unsafe类</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> valueOffset; <span class="comment">//表示AtomicInteger类value的地址</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            valueOffset = unsafe.objectFieldOffset</span><br><span class="line">                (AtomicInteger.class.getDeclaredField("value"));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception ex) &#123; <span class="keyword">throw</span> <span class="keyword">new</span> Error(ex); &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> value;</span><br></pre></td></tr></table></figure>
+<p>跳转到Unsafe.java的getAndAddInt方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Atomically adds the given value to the current value of a field</span></span><br><span class="line"><span class="comment">     * or array element within the given object &lt;code&gt;o&lt;/code&gt;</span></span><br><span class="line"><span class="comment">     * at the given &lt;code&gt;offset&lt;/code&gt;.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> o object/array to update the field/element in</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> offset field/element offset</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> delta the value to add</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the previous value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.8</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getAndAddInt</span><span class="params">(Object o, <span class="keyword">long</span> offset, <span class="keyword">int</span> delta)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> v;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            v = getIntVolatile(o, offset); </span><br><span class="line">        &#125; <span class="keyword">while</span> (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>跳转到getIntVolatile方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Volatile version of &#123;<span class="doctag">@link</span> #getInt(Object, long)&#125;  */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span>     <span class="title">getIntVolatile</span><span class="params">(Object o, <span class="keyword">long</span> offset)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** <span class="doctag">@see</span> #getByte(long) */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span>     <span class="title">getInt</span><span class="params">(<span class="keyword">long</span> address)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Fetches a value from a given memory address.  If the address is zero, or</span></span><br><span class="line"><span class="comment">     * does not point into a block obtained from &#123;<span class="doctag">@link</span> #allocateMemory&#125;, the</span></span><br><span class="line"><span class="comment">     * results are undefined.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@see</span> #allocateMemory</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">byte</span>    <span class="title">getByte</span><span class="params">(<span class="keyword">long</span> address)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>很明显getIntVolatile的作用是获取给定地址的值。接下来看compareAndSwapInt方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Atomically update Java variable to &lt;tt&gt;x&lt;/tt&gt; if it is currently</span></span><br><span class="line"><span class="comment">     * holding &lt;tt&gt;expected&lt;/tt&gt;.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &lt;tt&gt;true&lt;/tt&gt; if successful</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">compareAndSwapInt</span><span class="params">(Object o, <span class="keyword">long</span> offset,</span></span></span><br><span class="line"><span class="function"><span class="params">                                                  <span class="keyword">int</span> expected,</span></span></span><br><span class="line"><span class="function"><span class="params">                                                  <span class="keyword">int</span> x)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>我们直接到UnSafe.cpp类查找compareAndSwapInt</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// These are the methods for 1.8.0</span></span><br><span class="line"><span class="keyword">static</span> JNINativeMethod methods_18[] = &#123;</span><br><span class="line">    &#123;CC<span class="string">"getObject"</span>,        CC<span class="string">"("</span>OBJ<span class="string">"J)"</span>OBJ<span class="string">""</span>,   FN_PTR(Unsafe_GetObject)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"putObject"</span>,        CC<span class="string">"("</span>OBJ<span class="string">"J"</span>OBJ<span class="string">")V"</span>,  FN_PTR(Unsafe_SetObject)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"getObjectVolatile"</span>,CC<span class="string">"("</span>OBJ<span class="string">"J)"</span>OBJ<span class="string">""</span>,   FN_PTR(Unsafe_GetObjectVolatile)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"putObjectVolatile"</span>,CC<span class="string">"("</span>OBJ<span class="string">"J"</span>OBJ<span class="string">")V"</span>,  FN_PTR(Unsafe_SetObjectVolatile)&#125;,</span><br><span class="line"></span><br><span class="line">    DECLARE_GETSETOOP(Boolean, Z),</span><br><span class="line">    DECLARE_GETSETOOP(Byte, B),</span><br><span class="line">    DECLARE_GETSETOOP(Short, S),</span><br><span class="line">    DECLARE_GETSETOOP(Char, C),</span><br><span class="line">    DECLARE_GETSETOOP(Int, I),</span><br><span class="line">    DECLARE_GETSETOOP(Long, J),</span><br><span class="line">    DECLARE_GETSETOOP(Float, F),</span><br><span class="line">    DECLARE_GETSETOOP(Double, D),</span><br><span class="line"></span><br><span class="line">    DECLARE_GETSETNATIVE(Byte, B),</span><br><span class="line">    DECLARE_GETSETNATIVE(Short, S),</span><br><span class="line">    DECLARE_GETSETNATIVE(Char, C),</span><br><span class="line">    DECLARE_GETSETNATIVE(Int, I),</span><br><span class="line">    DECLARE_GETSETNATIVE(Long, J),</span><br><span class="line">    DECLARE_GETSETNATIVE(Float, F),</span><br><span class="line">    DECLARE_GETSETNATIVE(Double, D),</span><br><span class="line"></span><br><span class="line">    &#123;CC<span class="string">"getAddress"</span>,         CC<span class="string">"("</span>ADR<span class="string">")"</span>ADR,             FN_PTR(Unsafe_GetNativeAddress)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"putAddress"</span>,         CC<span class="string">"("</span>ADR<span class="string">""</span>ADR<span class="string">")V"</span>,          FN_PTR(Unsafe_SetNativeAddress)&#125;,</span><br><span class="line"></span><br><span class="line">    &#123;CC<span class="string">"allocateMemory"</span>,     CC<span class="string">"(J)"</span>ADR,                 FN_PTR(Unsafe_AllocateMemory)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"reallocateMemory"</span>,   CC<span class="string">"("</span>ADR<span class="string">"J)"</span>ADR,            FN_PTR(Unsafe_ReallocateMemory)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"freeMemory"</span>,         CC<span class="string">"("</span>ADR<span class="string">")V"</span>,               FN_PTR(Unsafe_FreeMemory)&#125;,</span><br><span class="line"></span><br><span class="line">    &#123;CC<span class="string">"objectFieldOffset"</span>,  CC<span class="string">"("</span>FLD<span class="string">")J"</span>,               FN_PTR(Unsafe_ObjectFieldOffset)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"staticFieldOffset"</span>,  CC<span class="string">"("</span>FLD<span class="string">")J"</span>,               FN_PTR(Unsafe_StaticFieldOffset)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"staticFieldBase"</span>,    CC<span class="string">"("</span>FLD<span class="string">")"</span>OBJ,             FN_PTR(Unsafe_StaticFieldBaseFromField)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"ensureClassInitialized"</span>,CC<span class="string">"("</span>CLS<span class="string">")V"</span>,            FN_PTR(Unsafe_EnsureClassInitialized)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"arrayBaseOffset"</span>,    CC<span class="string">"("</span>CLS<span class="string">")I"</span>,               FN_PTR(Unsafe_ArrayBaseOffset)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"arrayIndexScale"</span>,    CC<span class="string">"("</span>CLS<span class="string">")I"</span>,               FN_PTR(Unsafe_ArrayIndexScale)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"addressSize"</span>,        CC<span class="string">"()I"</span>,                    FN_PTR(Unsafe_AddressSize)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"pageSize"</span>,           CC<span class="string">"()I"</span>,                    FN_PTR(Unsafe_PageSize)&#125;,</span><br><span class="line"></span><br><span class="line">    &#123;CC<span class="string">"defineClass"</span>,        CC<span class="string">"("</span>DC_Args<span class="string">")"</span>CLS,         FN_PTR(Unsafe_DefineClass)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"allocateInstance"</span>,   CC<span class="string">"("</span>CLS<span class="string">")"</span>OBJ,             FN_PTR(Unsafe_AllocateInstance)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"monitorEnter"</span>,       CC<span class="string">"("</span>OBJ<span class="string">")V"</span>,               FN_PTR(Unsafe_MonitorEnter)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"monitorExit"</span>,        CC<span class="string">"("</span>OBJ<span class="string">")V"</span>,               FN_PTR(Unsafe_MonitorExit)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"tryMonitorEnter"</span>,    CC<span class="string">"("</span>OBJ<span class="string">")Z"</span>,               FN_PTR(Unsafe_TryMonitorEnter)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"throwException"</span>,     CC<span class="string">"("</span>THR<span class="string">")V"</span>,               FN_PTR(Unsafe_ThrowException)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"compareAndSwapObject"</span>, CC<span class="string">"("</span>OBJ<span class="string">"J"</span>OBJ<span class="string">""</span>OBJ<span class="string">")Z"</span>,  FN_PTR(Unsafe_CompareAndSwapObject)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"compareAndSwapInt"</span>,  CC<span class="string">"("</span>OBJ<span class="string">"J"</span><span class="string">"I"</span><span class="string">"I"</span><span class="string">")Z"</span>,      FN_PTR(Unsafe_CompareAndSwapInt)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"compareAndSwapLong"</span>, CC<span class="string">"("</span>OBJ<span class="string">"J"</span><span class="string">"J"</span><span class="string">"J"</span><span class="string">")Z"</span>,      FN_PTR(Unsafe_CompareAndSwapLong)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"putOrderedObject"</span>,   CC<span class="string">"("</span>OBJ<span class="string">"J"</span>OBJ<span class="string">")V"</span>,         FN_PTR(Unsafe_SetOrderedObject)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"putOrderedInt"</span>,      CC<span class="string">"("</span>OBJ<span class="string">"JI)V"</span>,             FN_PTR(Unsafe_SetOrderedInt)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"putOrderedLong"</span>,     CC<span class="string">"("</span>OBJ<span class="string">"JJ)V"</span>,             FN_PTR(Unsafe_SetOrderedLong)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"park"</span>,               CC<span class="string">"(ZJ)V"</span>,                  FN_PTR(Unsafe_Park)&#125;,</span><br><span class="line">    &#123;CC<span class="string">"unpark"</span>,             CC<span class="string">"("</span>OBJ<span class="string">")V"</span>,               FN_PTR(Unsafe_Unpark)&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>compareAndSwapInt会出现在多处，我们选择methods_18，因为是jdk8。然后搜索methods_18</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// This one function is exported, used by NativeLookup.</span></span><br><span class="line"><span class="comment">// The Unsafe_xxx functions above are called only from the interpreter.</span></span><br><span class="line"><span class="comment">// The optimizer looks at names and signatures to recognize</span></span><br><span class="line"><span class="comment">// individual functions.</span></span><br><span class="line"></span><br><span class="line">JVM_ENTRY(<span class="keyword">void</span>, JVM_RegisterUnsafeMethods(JNIEnv *env, jclass unsafecls))</span><br><span class="line">  UnsafeWrapper(<span class="string">"JVM_RegisterUnsafeMethods"</span>);</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="function">ThreadToNativeFromVM <span class="title">ttnfv</span><span class="params">(thread)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Unsafe methods</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">bool</span> success = <span class="literal">false</span>;</span><br><span class="line">      <span class="comment">// We need to register the 1.6 methods first because the 1.8 methods would register fine on 1.7 and 1.6</span></span><br><span class="line">      <span class="keyword">if</span> (!success) &#123;</span><br><span class="line">        success = register_natives(<span class="string">"1.6 methods"</span>,   env, unsafecls, methods_16,  <span class="keyword">sizeof</span>(methods_16)/<span class="keyword">sizeof</span>(JNINativeMethod));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (!success) &#123;</span><br><span class="line">        success = register_natives(<span class="string">"1.8 methods"</span>,   env, unsafecls, methods_18,  <span class="keyword">sizeof</span>(methods_18)/<span class="keyword">sizeof</span>(JNINativeMethod));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (!success) &#123;</span><br><span class="line">        success = register_natives(<span class="string">"1.5 methods"</span>,   env, unsafecls, methods_15,  <span class="keyword">sizeof</span>(methods_15)/<span class="keyword">sizeof</span>(JNINativeMethod));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (!success) &#123;</span><br><span class="line">        success = register_natives(<span class="string">"1.4.1 methods"</span>, env, unsafecls, methods_141, <span class="keyword">sizeof</span>(methods_141)/<span class="keyword">sizeof</span>(JNINativeMethod));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (!success) &#123;</span><br><span class="line">        success = register_natives(<span class="string">"1.4.0 methods"</span>, env, unsafecls, methods_140, <span class="keyword">sizeof</span>(methods_140)/<span class="keyword">sizeof</span>(JNINativeMethod));</span><br><span class="line">      &#125;</span><br><span class="line">      guarantee(success, <span class="string">"register unsafe natives"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Unsafe.getLoadAverage</span></span><br><span class="line">    register_natives(<span class="string">"1.6 loadavg method"</span>, env, unsafecls, loadavg_method, <span class="keyword">sizeof</span>(loadavg_method)/<span class="keyword">sizeof</span>(JNINativeMethod));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Prefetch methods</span></span><br><span class="line">    register_natives(<span class="string">"1.6 prefetch methods"</span>, env, unsafecls, prefetch_methods, <span class="keyword">sizeof</span>(prefetch_methods)/<span class="keyword">sizeof</span>(JNINativeMethod));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Memory copy methods</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">bool</span> success = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">if</span> (!success) &#123;</span><br><span class="line">        success = register_natives(<span class="string">"1.7 memory copy methods"</span>, env, unsafecls, memcopy_methods_17, <span class="keyword">sizeof</span>(memcopy_methods_17)/<span class="keyword">sizeof</span>(JNINativeMethod));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (!success) &#123;</span><br><span class="line">        success = register_natives(<span class="string">"1.5 memory copy methods"</span>, env, unsafecls, memcopy_methods_15, <span class="keyword">sizeof</span>(memcopy_methods_15)/<span class="keyword">sizeof</span>(JNINativeMethod));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Unsafe.defineAnonymousClass</span></span><br><span class="line">    <span class="keyword">if</span> (EnableInvokeDynamic) &#123;</span><br><span class="line">      register_natives(<span class="string">"1.7 define anonymous class method"</span>, env, unsafecls, anonk_methods, <span class="keyword">sizeof</span>(anonk_methods)/<span class="keyword">sizeof</span>(JNINativeMethod));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Unsafe.shouldBeInitialized</span></span><br><span class="line">    <span class="keyword">if</span> (EnableInvokeDynamic) &#123;</span><br><span class="line">      register_natives(<span class="string">"1.7 LambdaForm support"</span>, env, unsafecls, lform_methods, <span class="keyword">sizeof</span>(lform_methods)/<span class="keyword">sizeof</span>(JNINativeMethod));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Fence methods</span></span><br><span class="line">    register_natives(<span class="string">"1.8 fence methods"</span>, env, unsafecls, fence_methods, <span class="keyword">sizeof</span>(fence_methods)/<span class="keyword">sizeof</span>(JNINativeMethod));</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>根据注释直接查找NativeLookup.cpp，搜索JVM_RegisterUnsafeMethods</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CC (char*)  <span class="comment">/* cast a literal from (const char*) */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FN_PTR(f) CAST_FROM_FN_PTR(void*, &amp;f)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> JNINativeMethod lookup_special_native_methods[] = &#123;</span><br><span class="line">  <span class="comment">// Next two functions only exist for compatibility with 1.3.1 and earlier.</span></span><br><span class="line">  &#123; CC<span class="string">"Java_java_io_ObjectOutputStream_getPrimitiveFieldValues"</span>,   <span class="literal">NULL</span>, FN_PTR(JVM_GetPrimitiveFieldValues)     &#125;,  <span class="comment">// intercept ObjectOutputStream getPrimitiveFieldValues for faster serialization</span></span><br><span class="line">  &#123; CC<span class="string">"Java_java_io_ObjectInputStream_setPrimitiveFieldValues"</span>,    <span class="literal">NULL</span>, FN_PTR(JVM_SetPrimitiveFieldValues)     &#125;,  <span class="comment">// intercept ObjectInputStream setPrimitiveFieldValues for faster serialization</span></span><br><span class="line"></span><br><span class="line">  &#123; CC<span class="string">"Java_sun_misc_Unsafe_registerNatives"</span>,                      <span class="literal">NULL</span>, FN_PTR(JVM_RegisterUnsafeMethods)       &#125;,</span><br><span class="line">  &#123; CC<span class="string">"Java_java_lang_invoke_MethodHandleNatives_registerNatives"</span>, <span class="literal">NULL</span>, FN_PTR(JVM_RegisterMethodHandleMethods) &#125;,</span><br><span class="line">  &#123; CC<span class="string">"Java_sun_misc_Perf_registerNatives"</span>,                        <span class="literal">NULL</span>, FN_PTR(JVM_RegisterPerfMethods)         &#125;,</span><br><span class="line">  &#123; CC<span class="string">"Java_sun_hotspot_WhiteBox_registerNatives"</span>,                 <span class="literal">NULL</span>, FN_PTR(JVM_RegisterWhiteBoxMethods)     &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这样我们就找到了Java_sun_misc_Unsafe_registerNatives，其实就是指Java_sun_misc_Unsafe_registerNatives对应JVM_RegisterPerfMethods，而Java_sun_misc_Unsafe_registerNatives根据命名知道在Unsafe.java中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">registerNatives</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        registerNatives();</span><br><span class="line">        sun.reflect.Reflection.registerMethodsToFilter(Unsafe.class, "getUnsafe");</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>即在Unsafe加载之后就会调用registerNatives，即调用JVM_RegisterUnsafeMethods，即调用了Unsafe.cpp的register_natives</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Helper method to register native methods.</span><br><span class="line"> */</span><br><span class="line">static bool register_natives(const char* message, JNIEnv* env, jclass clazz, const JNINativeMethod* methods, jint nMethods) &#123;</span><br><span class="line">  int status = env-&gt;RegisterNatives(clazz, methods, nMethods);</span><br><span class="line">  if (status &lt; 0 || env-&gt;ExceptionOccurred()) &#123;</span><br><span class="line">    if (PrintMiscellaneous &amp;&amp; (Verbose || WizardMode)) &#123;</span><br><span class="line">      tty-&gt;print_cr(&quot;Unsafe:  failed registering %s&quot;, message);</span><br><span class="line">    &#125;</span><br><span class="line">    env-&gt;ExceptionClear();</span><br><span class="line">    return false;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    if (PrintMiscellaneous &amp;&amp; (Verbose || WizardMode)) &#123;</span><br><span class="line">      tty-&gt;print_cr(&quot;Unsafe:  successfully registered %s&quot;, message);</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>即注册了对应的方法。即compareAndSwapInt对应Unsafe_CompareAndSwapInt方法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">UNSAFE_ENTRY(jboolean, Unsafe_CompareAndSwapInt(JNIEnv *env, jobject unsafe, jobject obj, jlong offset, jint e, jint x))</span><br><span class="line">  UnsafeWrapper(<span class="string">"Unsafe_CompareAndSwapInt"</span>);</span><br><span class="line">  oop p = JNIHandles::resolve(obj); <span class="comment">//此处p指Unsafe.java对象</span></span><br><span class="line">  jint* addr = (jint *) index_oop_from_field_offset_long(p, offset); <span class="comment">//Unsafe.java中value变量的地址</span></span><br><span class="line">  <span class="keyword">return</span> (jint)(Atomic::cmpxchg(x, addr, e)) == e; e是compare value</span><br><span class="line">UNSAFE_END</span><br></pre></td></tr></table></figure>
+<p>直接看Atomic.cpp的cmpxchg方法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="title">Atomic::cmpxchg</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> exchange_value,</span></span></span><br><span class="line"><span class="function"><span class="params">                         <span class="keyword">volatile</span> <span class="keyword">unsigned</span> <span class="keyword">int</span>* dest, <span class="keyword">unsigned</span> <span class="keyword">int</span> compare_value)</span> </span>&#123;</span><br><span class="line">  assert(<span class="keyword">sizeof</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span>) == <span class="keyword">sizeof</span>(jint), <span class="string">"more work to do"</span>);</span><br><span class="line">  <span class="keyword">return</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span>)Atomic::cmpxchg((jint)exchange_value, (<span class="keyword">volatile</span> jint*)dest,</span><br><span class="line">                                       (jint)compare_value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在runtime/atomic.inline.hpp可以知道有很多不同版本的cmpxchg实现</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Copyright (c) 2012, Oracle and/or its affiliates. All rights reserved.</span></span><br><span class="line"><span class="comment"> * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This code is free software; you can redistribute it and/or modify it</span></span><br><span class="line"><span class="comment"> * under the terms of the GNU General Public License version 2 only, as</span></span><br><span class="line"><span class="comment"> * published by the Free Software Foundation.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This code is distributed in the hope that it will be useful, but WITHOUT</span></span><br><span class="line"><span class="comment"> * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or</span></span><br><span class="line"><span class="comment"> * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License</span></span><br><span class="line"><span class="comment"> * version 2 for more details (a copy is included in the LICENSE file that</span></span><br><span class="line"><span class="comment"> * accompanied this code).</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * You should have received a copy of the GNU General Public License version</span></span><br><span class="line"><span class="comment"> * 2 along with this work; if not, write to the Free Software Foundation,</span></span><br><span class="line"><span class="comment"> * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA</span></span><br><span class="line"><span class="comment"> * or visit www.oracle.com if you need additional information or have any</span></span><br><span class="line"><span class="comment"> * questions.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> SHARE_VM_RUNTIME_ATOMIC_INLINE_HPP</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SHARE_VM_RUNTIME_ATOMIC_INLINE_HPP</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"runtime/atomic.hpp"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Linux</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TARGET_OS_ARCH_linux_x86</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"atomic_linux_x86.inline.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TARGET_OS_ARCH_linux_sparc</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"atomic_linux_sparc.inline.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TARGET_OS_ARCH_linux_zero</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"atomic_linux_zero.inline.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TARGET_OS_ARCH_linux_arm</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"atomic_linux_arm.inline.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TARGET_OS_ARCH_linux_ppc</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"atomic_linux_ppc.inline.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Solaris</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TARGET_OS_ARCH_solaris_x86</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"atomic_solaris_x86.inline.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TARGET_OS_ARCH_solaris_sparc</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"atomic_solaris_sparc.inline.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Windows</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TARGET_OS_ARCH_windows_x86</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"atomic_windows_x86.inline.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// AIX</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TARGET_OS_ARCH_aix_ppc</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"atomic_aix_ppc.inline.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// BSD</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TARGET_OS_ARCH_bsd_x86</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"atomic_bsd_x86.inline.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TARGET_OS_ARCH_bsd_zero</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"atomic_bsd_zero.inline.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// SHARE_VM_RUNTIME_ATOMIC_INLINE_HPP</span></span></span><br></pre></td></tr></table></figure>
+<p>本来想看arm平台的，没找到，最后看atomic_linux_x86.inline.hpp的，</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> jint     <span class="title">Atomic::cmpxchg</span>    <span class="params">(jint     exchange_value, <span class="keyword">volatile</span> jint*     dest, jint     compare_value)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> mp = os::is_MP();</span><br><span class="line">  <span class="function">__asm__ <span class="title">volatile</span> <span class="params">(LOCK_IF_MP(%<span class="number">4</span>) <span class="string">"cmpxchgl %1,(%3)"</span></span></span></span><br><span class="line"><span class="function"><span class="params">                    : <span class="string">"=a"</span> (exchange_value)</span></span></span><br><span class="line"><span class="function"><span class="params">                    : <span class="string">"r"</span> (exchange_value), <span class="string">"a"</span> (compare_value), <span class="string">"r"</span> (dest), <span class="string">"r"</span> (mp)</span></span></span><br><span class="line"><span class="function"><span class="params">                    : <span class="string">"cc"</span>, <span class="string">"memory"</span>)</span></span>;</span><br><span class="line">  <span class="keyword">return</span> exchange_value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于篇幅已经够长了，因此开了一篇<a href="https://sakurajiang.github.io/2020/06/13/inline_assembly/">新文章</a>，用以解释上面的代码，推荐看下那篇文章，这里直接告诉结果：</p>
+<p> %1表示exchange_value，%3表示dest，这里”a” (compare_value)将compare_value的值赋给eax寄存器，这里cmpxchgl的指令作用是比较compare_value和dest的值，如果相等，将exchange_value赋值给dest，如果不相等，将dest的值赋值给exchange_value。而Unsafe_CompareAndSwapInt方法，返回值是cmpxchgl的返回值和e比较，不相等时，一直跑循环，否则，退出。这样就完成了原子自增操作。</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2020/06/19/CAS/" target="_blank" rel="external">http://sakurajiang.github.io/2020/06/19/CAS/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/06/13/inline_assembly/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">inline_assembly</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="CAS" data-title="CAS" data-url="http://sakurajiang.github.io/2020/06/19/CAS/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "CAS",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2020/06/19/CAS/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

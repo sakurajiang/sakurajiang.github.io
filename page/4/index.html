@@ -162,6 +162,53 @@
     <ul class="post-list">
     
         <li class="post-list-item">
+            <article id="post-Android-自定义ContentProvider"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-08-02T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-08-03
+</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/08/03/Android-自定义ContentProvider/">自定义ContentProvider</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        对于ContentProvider，我想大家应该都不算陌生，因为它是android四大组件之一，相对而言，它比activity和service要简单挺多，这个contentprovider的作用就是实现各个应用程序之间的（跨应用）数据共享，比如联系人应用中就使用了ContentProvider,你在自己的应用中可以读取和修改联系人的数据，不过需要获得相应的权限。其实它也只是一个中间人，真正的...
+    
+    
+        <a href="/2016/08/03/Android-自定义ContentProvider/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ContentProvider/">ContentProvider</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
             <article id="post-Android-初试Rxjava"
   class="article-card article-type-post" itemprop="blogPost">
      
@@ -398,53 +445,6 @@
         </li>
     
         <li class="post-list-item">
-            <article id="post-Android-activity源码分析准备阶段"
-  class="article-card article-type-post" itemprop="blogPost">
-     
-    <div class="post-meta">
-        <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-07-21
-</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/21/Android-activity源码分析准备阶段/">Activity源码分析准备阶段</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-    
-        昨天装好了source insight，今天看了一下activity.java这个类，为什么看这个类呢，因为在我学习android过程中见过最多的就是这个，于是我先看了一下经常见到的oncreate方法，在看到onstart方法时，我发现一个叫mLoaderManager的对象，而这个对象是一个叫LoaderManagerImpl的类，并且调研了doStart这个方法，可是我并没有在这个类中...
-    
-    
-        <a href="/2016/07/21/Android-activity源码分析准备阶段/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item">
             <article id="post-Android-activity window view的关系"
   class="article-card article-type-post" itemprop="blogPost">
      
@@ -492,7 +492,7 @@
         </li>
     
         <li class="post-list-item">
-            <article id="post-Android-创建一个简单的对话框"
+            <article id="post-Android-activity源码分析准备阶段"
   class="article-card article-type-post" itemprop="blogPost">
      
     <div class="post-meta">
@@ -510,7 +510,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/21/Android-创建一个简单的对话框/">创建一个简单的对话框</a>
+      <a class="post-title-link" href="/2016/07/21/Android-activity源码分析准备阶段/">Activity源码分析准备阶段</a>
     </h3>
   
 
@@ -520,17 +520,17 @@
     <div class="post-content" id="post-content" itemprop="postContent" >
 
     
-        在android中创建一个对话框可以通过直接用AlterDialog.Builder类来创建一个对象，然后通过调用这个对象的setMessage()设置这个对话框的的显示信息，如果你需要类似于确定、取消这种按钮，你可以调用这个对象的setPositiveButton()方法和setNegativeButton()方法，当然你还可以创建一个类，让它继承DialogFragment这个类，然后复...
+        昨天装好了source insight，今天看了一下activity.java这个类，为什么看这个类呢，因为在我学习android过程中见过最多的就是这个，于是我先看了一下经常见到的oncreate方法，在看到onstart方法时，我发现一个叫mLoaderManager的对象，而这个对象是一个叫LoaderManagerImpl的类，并且调研了doStart这个方法，可是我并没有在这个类中...
     
     
-        <a href="/2016/07/21/Android-创建一个简单的对话框/" class="post-more waves-effect waves-button">
+        <a href="/2016/07/21/Android-activity源码分析准备阶段/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </div>
     
@@ -586,7 +586,7 @@
         </li>
     
         <li class="post-list-item">
-            <article id="post-Android-测试保存activity状态用preference的方式"
+            <article id="post-Android-创建一个简单的对话框"
   class="article-card article-type-post" itemprop="blogPost">
      
     <div class="post-meta">
@@ -604,7 +604,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/21/Android-测试保存activity状态用preference的方式/">测试保存activity状态用preference的方式</a>
+      <a class="post-title-link" href="/2016/07/21/Android-创建一个简单的对话框/">创建一个简单的对话框</a>
     </h3>
   
 
@@ -614,11 +614,10 @@
     <div class="post-content" id="post-content" itemprop="postContent" >
 
     
-         this.getPreferences(MODE_PRIVATE).edit().putString(“name”, myEditText.getText().toString()).apply();（apply()也可以用commit()代替），这行代码从调用完getPreferences（）方法后，后面的所有方法都是SharedPreferences接口中的，
-（这是我后面看自己博客时...
+        在android中创建一个对话框可以通过直接用AlterDialog.Builder类来创建一个对象，然后通过调用这个对象的setMessage()设置这个对话框的的显示信息，如果你需要类似于确定、取消这种按钮，你可以调用这个对象的setPositiveButton()方法和setNegativeButton()方法，当然你还可以创建一个类，让它继承DialogFragment这个类，然后复...
     
     
-        <a href="/2016/07/21/Android-测试保存activity状态用preference的方式/" class="post-more waves-effect waves-button">
+        <a href="/2016/07/21/Android-创建一个简单的对话框/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
