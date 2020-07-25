@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>mmap_understand | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="mmap,linux">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="mmap,linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mmap_understand">
+<meta property="og:url" content="http://sakurajiang.github.io/2020/06/20/mmap_mapping_file/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-25T10:07:56.332Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mmap_understand">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">mmap_understand</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">mmap_understand</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#操作系统如何访问文件"><span class="post-toc-text">操作系统如何访问文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#虚拟内存"><span class="post-toc-text">虚拟内存</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#内核空间和用户空间"><span class="post-toc-text">内核空间和用户空间</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#操作系统如何访问文件-1"><span class="post-toc-text">操作系统如何访问文件</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-mmap_mapping_file" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">mmap_understand</h1>
+        <div class="post-meta">
+            <time datetime="2020-06-19T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2020-06-20
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>网络上有很多描述mmap的文章，但是看完之后还是会让人感觉迷惑，原因是只是单纯的介绍了mmap的使用，其中提的最多的就是减少拷贝次数，并没有解释为什么要这样做。在计算机中，所有东西的出现必然有其原因，了解整个的前因对于对mmap的理解会很有好处，下面我们就从前因开始。</p>
+<h3 id="操作系统如何访问文件"><a href="#操作系统如何访问文件" class="headerlink" title="操作系统如何访问文件"></a>操作系统如何访问文件</h3><p>要说这个就得先说下虚拟内存</p>
+<h4 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h4><p>现代的操作系统，都会支持虚拟内存，它将物理内存对应用层开发透明，应用程序都是使用虚拟地址，其在编译的时候就确定，当然在链接的时候可能还会重定位修改。虚拟内存让进程以为自己独占系统所有的内存，当然是以一种欺骗的方式，因为现在的操作系统都支持多进程，比如我现在就在写这篇文章的同时，在听着杰伦的Mojito。且为了效率，虚拟地址的单位大小是页，一般是4096字节。也就是4kb。从前面的描述可以看出，虚拟内存和进程其实是密切相关的，一般来说两个不同的进程，同样的虚拟地址映射的是不同的物理内存(如果是同样的，岂不是乱套了)，所以在操作系统内部必然要存在物理地址和虚拟地址的转换，这个就是MMU，即memory manage unit。转换的时候需要使用到Page Tables，Page Tables包含Page Directory(PGD)、Page mid-level Directory(PMD)、Page Table(PT)。三者都是链表的结构，主要介绍一下PT，里面的每个元素被称为Page Table Entry，其中包含的值就是物理地址。</p>
+<p>说了这么多，还是没开始说操作系统如何访问文件，别急，前置知识还是要了解的，还需要再介绍的前置知识就是用户空间和内核空间。</p>
+<h4 id="内核空间和用户空间"><a href="#内核空间和用户空间" class="headerlink" title="内核空间和用户空间"></a>内核空间和用户空间</h4><p>我们假设虚拟地址的大小是4G，那么用户空间和内核空间分别占有3G和1G的空间，且内核空间的地址是高地址，即0xC0000000 到 0xFFFFFFFF，两者权限不同，内核可以访问计算机所有的资源，比如磁盘、所有的CPU指令、所有的虚拟空间。而用户空间只能访问受限的资源，一个常见的用户空间结构包含：stack、heap、text、data、bss、内存映射区域等。引入内核空间主要是基于系统的安全考量。因为如果所有的进程都可以访问系统资源，那么恶意进程对计算机的破坏就太恐怖了，比如一个恶意进程将计算机所有的文件删除。</p>
+<h4 id="操作系统如何访问文件-1"><a href="#操作系统如何访问文件-1" class="headerlink" title="操作系统如何访问文件"></a>操作系统如何访问文件</h4><p>说了这么多，终于到重头戏了，有了这些前置知识，假如你是一个操作系统的设计者，你会如何设计一个文件操作子系统。不妨停下想一想。</p>
+<p>我们知道磁盘的读写速度和内存的读写速度不在一个量级上，加上前面说的用户空间和内核空间，因此频繁的访问磁盘肯定会降低程序的速度，因为会涉及到用户态和内核态的切换，正如解决计算机问题的经典方式，加一个中间层，那么自然就会想到在内核中使用一个buffer存储用户态传来的数据，当到一个容量的时候，再将数据写会磁盘。而且这样还有好处，比如，当进程A访问文件B，而进程B也访问文件B，在进程访问文件A后，文件的内容已经在内核的buffer中了，此时，进程B访问的时候就不需要再从磁盘将数据读入内核了。加快了进程B访问文件的速度。事实上，现代操作系统就是这样做的，负责磁盘和内核交互的模块是DMA，即direct memory access，而负责内核和用户空间的数据交互是CPU，分开的好处在于减轻CPU的工作，在从磁盘读文件的时候可以做其他事，此时的buffer有一个专门的名字叫做page cache。但是细想一下，如果只提供这样一种方式，是不是不友好，因为在文件的访问过程中可能会涉及到多次的用户态和内核态切换。那么有什么方式呢？也可以停下想一想。</p>
+<p>上述的过程中，直接将内核空间的page cache和用户空间的映射，如何实现映射呢？只要内核空间的page cache中对应那块文件的内存的PT和用户空间需要映射的内存相同就行，这样两者所访问的物理内存就相同，当然最后映射返回的地址肯定要属于用户空间，因为只有这样用户空间才能访问。这样就可以减少一次内核态到用户态的一次拷贝。即现代操作系统的mmap，返回的值便是映射区域的地址(可以将地址打印出来，用于验证前面说的返回的地址是属于用户空间)，关于mmap的介绍可以直接看<a href="https://man7.org/linux/man-pages/man2/mmap.2.html" target="_blank" rel="noopener">官方文档</a>这里停下思考下，为什么我说的是内核态到用户态的一次拷贝，而不是双向的，<strong>即为什么只是read减少了一次拷贝，而write没有呢</strong>。</p>
+<p>我们想下，在实际的代码中，当我们需要往某块地址中写数据的时候，比如我们有数据char *data = “hello world”，那么当我们拿到mmap返回的地址后，我们假设是mmapAddress，我们往mmapAddress写数据的数据，肯定需要将数据从data中拷贝到mmapAddress，只不过相比直接使用fwrite方法而言，少了内核态和用户态的切换。而读数据的时候就会减少拷贝，即我们可以直接访问mmapAddress地址。下面直接给代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> * <span class="built_in">map</span>;</span><br><span class="line">    <span class="keyword">int</span> fd, offset = <span class="number">0</span>;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">fileInfo</span>;</span></span><br><span class="line">    <span class="keyword">size_t</span> fileSizeOld, fileSizeNew, textSize;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *text = <span class="string">"hello world"</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *filePath = <span class="string">"/Users/jdk/TestMMAP/testmmap.txt"</span>; <span class="comment">//your mapping file path</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"We will write text '%s' to '%s'.\n"</span>, text, filePath);</span><br><span class="line">    <span class="comment">// Open a file for writing.</span></span><br><span class="line">    <span class="comment">// Creating the file if it doesn't exist.</span></span><br><span class="line">    <span class="keyword">if</span> ((fd = open(filePath, O_RDWR | O_CREAT, (<span class="keyword">mode_t</span>)<span class="number">0664</span> )) == <span class="number">-1</span>) &#123;</span><br><span class="line">        perror(<span class="string">"open"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (stat(filePath, &amp;fileInfo) == <span class="number">-1</span>) &#123;</span><br><span class="line">        perror(<span class="string">"stat"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// If the file is not empty, show its content</span></span><br><span class="line">    <span class="keyword">if</span> (fileInfo.st_size != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">map</span> = mmap(<span class="number">0</span>, fileInfo.st_size, PROT_READ, MAP_SHARED, fd, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">map</span> == MAP_FAILED) &#123;</span><br><span class="line">            close(fd);</span><br><span class="line">            perror(<span class="string">"mmap"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"The content in '%s' before writing:\n"</span>, filePath);</span><br><span class="line">        <span class="keyword">while</span> (offset &lt; fileInfo.st_size) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%c"</span>, <span class="built_in">map</span>[offset]);</span><br><span class="line">            offset++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">        <span class="keyword">if</span> (munmap(<span class="built_in">map</span>, fileInfo.st_size) == <span class="number">-1</span>) &#123;</span><br><span class="line">            close(fd);</span><br><span class="line">            perror(<span class="string">"Error un-mmapping the file"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Stretch the file size to write the array of char</span></span><br><span class="line">    fileSizeOld = fileInfo.st_size;</span><br><span class="line"></span><br><span class="line">    textSize = <span class="built_in">strlen</span>(text);</span><br><span class="line">    fileSizeNew = fileInfo.st_size + textSize;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (ftruncate(fd, fileSizeNew) == <span class="number">-1</span>) &#123;</span><br><span class="line">        close(fd);</span><br><span class="line">        perror(<span class="string">"Error resizing the file"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// mmap to write</span></span><br><span class="line">    <span class="built_in">map</span> = mmap(<span class="number">0</span>, fileSizeNew, PROT_READ | PROT_WRITE, MAP_SHARED, fd, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">map</span> == MAP_FAILED) &#123;</span><br><span class="line">        close(fd);</span><br><span class="line">        perror(<span class="string">"mmap"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);\</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"mmap address= %p"</span>,<span class="built_in">map</span>);</span><br><span class="line">    <span class="comment">//memcpy(map,text,textSize);</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; textSize; i++) &#123;</span><br><span class="line">        <span class="comment">/* printf("Writing character %c at %zu\n", text[i], i); */</span></span><br><span class="line">        <span class="built_in">map</span>[i+fileSizeOld] = text[i]; <span class="comment">//copy</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Write it now to disk</span></span><br><span class="line">    <span class="keyword">if</span> (msync(<span class="built_in">map</span>, fileSizeNew, MS_SYNC) == <span class="number">-1</span>) &#123;</span><br><span class="line">        perror(<span class="string">"Could not sync the file to disk"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span>  i =<span class="number">0</span>;i&lt;textSize;i++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"value =%c \n"</span>,<span class="built_in">map</span>[i]); <span class="comment">//no need to copy</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Free the mmapped memory</span></span><br><span class="line">    <span class="keyword">if</span> (munmap(<span class="built_in">map</span>, fileSizeNew) == <span class="number">-1</span>) &#123;</span><br><span class="line">        close(fd);</span><br><span class="line">        perror(<span class="string">"Error un-mmapping the file"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Un-mmaping doesn't close the file, so we still need to do that</span></span><br><span class="line">    close(fd);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2020/06/20/mmap_mapping_file/" target="_blank" rel="external">http://sakurajiang.github.io/2020/06/20/mmap_mapping_file/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mmap/">mmap</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/06/19/CAS/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">CAS</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="mmap_mapping_file" data-title="mmap_understand" data-url="http://sakurajiang.github.io/2020/06/20/mmap_mapping_file/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "mmap_understand",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2020/06/20/mmap_mapping_file/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
