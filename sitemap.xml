@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sakurajiang.github.io/2020/06/23/client_collect_crash_by_breakpad/</loc>
+    
+    <lastmod>2020-07-26T10:08:09.929Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sakurajiang.github.io/2020/05/05/stack_backtrace/</loc>
     
     <lastmod>2020-07-26T07:40:00.027Z</lastmod>

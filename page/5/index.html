@@ -162,6 +162,53 @@
     <ul class="post-list">
     
         <li class="post-list-item">
+            <article id="post-Android-activity window view的关系"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-07-21
+</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/07/21/Android-activity window view的关系/">Activity Window View的关系</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        activity.java的attach()方法，这个方法传入多个参数，有Context,ActivityThread，Instrumentation等等，我们先不管他们，我们直接找到mWindow = PolicyManager.makeNewWindow(this);这一行代码，也就意味着我们需要找PolicyManager.java，这时我们需要找的是policy这个类，而不是Ipol...
+    
+    
+        <a href="/2016/07/21/Android-activity window view的关系/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
             <article id="post-Android-写一个简单的加载多张图片的自定义view"
   class="article-card article-type-post" itemprop="blogPost">
      
@@ -201,6 +248,53 @@
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
+            <article id="post-Android-创建一个简单的对话框"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-07-21
+</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/07/21/Android-创建一个简单的对话框/">创建一个简单的对话框</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        在android中创建一个对话框可以通过直接用AlterDialog.Builder类来创建一个对象，然后通过调用这个对象的setMessage()设置这个对话框的的显示信息，如果你需要类似于确定、取消这种按钮，你可以调用这个对象的setPositiveButton()方法和setNegativeButton()方法，当然你还可以创建一个类，让它继承DialogFragment这个类，然后复...
+    
+    
+        <a href="/2016/07/21/Android-创建一个简单的对话框/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
 
     </div>
     
@@ -289,53 +383,6 @@
     
     
         <a href="/2016/07/21/Android-测试保存activity状态用preference的方式/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item">
-            <article id="post-Android-创建一个简单的对话框"
-  class="article-card article-type-post" itemprop="blogPost">
-     
-    <div class="post-meta">
-        <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-07-21
-</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/21/Android-创建一个简单的对话框/">创建一个简单的对话框</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-    
-        在android中创建一个对话框可以通过直接用AlterDialog.Builder类来创建一个对象，然后通过调用这个对象的setMessage()设置这个对话框的的显示信息，如果你需要类似于确定、取消这种按钮，你可以调用这个对象的setPositiveButton()方法和setNegativeButton()方法，当然你还可以创建一个类，让它继承DialogFragment这个类，然后复...
-    
-    
-        <a href="/2016/07/21/Android-创建一个简单的对话框/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
@@ -571,53 +618,6 @@
     
     
         <a href="/2016/07/21/Java-关于java各个访问属性的问题/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item">
-            <article id="post-Java-关于函数方法的返回类型是一个类类型时的情况"
-  class="article-card article-type-post" itemprop="blogPost">
-     
-    <div class="post-meta">
-        <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-07-21
-</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/21/Java-关于函数方法的返回类型是一个类类型时的情况/">关于函数方法的返回类型是一个类类型时的情况</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-    
-        在一个方法中，如果你想返回的是一个类类型时，那么这个方法中的return语句返回的类型就需要和方法的返回类型一致，如果你在方法中定义了一个类并且指向一个变量时，这个new构造的对象决定在你调用这个方法时能不能转换成别的对象，而指向的那个变量决定的是需不需要强制类型转换，我们都知道，一个子类的对象可以指向父类的引用，假如在方法中写了这样的代码，并且方法的返回类型是父类类型，那么在调用这个方法时...
-    
-    
-        <a href="/2016/07/21/Java-关于函数方法的返回类型是一个类类型时的情况/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>

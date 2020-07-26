@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>客户端使用breakpad收集crash | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="linux,native_crash,breakpad">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="linux,native_crash,breakpad">
+<meta property="og:type" content="article">
+<meta property="og:title" content="客户端使用breakpad收集crash">
+<meta property="og:url" content="http://sakurajiang.github.io/2020/06/23/client_collect_crash_by_breakpad/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-26T10:08:09.929Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="客户端使用breakpad收集crash">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">客户端使用breakpad收集crash</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">客户端使用breakpad收集crash</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#what"><span class="post-toc-text">what</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#how"><span class="post-toc-text">how</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#发生crash的时候，linux的流程"><span class="post-toc-text">发生crash的时候，linux的流程</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#breakpad流程"><span class="post-toc-text">breakpad流程</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#如何定制化minidump"><span class="post-toc-text">如何定制化minidump</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#如何在native-crash的时候收集java堆栈"><span class="post-toc-text">如何在native crash的时候收集java堆栈</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-client_collect_crash_by_breakpad" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">客户端使用breakpad收集crash</h1>
+        <div class="post-meta">
+            <time datetime="2020-06-22T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2020-06-23
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="what"><a href="#what" class="headerlink" title="what"></a>what</h3><p>主要讲解使用如何在客户端使用breakpad收集crash数据，当然还有定制breakpad。client端主要是收集crash数据，首先想到的就是堆栈、操作系统以及手机的基础属性、还有APP的版本等，当然还有一些别的数据，这里推荐直接对照成熟的crash收集平台，比如bugly、听云等。按照我的经验，比较重要但是没那么显眼的属性有以下几个：前后台、渠道、系统日志。当然还可以扩展思路，比如和日志系统、应用轨迹(即从用户打开APP开始到最后回到后台整个过程中，用户的所有交互行为。)、网络性能数据打通，获取更多的crash前后的上下文。</p>
+<h3 id="how"><a href="#how" class="headerlink" title="how"></a>how</h3><p>首先我们先了解一些基本知识：</p>
+<h4 id="发生crash的时候，linux的流程"><a href="#发生crash的时候，linux的流程" class="headerlink" title="发生crash的时候，linux的流程"></a>发生crash的时候，linux的流程</h4><p>在linux中，当native发生crash的时候，我们可以通过注册signal来捕获对应的signal，函数原型如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sigaction</span><span class="params">(<span class="keyword">int</span> signum, <span class="keyword">const</span> struct sigaction *act,</span></span></span><br><span class="line"><span class="function"><span class="params">                     struct sigaction *oldact)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>下面说一下参数的意义：</p>
+<ul>
+<li><p>signum：表示signal的类别，比如,SIGSEGV、SIGABRT等等，但是不包含SIGKILL 和 SIGSTOP，我们一般捕获的是以下6个：SIGSEGV, SIGABRT, SIGFPE, SIGILL, SIGBUS, SIGTRAP</p>
+</li>
+<li><p>sigaction *act：首先介绍一下sigaction是一个结构体，其中比较关键的就是<em>sa_sigaction和sa_flags，\</em>sa_sigaction作为回调，而如果需要回调起作用，则需要设置sa_flags，通常的做法都是</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sigaction</span> <span class="title">action</span>&#123;</span>&#125;;</span><br><span class="line">action.sa_sigaction = SignalHandler;</span><br><span class="line">action.sa_flags = SA_SIGINFO | SA_ONSTACK;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Sigaction *oldact：由于每个信息只允许存在一个处理的函数，因此当我们设置我们的处理函数时会覆盖原来的处理函数，因此需要将原来的处理函数保存下来，然后当我们的函数执行完之后，再处理执行原先的处理函数。</p>
+</li>
+</ul>
+<p>如此设置之后，当有signal出现的时候就会回调到SignalHandler中，而这个的函数原型如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SignalHandler</span><span class="params">(<span class="keyword">int</span> sig, <span class="keyword">siginfo_t</span> *info, <span class="keyword">void</span> *ucontext)</span></span></span><br></pre></td></tr></table></figure>
+<p>下面分别介绍一下参数：</p>
+<ul>
+<li><p>sig：表示的是哪个signal，参考上面的signum</p>
+</li>
+<li><p>*info：是一个结构体指针，先介绍一下siginfo_t这个结构体</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">__SIGINFO <span class="class"><span class="keyword">struct</span> &#123;</span> <span class="keyword">int</span> si_signo; <span class="keyword">int</span> si_errno; <span class="keyword">int</span> si_code; <span class="keyword">union</span> __sifields _sifields; \</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其中si_signo与sig一致，si_errno的值一般是0，si_code指示为什么这个signal会发送，__sifields一般不关心。</p>
+<p>然后我们在SignalHandler中处理*oldact就完成了整个流程。</p>
+<h4 id="breakpad流程"><a href="#breakpad流程" class="headerlink" title="breakpad流程"></a>breakpad流程</h4><p>首先放一张表示流程的自然语言：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//   SignalHandler (uses a global stack of ExceptionHandler objects to find</span></span><br><span class="line"><span class="comment">//        |         one to handle the signal. If the first rejects it, try</span></span><br><span class="line"><span class="comment">//        |         the second etc...)</span></span><br><span class="line"><span class="comment">//        V</span></span><br><span class="line"><span class="comment">//   HandleSignal ----------------------------| (clones a new process which</span></span><br><span class="line"><span class="comment">//        |                                   |  shares an address space with</span></span><br><span class="line"><span class="comment">//   (wait for cloned                         |  the crashed process. This</span></span><br><span class="line"><span class="comment">//     process)                               |  allows us to ptrace the crashed</span></span><br><span class="line"><span class="comment">//        |                                   |  process)</span></span><br><span class="line"><span class="comment">//        V                                   V</span></span><br><span class="line"><span class="comment">//   (set signal handler to             ThreadEntry (static function to bounce</span></span><br><span class="line"><span class="comment">//    SIG_DFL and rethrow,                    |      back into the object)</span></span><br><span class="line"><span class="comment">//    killing the crashed                     |</span></span><br><span class="line"><span class="comment">//    process)                                V</span></span><br><span class="line"><span class="comment">//                                          DoDump  (writes minidump)</span></span><br><span class="line"><span class="comment">//                                            |</span></span><br><span class="line"><span class="comment">//                                            V</span></span><br><span class="line"><span class="comment">//                                         sys_exit</span></span><br><span class="line"><span class="comment">//</span></span><br></pre></td></tr></table></figure>
+<p>上述的流程就是breakpad处理signal的流程，我们主要看一下DoDump()方法，主要做了如下事情：</p>
+<ul>
+<li>读取/proc/$pid/auxv⽂件</li>
+<li>读取/proc/$pid/task⽬录，读取进程所有的线程信息</li>
+<li>读取/proc/$pid/maps⽂件，获取当前进程加载的所有模块的信息，包含模块名、起始地址、模块<br>size</li>
+<li>写minidump文件</li>
+</ul>
+<h4 id="如何定制化minidump"><a href="#如何定制化minidump" class="headerlink" title="如何定制化minidump"></a>如何定制化minidump</h4><p>首先我们需要知道minidump文件的格式，格式的定义是在minidump_format.h中，但是有些结构并没有在代码中直接使用相应的对象，比如MDRawThreadList，按照之前解析class文件的经验，都是直接生成对应结构的对象，但是，由于是C语言可以直接操作地址，因此，可以不通过构建对象的方式来构建这个结构体，那么如何实现呢？不要急，我们先看一下写minidump文件的大致流程：</p>
+<ol>
+<li><p>写header，一般都是这样处理的，不多说</p>
+</li>
+<li><p>写MDRawDirectory，默认是13个，结构如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">uint32_t</span> MDRVA;  <span class="comment">/* RVA */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">  <span class="keyword">uint32_t</span>  data_size; <span class="comment">//MDRawDirectory的大小</span></span><br><span class="line">  MDRVA     rva;	<span class="comment">//MDRawDirectory中第一个元素的偏移量或者说起始位置</span></span><br><span class="line">&#125; MDLocationDescriptor;  <span class="comment">/* MINIDUMP_LOCATION_DESCRIPTOR */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">  <span class="keyword">uint32_t</span>             stream_type;</span><br><span class="line">  MDLocationDescriptor location;</span><br><span class="line">&#125; MDRawDirectory;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写MDRawThreadList，这里就是上面说的问题了，你会发现整个breakpad中，并没有构建MDRawThreadList对象，而是通过偏移量来操作，首先是获取thread的数目，然后rva = originPosition+numsOfThread*sizeof(MDRawThread)，这样就知道第一个MDRawThread的位置。</p>
+</li>
+</ol>
+<p>所以，修改的方式简单来说就是定义一个struct，然后将其插入到minidump文件的最后，然后按照规则解析出来。</p>
+<h4 id="如何在native-crash的时候收集java堆栈"><a href="#如何在native-crash的时候收集java堆栈" class="headerlink" title="如何在native crash的时候收集java堆栈"></a>如何在native crash的时候收集java堆栈</h4><p>在breakpad的MinidumpCallback中是无法收集java 堆栈的，经过我的测试，只要涉及到<code>String</code>类型的数据，就会直接退出，比如你在收集Java堆栈的方法中，定义一个<code>String</code>类型的数据，当运行到这行代码时，就会直接退出，后面的代码不会运行，解决的方式是开启一个新线程收集，这样就需要涉及到线程的同步问题，换句话说，就是崩溃线程A依赖于收集java堆栈的线程B，线程B也依赖于线程A，于是我们就会想到使用互斥锁+条件变量的方式解决。具体的做法如下：</p>
+<ol>
+<li><p>首先我们定义一个java方法，该方法用于收集java的堆栈。<code>public static void generateCrashProto(int crashId, final String path)</code></p>
+</li>
+<li><p>在<code>JNI_OnLoad</code>的时候将该方法的<code>jmethodID</code>以及所属类的<code>jclass</code>保存为全局引用</p>
+</li>
+<li><p>在<code>JNI_OnLoad</code>中使用<code>pthread_create</code>创建一个线程，定义回调<code>void* DumpJavaThreadInfo(void *argv)</code></p>
+</li>
+<li><p>定于 如下几个变量：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> tidCrash;  <span class="comment">//crash线程id</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">pthread_mutex_t</span> mutex = PTHREAD_MUTEX_INITIALIZER;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">pthread_cond_t</span> cond = PTHREAD_COND_INITIALIZER;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">pthread_mutex_t</span> mutex_finish = PTHREAD_MUTEX_INITIALIZER;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">pthread_cond_t</span> cond_finish = PTHREAD_COND_INITIALIZER;</span><br><span class="line"><span class="keyword">pthread_t</span> ntid;  <span class="comment">//新建线程id</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>DumpJavaThreadInfo</code>中判断<code>tidCrash</code>是否为0，不为0则一直等待，即等待MinidumpCallback回调</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pthread_mutex_lock(&amp;mutex);</span><br><span class="line">    <span class="comment">//当条件不满足时等待</span></span><br><span class="line">    <span class="keyword">while</span> (tidCrash == <span class="number">0</span>) &#123;</span><br><span class="line">        pthread_cond_wait(&amp;cond, &amp;mutex);</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br><span class="line">pthread_mutex_unlock(&amp;mutex);</span><br><span class="line">SetDumpJavaFinish(); <span class="comment">//通知crash线程，java堆栈收集完毕</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在MinidumpCallback回调中对<code>tidCrash</code>赋值，并且发生信号给上一步阻塞的线程</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">tidCrash = gettid();</span><br><span class="line">minidumpPath = <span class="keyword">const_cast</span>&lt;<span class="keyword">char</span> *&gt;(descriptor.path());</span><br><span class="line"><span class="keyword">if</span> (ntid != <span class="literal">NULL</span>)&#123;</span><br><span class="line">    pthread_mutex_lock(&amp;mutex);</span><br><span class="line">    pthread_cond_signal(&amp;cond);</span><br><span class="line">    pthread_mutex_unlock(&amp;mutex);</span><br><span class="line">    WaitDumpJava();  <span class="comment">//等待获取java堆栈函数完成</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">WaitDumpJava</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">now</span>;</span></span><br><span class="line">    gettimeofday(&amp;now, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timespec</span> <span class="title">outtime</span>;</span></span><br><span class="line">    outtime.tv_sec = now.tv_sec + c_waitSecond;</span><br><span class="line">    outtime.tv_nsec = <span class="number">0</span>;</span><br><span class="line">    pthread_mutex_lock(&amp;mutex_finish);</span><br><span class="line">    pthread_cond_timedwait(&amp;cond_finish, &amp;mutex_finish, &amp;outtime);</span><br><span class="line">    pthread_mutex_unlock(&amp;mutex_finish);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在DumpJavaThreadInfo被调用</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SetDumpJavaFinish</span><span class="params">()</span></span>&#123;</span><br><span class="line">    pthread_mutex_lock(&amp;mutex_finish);</span><br><span class="line">    pthread_cond_signal(&amp;cond_finish);</span><br><span class="line">    pthread_mutex_unlock(&amp;mutex_finish);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2020/06/23/client_collect_crash_by_breakpad/" target="_blank" rel="external">http://sakurajiang.github.io/2020/06/23/client_collect_crash_by_breakpad/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/breakpad/">breakpad</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/native-crash/">native_crash</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/06/20/mmap_mapping_file/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">mmap_understand</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="client_collect_crash_by_breakpad" data-title="客户端使用breakpad收集crash" data-url="http://sakurajiang.github.io/2020/06/23/client_collect_crash_by_breakpad/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "客户端使用breakpad收集crash",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2020/06/23/client_collect_crash_by_breakpad/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
