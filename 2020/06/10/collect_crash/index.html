@@ -5,31 +5,25 @@
   
   
   
-  <title>使用RecyclerView遇到的一些问题 | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <title>collect_crash | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
   
   
-  <meta name="keywords" content="Android">
+  <meta name="keywords" content="linux,native_crash,breakpad">
   <meta name="description" content="这是一篇比较干货的文章">
-<meta name="keywords" content="Android">
+<meta name="keywords" content="linux,native_crash,breakpad">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用RecyclerView遇到的一些问题">
-<meta property="og:url" content="http://sakurajiang.github.io/2016/07/21/Android-RecyclerView的简单使用/index.html">
+<meta property="og:title" content="collect_crash">
+<meta property="og:url" content="http://sakurajiang.github.io/2020/06/10/collect_crash/index.html">
 <meta property="og:site_name" content="sakurajiang的个人博客">
 <meta property="og:description" content="这是一篇比较干货的文章">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E4%BD%BF%E7%94%A8RecyclerView%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/A.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E4%BD%BF%E7%94%A8RecyclerView%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/B.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E4%BD%BF%E7%94%A8RecyclerView%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/C.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E4%BD%BF%E7%94%A8RecyclerView%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/D.PNG">
-<meta property="og:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E4%BD%BF%E7%94%A8RecyclerView%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/E.PNG">
-<meta property="og:updated_time" content="2020-07-06T09:17:23.455Z">
+<meta property="og:updated_time" content="2020-07-26T10:20:37.770Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用RecyclerView遇到的一些问题">
+<meta name="twitter:title" content="collect_crash">
 <meta name="twitter:description" content="这是一篇比较干货的文章">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E4%BD%BF%E7%94%A8RecyclerView%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/A.PNG">
   
     <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
   
@@ -126,7 +120,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">使用RecyclerView遇到的一些问题</div>
+        <div class="flex-col header-title ellipsis">collect_crash</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -148,7 +142,7 @@
 <header class="content-header post-header">
 
     <div class="container">
-        <h1 class="title">使用RecyclerView遇到的一些问题</h1>
+        <h1 class="title">collect_crash</h1>
         
         
 
@@ -161,14 +155,21 @@
 
 <div class="container body-wrap">
     
-<article id="post-Android-RecyclerView的简单使用" 
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#what"><span class="post-toc-text">what</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#how"><span class="post-toc-text">how</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#client"><span class="post-toc-text">client</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#CI"><span class="post-toc-text">CI</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#server"><span class="post-toc-text">server</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-collect_crash" 
   class="post-article article-type-post" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">使用RecyclerView遇到的一些问题</h1>
+        <h1 class="post-card-title">collect_crash</h1>
         <div class="post-meta">
-            <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-07-21
+            <time datetime="2020-06-09T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2020-06-10
 </time>
 
             
@@ -176,14 +177,16 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>###1.无法使用RecyclerView，因为我们没有导入v7包<br>　　我们如何导入呢？因为我使用的是AS，所以我这里说一下AS的导入，首先，你找到你项目中的build.gradle，注意这里有两个build.gradle，那么我们需要找哪个呢？下面我放了一张图片<br><img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E4%BD%BF%E7%94%A8RecyclerView%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/A.PNG" alt="Github"><br>那么我们应该选哪个内容呢？我们应该选第二个，点进去第二个后，找到dependencies，如图：<br><img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E4%BD%BF%E7%94%A8RecyclerView%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/B.PNG" alt="Github"><br>我们将这个修改为:<br><img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E4%BD%BF%E7%94%A8RecyclerView%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/C.PNG" alt="Github"><br>这里需要注意版本要保持一致，如两张图中都是v7:23，这样应该就没有问题了。</p>
-<p>###2.使用RecyclerView时，需要自定义一个Adapter继承Recycler.Adapter<br>　　这里需要继承的是泛型类，比如:<br><img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E4%BD%BF%E7%94%A8RecyclerView%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/D.PNG" alt="Github"><br>其中ＭyRecyclerViewAdapter是自定义的Adapter，而MyViewHolder是<br>ＭyRecyclerViewAdapter中的内部类，继承了RecyclerViewAdapter.ViewHolder，如下:<br><img src="https://raw.githubusercontent.com/sakurajiang/Picture/master/%E4%BD%BF%E7%94%A8RecyclerView%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/E.PNG" alt="Github"></p>
+            <h3 id="what"><a href="#what" class="headerlink" title="what"></a>what</h3><p>主要是简单介绍如何收集crash，包括SDK、符号表收集、以及解析堆栈。后续会出新的文章详细介绍。这里主要是以breakpad举例，但是思路都是想通的，其他的框架也差不多。</p>
+<h3 id="how"><a href="#how" class="headerlink" title="how"></a>how</h3><h4 id="client"><a href="#client" class="headerlink" title="client"></a>client</h4><p>client端主要是收集crash数据，对于breakpad的使用以及原理不在这篇文章的范围，主要讲述的是client端需要收集哪些数据。首先想到的就是堆栈、操作系统以及手机的基础属性、还有APP的版本等，当然还有一些别的数据，这里推荐直接对照成熟的crash收集平台，比如bugly、听云等。按照我的经验，比较重要但是没那么显眼的属性有以下几个：前后台、渠道、系统日志。当然还可以扩展思路，比如和日志系统、应用轨迹(即从用户打开APP开始到最后回到后台整个过程中，用户的所有交互行为。)、网络性能数据打通，获取更多的crash前后的上下文。</p>
+<h4 id="CI"><a href="#CI" class="headerlink" title="CI"></a>CI</h4><p>CI端的作用就是收集符号表和mapping文件。除了这些我们还需要一些额外的信息，比如渠道、AppId、AppSecret、env等。将打包过程中生成的mapping文件和so文件拷贝到一个统一的目录，然后将mapping文件和so文件的路径以及上面的额外信息放在一个文件中，这样我们需要的信息都在这个文件中，可以通过遍历文件的方式将生成对应的symbol文件，将其上传到服务端，需要注意的是上传成功后不要立即将原来的so文件删除，因为有可能你的APP会接入多个crash收集系统，而为了防止重复生成symbol文件的问题，当遍历完一个文件后，设置一个标志，而后不再遍历该文件。当然还可以设置一个时间期限，比如7天。</p>
+<h4 id="server"><a href="#server" class="headerlink" title="server"></a>server</h4><p>这里的server端不涉及到数据的存储，只是接口层面的数据接口，server端主要做的事情是解析堆栈，也就是输入参数有两个，分别是Client收集的数据和CI端收集的数据，输出则是前端页面消费的数据。比较难的数据就是将crash分类。复杂程度和前端需要的数据相关。</p>
 
         </div>
         
         <blockquote class="post-copyright">
             <div class="content">
-               转载请注明出处：<a href="/2016/07/21/Android-RecyclerView的简单使用/" target="_blank" rel="external">http://sakurajiang.github.io/2016/07/21/Android-RecyclerView的简单使用/</a>
+               转载请注明出处：<a href="/2020/06/10/collect_crash/" target="_blank" rel="external">http://sakurajiang.github.io/2020/06/10/collect_crash/</a>
             </div>
             <footer>
                 <a href="http://sakurajiang.github.io">
@@ -201,7 +204,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/breakpad/">breakpad</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/native-crash/">native_crash</a></li></ul>
 
 
             
@@ -255,18 +258,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2016/07/26/Android-关于使用回调设置监听和在activity中设置监听的一些问题及实验/" id="post-prev" class="post-nav-link">
+      <a href="/2020/06/13/inline_assembly/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">关于使用回调设置监听和在activity中设置监听的一些问题及实验</h4>
+        <h4 class="title">inline_assembly</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2016/07/21/Android-activity window view的关系/" id="post-next" class="post-nav-link">
+      <a href="/2020/05/05/stack_backtrace/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Activity Window View的关系</h4>
+        <h4 class="title">stack_backtrace</h4>
       </a>
     </div>
   
@@ -276,7 +279,7 @@
             
     
 <div class="duoshuo">
-	<div class="ds-thread" data-thread-key="Android-RecyclerView的简单使用" data-title="使用RecyclerView遇到的一些问题" data-url="http://sakurajiang.github.io/2016/07/21/Android-RecyclerView的简单使用/"></div>
+	<div class="ds-thread" data-thread-key="collect_crash" data-title="collect_crash" data-url="http://sakurajiang.github.io/2020/06/10/collect_crash/"></div>
 </div>
 <script src="/js/embed.min.js?v=1.1.7"></script>
 <script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
@@ -321,10 +324,10 @@ var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
 
 <script>var BLOG = { ROOT: '/' };
 BLOG.SHARE = {
-title: "使用RecyclerView遇到的一些问题",
+title: "collect_crash",
 pic: "/img/logo.jpg",
 summary: document.getElementsByName('summary')[0].content,
-url: "http://sakurajiang.github.io/2016/07/21/Android-RecyclerView的简单使用/" }
+url: "http://sakurajiang.github.io/2020/06/10/collect_crash/" }
 </script>
 <div class="global-share" id="global-share">
     <div class="tit">分享到：</div>
