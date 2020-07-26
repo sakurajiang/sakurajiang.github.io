@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>stack_backtrace | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="linux,native_crash">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="linux,native_crash">
+<meta property="og:type" content="article">
+<meta property="og:title" content="stack_backtrace">
+<meta property="og:url" content="http://sakurajiang.github.io/2020/05/05/stack_backtrace/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-26T07:40:00.027Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="stack_backtrace">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">stack_backtrace</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">stack_backtrace</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#what"><span class="post-toc-text">what</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#why"><span class="post-toc-text">why</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#how"><span class="post-toc-text">how</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#fp-register"><span class="post-toc-text">fp register</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题外话"><span class="post-toc-text">题外话</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-stack_backtrace" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">stack_backtrace</h1>
+        <div class="post-meta">
+            <time datetime="2020-05-04T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2020-05-05
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="what"><a href="#what" class="headerlink" title="what"></a>what</h3><p>在计算机中，stack backtrace(又称为stack trace、stack traceback)是程序执行中某一时间点的stack frames的报告，而每个stack frame对应一个还没有返回的函数调用，里面包含函数的局部变量、参数、使用的寄存器等。举个例子，比如funcA调用了funcB，而funcB还没返回，那么此时stack中就有两个stack frame，一个是funcA的，一个是funcB的，当然两个都是在一个stack中。那么stack backtrace就会包含这两个stack frame。</p>
+<h3 id="why"><a href="#why" class="headerlink" title="why"></a>why</h3><p>当程序出错的时候，可以通过stack backtrace获取有效的信息。</p>
+<h3 id="how"><a href="#how" class="headerlink" title="how"></a>how</h3><p>主要有三种方式，参考<code>breakpad</code>中的代码，以<code>stackwalker_arm</code>中的<code>GetCallerFrame</code>为例，主要包含三种方式，按顺序分别是根据<code>CFI</code>、根据fp、扫描stack，下面主要介绍根据fp register来backtrace：</p>
+<h5 id="fp-register"><a href="#fp-register" class="headerlink" title="fp register"></a>fp register</h5><p>首先先了解一下stack frame，方式是直接看汇编代码，由于gcc版本会有多个，在本地测试不方便，因此，直接在<a href="https://gcc.godbolt.org/" target="_blank" rel="noopener">arm线上编译器</a>编写。代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">funcA</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"this is funcA"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译时加入-mapcs-frame选项，则对应的汇编如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mov     ip, sp   //将sp的值存入ip</span><br><span class="line">    push    &#123;fp, ip, lr, pc&#125; //将pc、lr、ip、fp的值压栈，且每次sp的值减小4，且是先减小4，然后在压栈，即pc的值存储在sp-4，lr的值存储在sp-8，ip的值存储在sp-12,fp的值存储在sp-16中</span><br><span class="line">    sub     fp, ip, #4 //将ip的值减去4存入fp</span><br><span class="line">    ldr     r0, .L2 </span><br><span class="line">    bl      printf</span><br><span class="line">    nop</span><br><span class="line">    mov     r0, r3 //将r3的值存入r0</span><br><span class="line">    sub     sp, fp, #12 //将fp中的值减去12存入sp</span><br><span class="line">    ldm     sp, &#123;fp, sp, lr&#125; //从sp中取值3个值分别存入fp、sp、lr，对应的是sp-&gt;fp，sp+4-&gt;sp，sp+8-&gt;lr</span><br><span class="line">    bx      lr</span><br></pre></td></tr></table></figure>
+<p>我们主要关注fp、ip、lr、pc这几个寄存器，从上面的注释可以看到，该stack frame中首先将sp的值存入ip中，然后压入了4个寄存器的值，即此时，而后将ip的值减去4存入fp中，这样操作之后，该stack frame中就有4个寄存器的值。如下表格：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">ip register</th>
+<th>previous function area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"></td>
+<td>pc</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td>lr</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td>ip</td>
+</tr>
+<tr>
+<td style="text-align:left">sp register</td>
+<td>fp</td>
+</tr>
+</tbody>
+</table>
+<p>之所以顺序是如此，因为，根据arm的<a href="https://www.scss.tcd.ie/~waldroj/3d1/arm_arm.pdf" target="_blank" rel="noopener">官方文档</a>描述：The registers are stored in sequence, the lowest-numbered register to the lowest memory address (start_address), through to the highest-numbered register to the highest memory address (end_address).而根据<a href="**https://azeria-labs.com/arm-data-types-and-registers-part-2/**">寄存器的编号大小</a>是可以知道是这个顺序。</p>
+<p>经过sub     fp, ip, #4之后的stack frame如下</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th>previous function area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">fp register</td>
+<td>pc</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td>lr</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td>ip</td>
+</tr>
+<tr>
+<td style="text-align:left">sp register</td>
+<td>fp</td>
+</tr>
+</tbody>
+</table>
+<p>而经过sub     sp, fp, #12之后的stack frame如下</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th>previous function area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">fp register</td>
+<td>pc</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td>lr</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td>ip</td>
+</tr>
+<tr>
+<td style="text-align:left">sp register</td>
+<td>fp</td>
+</tr>
+</tbody>
+</table>
+<p>经过ldm     sp, {fp, sp, lr}之后的stack frame如下</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">ip register</th>
+<th>previous function area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">fp register</td>
+<td>pc</td>
+</tr>
+<tr>
+<td style="text-align:left">lr register</td>
+<td>lr</td>
+</tr>
+<tr>
+<td style="text-align:left">sp register</td>
+<td>ip</td>
+</tr>
+<tr>
+<td style="text-align:left">fp register</td>
+<td>fp</td>
+</tr>
+</tbody>
+</table>
+<p>注意registers中的值都是地址，所以，当我们对寄存器的值取值之后才是寄存器值对应那块地址中存储的值，所以，下面会出现寄存器的值和取值两个用词，注意区分，从上面就可以看出，我们进行stack backtrace其实只需要知道fp register的值即可，假设我们知道fp register的值，将其-4之后取值就会得到该frame的lr 那块区域的值，即该函数的调用者，同时，将该值减12取值就会得到调用者的fp的值，于是就可以继续这个递归。获取方法的整条链路。</p>
+<p>从上面可以看出，pc、ip寄存器是不需要的，所以，可以进行优化，即将-mapcs-frame选项删除，gcc则会使用默认的mno-apcs-frame选项，注意在gcc5.0之后，-mapcs-frame选项已被废弃，产生的汇编如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">push    &#123;fp, lr&#125;  //将lr、fp寄存器的值压栈，且每次sp的值减小4，且是先减小4，然后在压栈，即lr的值存储在sp-4，fp的值存储在sp-8</span><br><span class="line">    add     fp, sp, #4 //sp寄存器的值加4存入fp中</span><br><span class="line">    ldr     r0, .L2</span><br><span class="line">    bl      printf</span><br><span class="line">    nop</span><br><span class="line">    mov     r0, r3 //将r3的值存入r0</span><br><span class="line">    sub     sp, fp, #4 //将fp的值减去4存入sp</span><br><span class="line">    pop     &#123;fp, lr&#125; //从栈中弹值存入fp和lr，且每次sp增大4，且是先弹出再存值，因此sp的值存入fp，sp+4的值存入lr。sp同样增大了8</span><br><span class="line">    bx      lr</span><br></pre></td></tr></table></figure>
+<p>经过push    {fp, lr}之后的栈如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th>previous function area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"></td>
+<td>lr</td>
+</tr>
+<tr>
+<td style="text-align:left">sp register</td>
+<td>fp</td>
+</tr>
+</tbody>
+</table>
+<p>经过add     fp, sp, #4</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th>previous function area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">fp register</td>
+<td>lr</td>
+</tr>
+<tr>
+<td style="text-align:left">sp register</td>
+<td>fp</td>
+</tr>
+</tbody>
+</table>
+<p>经过sub     sp, fp, #4</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th>previous function area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">fp register</td>
+<td>lr</td>
+</tr>
+<tr>
+<td style="text-align:left">sp register</td>
+<td>fp</td>
+</tr>
+</tbody>
+</table>
+<p>pop     {fp, lr}</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">sp register</th>
+<th>previous function area</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">lp register</td>
+<td>lr</td>
+</tr>
+<tr>
+<td style="text-align:left">fp register</td>
+<td>fp</td>
+</tr>
+</tbody>
+</table>
+<p>此时，fp的值存入了fp register，lr的值存入了lr register，且stack frame<strong>收缩</strong>了。即sp register此时指向了之前的stack frame。跟之前一样，可以通过fp跟踪整个调用链，就不展开了。</p>
+<p>上面的例子都是arm编译器编译的，arm64编译的会不一样，比如stack frame的fp寄存器的值，建议读者自己跑一遍。</p>
+<h3 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h3><p>这里说句题外话，从上面的这些例子可以看出，函数调用返回后，只是stack frame收缩或没有收缩了，但是不管收缩还是没有收缩，数据都是未被清理的，这也就会导致如果两个stack frame完全一样，那么就会导致后一个stack frame的局部变量如果没有赋初值，就会复用上一个stack frame的局部变量的值，举个例子。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func1</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">     <span class="keyword">int</span> a = <span class="number">23</span>;</span><br><span class="line">     <span class="keyword">int</span> b = <span class="number">24</span>;</span><br><span class="line">     <span class="keyword">int</span> c;</span><br><span class="line">     c = a + b;</span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">"a = %d, b = %d, c = %d\n"</span>, a, b, c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">     <span class="keyword">int</span> a;</span><br><span class="line">     <span class="keyword">int</span> b;</span><br><span class="line">     <span class="keyword">int</span> c;</span><br><span class="line"></span><br><span class="line">     <span class="built_in">printf</span>(<span class="string">"a = %d, b = %d, c = %d\n"</span>, a, b, c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    func1();</span><br><span class="line">    func2();</span><br><span class="line">    <span class="keyword">return</span> (<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2020/05/05/stack_backtrace/" target="_blank" rel="external">http://sakurajiang.github.io/2020/05/05/stack_backtrace/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/native-crash/">native_crash</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/06/13/inline_assembly/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">inline_assembly</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/10/30/gradle介绍和实战/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">gradle</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="stack_backtrace" data-title="stack_backtrace" data-url="http://sakurajiang.github.io/2020/05/05/stack_backtrace/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "stack_backtrace",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2020/05/05/stack_backtrace/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
