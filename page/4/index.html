@@ -209,6 +209,53 @@
         </li>
     
         <li class="post-list-item">
+            <article id="post-Android-preference的使用以及自定义一个preference"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-08-02T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-08-03
+</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/08/03/Android-preference的使用以及自定义一个preference/">preference的使用以及自定义一个preference</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        当你要写一个类似于设置这种界面时，你可能会需要使用到好多的layout，这样做会非常复杂，这时，android提供了一个简单的方法，就是让你的activity继承PreferenceActivity，然后创建一个preference这个xml文件，这个文件是在res/xml中的，然后在activity中调用addPreferencesFromResource(R.xml.mypreferen...
+    
+    
+        <a href="/2016/08/03/Android-preference的使用以及自定义一个preference/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
             <article id="post-Android-关于使用BroadCastReceiver的一些问题"
   class="article-card article-type-post" itemprop="blogPost">
      
@@ -256,7 +303,7 @@
         </li>
     
         <li class="post-list-item">
-            <article id="post-Android-service学习总结"
+            <article id="post-Android-自定义ContentProvider"
   class="article-card article-type-post" itemprop="blogPost">
      
     <div class="post-meta">
@@ -274,7 +321,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/08/03/Android-service学习总结/">service学习总结</a>
+      <a class="post-title-link" href="/2016/08/03/Android-自定义ContentProvider/">自定义ContentProvider</a>
     </h3>
   
 
@@ -284,17 +331,17 @@
     <div class="post-content" id="post-content" itemprop="postContent" >
 
     
-        学一个东西我们一般要了解它有什么用，那么service有什么用呢？service简洁来说一般是用于处理耗时时间长，并且与activity通讯不频繁的的任务，比如下载一部电影，但是如果你下载一个图片，并且希望当它下载后显示出来，那我们没有必要使用service，我们可以使用线程。那么知道了service的作用后，它有多少种类型呢？对于这个，我们一般是跟分的方式有关，我们可以有三种方式的分法，首...
+        对于ContentProvider，我想大家应该都不算陌生，因为它是android四大组件之一，相对而言，它比activity和service要简单挺多，这个contentprovider的作用就是实现各个应用程序之间的（跨应用）数据共享，比如联系人应用中就使用了ContentProvider,你在自己的应用中可以读取和修改联系人的数据，不过需要获得相应的权限。其实它也只是一个中间人，真正的...
     
     
-        <a href="/2016/08/03/Android-service学习总结/" class="post-more waves-effect waves-button">
+        <a href="/2016/08/03/Android-自定义ContentProvider/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Service/">Service</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ContentProvider/">ContentProvider</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
 
     </div>
     
@@ -342,53 +389,6 @@
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item">
-            <article id="post-Android-自定义ContentProvider"
-  class="article-card article-type-post" itemprop="blogPost">
-     
-    <div class="post-meta">
-        <time datetime="2016-08-02T16:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-08-03
-</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/08/03/Android-自定义ContentProvider/">自定义ContentProvider</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-    
-        对于ContentProvider，我想大家应该都不算陌生，因为它是android四大组件之一，相对而言，它比activity和service要简单挺多，这个contentprovider的作用就是实现各个应用程序之间的（跨应用）数据共享，比如联系人应用中就使用了ContentProvider,你在自己的应用中可以读取和修改联系人的数据，不过需要获得相应的权限。其实它也只是一个中间人，真正的...
-    
-    
-        <a href="/2016/08/03/Android-自定义ContentProvider/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ContentProvider/">ContentProvider</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
 
     </div>
     

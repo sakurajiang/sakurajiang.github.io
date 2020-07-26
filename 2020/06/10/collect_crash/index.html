@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="sakurajiang的个人博客">
 <meta property="og:description" content="这是一篇比较干货的文章">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-07-26T10:20:37.770Z">
+<meta property="og:updated_time" content="2020-07-26T10:27:43.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="collect_crash">
 <meta name="twitter:description" content="这是一篇比较干货的文章">
@@ -180,6 +180,10 @@
             <h3 id="what"><a href="#what" class="headerlink" title="what"></a>what</h3><p>主要是简单介绍如何收集crash，包括SDK、符号表收集、以及解析堆栈。后续会出新的文章详细介绍。这里主要是以breakpad举例，但是思路都是想通的，其他的框架也差不多。</p>
 <h3 id="how"><a href="#how" class="headerlink" title="how"></a>how</h3><h4 id="client"><a href="#client" class="headerlink" title="client"></a>client</h4><p>client端主要是收集crash数据，对于breakpad的使用以及原理不在这篇文章的范围，主要讲述的是client端需要收集哪些数据。首先想到的就是堆栈、操作系统以及手机的基础属性、还有APP的版本等，当然还有一些别的数据，这里推荐直接对照成熟的crash收集平台，比如bugly、听云等。按照我的经验，比较重要但是没那么显眼的属性有以下几个：前后台、渠道、系统日志。当然还可以扩展思路，比如和日志系统、应用轨迹(即从用户打开APP开始到最后回到后台整个过程中，用户的所有交互行为。)、网络性能数据打通，获取更多的crash前后的上下文。</p>
 <h4 id="CI"><a href="#CI" class="headerlink" title="CI"></a>CI</h4><p>CI端的作用就是收集符号表和mapping文件。除了这些我们还需要一些额外的信息，比如渠道、AppId、AppSecret、env等。将打包过程中生成的mapping文件和so文件拷贝到一个统一的目录，然后将mapping文件和so文件的路径以及上面的额外信息放在一个文件中，这样我们需要的信息都在这个文件中，可以通过遍历文件的方式将生成对应的symbol文件，将其上传到服务端，需要注意的是上传成功后不要立即将原来的so文件删除，因为有可能你的APP会接入多个crash收集系统，而为了防止重复生成symbol文件的问题，当遍历完一个文件后，设置一个标志，而后不再遍历该文件。当然还可以设置一个时间期限，比如7天。</p>
+<p>坑点：</p>
+<ul>
+<li>通过breakpad提供的dump_syms工具解析文件，该工具的输入源是so文件，这个一般都会通过插件去获取，当我们拿到这些so后，将其作为输入源，用以产生symbol文件，将symbol放在一个temp目录，这个时候会遇到第一个问题，即文件名冲突，我们可以使用symbol文件中的identify ID和so名字去生成文件名，即”$identifid|\$soname .sym”。这样就解决了名字冲突的问题。压缩该目录下所有文件后，将temp目录下的所有文件删除，将压缩文件上传后，删除该压缩文件。</li>
+</ul>
 <h4 id="server"><a href="#server" class="headerlink" title="server"></a>server</h4><p>这里的server端不涉及到数据的存储，只是接口层面的数据接口，server端主要做的事情是解析堆栈，也就是输入参数有两个，分别是Client收集的数据和CI端收集的数据，输出则是前端页面消费的数据。比较难的数据就是将crash分类。复杂程度和前端需要的数据相关。</p>
 
         </div>
