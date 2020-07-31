@@ -162,7 +162,7 @@
     <ul class="post-list">
     
         <li class="post-list-item">
-            <article id="post-RestAPP-使用SQLite遇到的一个问题"
+            <article id="post-RestAPP-webview和其他控件混合使用"
   class="article-card article-type-post" itemprop="blogPost">
      
     <div class="post-meta">
@@ -180,7 +180,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/08/23/RestAPP-使用SQLite遇到的一个问题/">RestAPP-使用SQLite遇到的一个问题</a>
+      <a class="post-title-link" href="/2016/08/23/RestAPP-webview和其他控件混合使用/">RestAPP-webview和其他控件混合使用</a>
     </h3>
   
 
@@ -190,12 +190,12 @@
     <div class="post-content" id="post-content" itemprop="postContent" >
 
     
-        我们都知道SQLite是不允许插入空行的，但是很多时候我们对于插入的数据是不知道的，其中可能就会有没有值，然后就造成空行，那么我们如何判断呢？很多人说只要我们将得到的数据重新整理一遍就好了，一旦为空就给他赋值，我也是这么想的，结果悲剧了，下面直接出代码:
-public URLTableData setUrlTableData(URLTableData urlTableData){
-    i...
+        当我们使用webview的时候，我们会经常的和其他控件一起使用，那么如何让webview适应布局呢？直接上代码:
+ &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/an...
     
     
-        <a href="/2016/08/23/RestAPP-使用SQLite遇到的一个问题/" class="post-more waves-effect waves-button">
+        <a href="/2016/08/23/RestAPP-webview和其他控件混合使用/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
@@ -243,6 +243,55 @@ public URLTableData setUrlTableData(URLTableData urlTableData){
     
     
         <a href="/2016/08/23/RestAPP-使用recyclerView遇到的问题/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RestApp/">RestApp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
+            <article id="post-RestAPP-使用SQLite遇到的一个问题"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-08-22T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-08-23
+</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/08/23/RestAPP-使用SQLite遇到的一个问题/">RestAPP-使用SQLite遇到的一个问题</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        我们都知道SQLite是不允许插入空行的，但是很多时候我们对于插入的数据是不知道的，其中可能就会有没有值，然后就造成空行，那么我们如何判断呢？很多人说只要我们将得到的数据重新整理一遍就好了，一旦为空就给他赋值，我也是这么想的，结果悲剧了，下面直接出代码:
+public URLTableData setUrlTableData(URLTableData urlTableData){
+    i...
+    
+    
+        <a href="/2016/08/23/RestAPP-使用SQLite遇到的一个问题/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
@@ -545,7 +594,7 @@ l.setOnClickListener(new View.OnClickListener() {
         </li>
     
         <li class="post-list-item">
-            <article id="post-Android-service中有关于stopselfResult()方法的一些问题"
+            <article id="post-Android-preference的使用以及自定义一个preference"
   class="article-card article-type-post" itemprop="blogPost">
      
     <div class="post-meta">
@@ -563,7 +612,7 @@ l.setOnClickListener(new View.OnClickListener() {
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/08/03/Android-service中有关于stopselfResult()方法的一些问题/">Service中有关于stopselfResult()方法的一些问题</a>
+      <a class="post-title-link" href="/2016/08/03/Android-preference的使用以及自定义一个preference/">preference的使用以及自定义一个preference</a>
     </h3>
   
 
@@ -573,70 +622,17 @@ l.setOnClickListener(new View.OnClickListener() {
     <div class="post-content" id="post-content" itemprop="postContent" >
 
     
-        在一个service中我们使用stopselfresult（）时的一些问题，当我在service中创建一个如下的函数：
- public void Print(){
-    for(int i=0;i&lt;100;i++){
-        try {
-            Thread.sleep(1000);
-            if(i==11){
-               ...
+        当你要写一个类似于设置这种界面时，你可能会需要使用到好多的layout，这样做会非常复杂，这时，android提供了一个简单的方法，就是让你的activity继承PreferenceActivity，然后创建一个preference这个xml文件，这个文件是在res/xml中的，然后在activity中调用addPreferencesFromResource(R.xml.mypreferen...
     
     
-        <a href="/2016/08/03/Android-service中有关于stopselfResult()方法的一些问题/" class="post-more waves-effect waves-button">
+        <a href="/2016/08/03/Android-preference的使用以及自定义一个preference/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Service/">Service</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/问题/">问题</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item">
-            <article id="post-Android-service学习总结"
-  class="article-card article-type-post" itemprop="blogPost">
-     
-    <div class="post-meta">
-        <time datetime="2016-08-02T16:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-08-03
-</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/08/03/Android-service学习总结/">service学习总结</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-    
-        学一个东西我们一般要了解它有什么用，那么service有什么用呢？service简洁来说一般是用于处理耗时时间长，并且与activity通讯不频繁的的任务，比如下载一部电影，但是如果你下载一个图片，并且希望当它下载后显示出来，那我们没有必要使用service，我们可以使用线程。那么知道了service的作用后，它有多少种类型呢？对于这个，我们一般是跟分的方式有关，我们可以有三种方式的分法，首...
-    
-    
-        <a href="/2016/08/03/Android-service学习总结/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Service/">Service</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
 
     </div>
     

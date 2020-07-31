@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <title>ASM | sakurajiang的个人博客 | 心有猛虎&amp;&amp;细嗅蔷薇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="干货,AOP">
+  <meta name="description" content="这是一篇比较干货的文章">
+<meta name="keywords" content="干货,AOP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASM">
+<meta property="og:url" content="http://sakurajiang.github.io/2020/07/01/ASM/index.html">
+<meta property="og:site_name" content="sakurajiang的个人博客">
+<meta property="og:description" content="这是一篇比较干货的文章">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-07-31T06:43:49.281Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ASM">
+<meta name="twitter:description" content="这是一篇比较干货的文章">
+  
+    <link rel="alternative" href="/atom.xml" title="sakurajiang的个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="心有猛虎&amp;&amp;细嗅蔷薇">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.1.7">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+        <hgroup class="introduce">
+          <h5 class="nickname">sakurajiang</h5>
+          <a href="mailto:546759734@qq.com" title="546759734@qq.com" class="mail">546759734@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives/"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/sakurajiang" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/jiangsakura" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/404"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/干货/"  >
+                <i class="icon icon-lg icon-thumbs-up"></i>
+                干货
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>sakurajiang的个人博客 &copy; 2020</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+    </div>
+  </div>
+</aside>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">ASM</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">ASM</h1>
+        
+        
+
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#what"><span class="post-toc-text">what</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#how"><span class="post-toc-text">how</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#在类中插入变量"><span class="post-toc-text">在类中插入变量</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#在类中新增方法"><span class="post-toc-text">在类中新增方法</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#在方法最开始插入字节码"><span class="post-toc-text">在方法最开始插入字节码</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#在方法最后插入字节码"><span class="post-toc-text">在方法最后插入字节码</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#验证"><span class="post-toc-text">验证</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#important"><span class="post-toc-text">important</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-ASM" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">ASM</h1>
+        <div class="post-meta">
+            <time datetime="2020-06-30T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2020-07-01
+</time>
+
+            
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="what"><a href="#what" class="headerlink" title="what"></a>what</h3><p>ASM是多用途的字节码处理和分析框架，它可以用来修改已有的类，或者直接以二进制的方式动态生成类，相比于其他的字节码处理框架，比如Javassist、AspectJ，它拥有更好的性能。</p>
+<h3 id="how"><a href="#how" class="headerlink" title="how"></a>how</h3><p>使用ASM处理字节码，可以使用一些插件，比如ASM Bytecode Viewer，但是最好还是要对字节码常见指令有一些认识。下面是一个java类源代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoggerHelper</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">log</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Log.e(<span class="string">"sakurajiang"</span>,<span class="string">"this is insert log by ASM"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是通过ASM Bytecode Viewer生成的ASM代码中关于log方法的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">methodVisitor = classWriter.visitMethod(ACC_PUBLIC | ACC_STATIC, &quot;log&quot;, &quot;()V&quot;, null, null);</span><br><span class="line">            methodVisitor.visitCode();</span><br><span class="line">            Label label0 = new Label();</span><br><span class="line">            methodVisitor.visitLabel(label0);</span><br><span class="line">            methodVisitor.visitLineNumber(10, label0);</span><br><span class="line">            methodVisitor.visitLdcInsn(&quot;sakurajiang&quot;);</span><br><span class="line">            methodVisitor.visitLdcInsn(&quot;this is insert log by ASM&quot;);</span><br><span class="line">            methodVisitor.visitMethodInsn(INVOKESTATIC, &quot;android/util/Log&quot;, &quot;e&quot;, &quot;(Ljava/lang/String;Ljava/lang/String;)I&quot;, false);</span><br><span class="line">            methodVisitor.visitInsn(POP);</span><br><span class="line">            Label label1 = new Label();</span><br><span class="line">            methodVisitor.visitLabel(label1);</span><br><span class="line">            methodVisitor.visitLineNumber(11, label1);</span><br><span class="line">            methodVisitor.visitInsn(RETURN);</span><br><span class="line">            methodVisitor.visitMaxs(2, 0);</span><br><span class="line">            methodVisitor.visitEnd();</span><br></pre></td></tr></table></figure>
+<p>下面的代码看着可能会有一些迷惑，这些都是ASM的一些东西。</p>
+<p><code>ClassReader</code>：该类的作用是解析class文件，并且将解析的数据传给<code>ClassVisitor</code>，使用了“访问者模式”，这里的“访问者模式”也比较特殊。稍后会分析。</p>
+<p><code>ClassVisitor</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A visitor to visit a Java class. The methods of this class must be called in the following order:</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@code</span> visit&#125; [ &#123;<span class="doctag">@code</span> visitSource&#125; ] [ &#123;<span class="doctag">@code</span> visitModule&#125; ][ &#123;<span class="doctag">@code</span> visitNestHost&#125; ][ &#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> * visitOuterClass&#125; ] ( &#123;<span class="doctag">@code</span> visitAnnotation&#125; | &#123;<span class="doctag">@code</span> visitTypeAnnotation&#125; | &#123;<span class="doctag">@code</span></span></span><br><span class="line"><span class="comment"> * visitAttribute&#125; )* ( &#123;<span class="doctag">@code</span> visitNestMember&#125; | &#123;<span class="doctag">@code</span> visitInnerClass&#125; | &#123;<span class="doctag">@code</span> visitField&#125; |</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@code</span> visitMethod&#125; )* &#123;<span class="doctag">@code</span> visitEnd&#125;.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Eric Bruneton</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<p>直接看注释，很明显这个类的作用是负责访问ClassReader解析的class文件，需要注意的是它有两个构造方法，一个是<code>public ClassVisitor(final int api)</code>，还有一个是<code>public ClassVisitor(final int api, final ClassVisitor classVisitor)</code>，第二个构造函数表明，ClassVisitor自身可以形成一条链路，这样设计的原因就是为了可以分层处理class文件，让结构更加清晰。</p>
+<p><code>ClassWriter</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A &#123;@link ClassVisitor&#125; that generates a corresponding ClassFile structure, as defined in the Java</span><br><span class="line"> * Virtual Machine Specification (JVMS). It can be used alone, to generate a Java class &quot;from</span><br><span class="line"> * scratch&quot;, or with one or more &#123;@link ClassReader&#125; and adapter &#123;@link ClassVisitor&#125; to generate a</span><br><span class="line"> * modified class from one or more existing Java classes.</span><br><span class="line"> *</span><br><span class="line"> * @see &lt;a href=&quot;https://docs.oracle.com/javase/specs/jvms/se9/html/jvms-4.html&quot;&gt;JVMS 4&lt;/a&gt;</span><br><span class="line"> * @author Eric Bruneton</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+<p>从注释可以看出，<code>ClassWriter</code>继承自<code>ClassVisitor</code>，之前有说过，<code>ClassVisitor</code>会形成一条链路，但是所有的链路到最后肯定会有终点，而这个终点就是<code>ClassWriter</code>，这一点从<code>ClassWriter</code>也可以看出来，它并不接收任何<code>ClassVisitor</code>类。同时，可以直接通过<code>ClassWriter</code>类直接生成Java类，当然这个类是全新的，我们在使用的时候更多是搭配<code>ClassReader</code>和<code>ClassVisitor</code>类去修改已有的类。</p>
+<p>下面直接以常见的例子开始：</p>
+<p>首先定义原始类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OriginClass</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a+b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="在类中插入变量"><a href="#在类中插入变量" class="headerlink" title="在类中插入变量"></a>在类中插入变量</h5><p>我们在类中插入一个int类型的变量，名字是sakurajiang。我们首先通过ASM Bytecode Viewer这个插件将OriginClass的ASM格式的代码编出来。即在编译后的OriginClass.class文件右键，点击ASM Bytecode Viewer就可以，然后再在类中增加int sakurajiang = 666;，编译后再点击ASM Bytecode Viewer，而后选择diff，就可以看到插入int sakurajiang = 666后代码的变化。本身不难，为了防止重复插入变量，需要增加一个判断条件。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span> InsertVariable2Class &#123;</span><br><span class="line">    <span class="keyword">var</span> isAlreadyInserted = <span class="literal">false</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">changeByteCodeByASM</span><span class="params">(classReader: <span class="type">ClassReader</span>,classWriter: <span class="type">ClassWriter</span>)</span></span>:ByteArray?&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">"com/sakurajiang/asmsample/OriginClass"</span>==classReader.className) &#123;</span><br><span class="line">            <span class="keyword">val</span> insertVariableClassVisitor = InsertVariableClassVisitor(Opcodes.ASM7, classWriter)</span><br><span class="line">            classReader.accept(insertVariableClassVisitor, ClassReader.EXPAND_FRAMES)</span><br><span class="line">            <span class="keyword">val</span> result = classWriter.toByteArray()</span><br><span class="line">            DebugUtils.copy2Computer(classReader.className, result, <span class="string">"TestASM"</span>)</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">InsertVariableClassVisitor</span></span>(api:<span class="built_in">Int</span>,<span class="keyword">val</span> classWriter: ClassWriter) : ClassVisitor(api,classWriter)&#123;</span><br><span class="line">        <span class="keyword">var</span> className:String? = <span class="literal">null</span></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">visit</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            version: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            access: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            name: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            signature: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            superName: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            interfaces: <span class="type">Array</span>&lt;<span class="type">out</span> <span class="type">String</span>&gt;?</span></span></span><br><span class="line"><span class="function"><span class="params">        )</span></span> &#123;</span><br><span class="line">            className = name</span><br><span class="line">            <span class="keyword">super</span>.visit(version, access, name, signature, superName, interfaces)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">visitField</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            access: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            name: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            descriptor: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            signature: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            value: <span class="type">Any</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">        )</span></span>: FieldVisitor &#123;</span><br><span class="line">            <span class="keyword">if</span>(ConstantVariable.VARIABLE_INSERTED==name)&#123;</span><br><span class="line">                isAlreadyInserted = <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.visitField(access, name, descriptor, signature, value)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">visitMethod</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            access: <span class="type">Int</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            name: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            descriptor: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            signature: <span class="type">String</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">            exceptions: <span class="type">Array</span>&lt;<span class="type">out</span> <span class="type">String</span>&gt;?</span></span></span><br><span class="line"><span class="function"><span class="params">        )</span></span>: MethodVisitor &#123;</span><br><span class="line">            <span class="keyword">val</span> methodVisitor = <span class="keyword">super</span>.visitMethod(access, name, descriptor, signature, exceptions)</span><br><span class="line">            <span class="keyword">if</span>(<span class="string">"&lt;init&gt;"</span>==name &amp;&amp; <span class="string">"()V"</span>==descriptor)&#123;</span><br><span class="line">                <span class="keyword">return</span> InitVariableAdviceAdapter(api,methodVisitor,access,name,descriptor,className)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> methodVisitor</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">visitEnd</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(!isAlreadyInserted)&#123;</span><br><span class="line">                insertVariable(classWriter)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">InitVariableAdviceAdapter</span> </span>(</span><br><span class="line">        api: <span class="built_in">Int</span>, <span class="keyword">val</span> methodVisitor: MethodVisitor,</span><br><span class="line">        access: <span class="built_in">Int</span>, name: String?, desc: String?,<span class="keyword">val</span> classFullName: String?</span><br><span class="line">    ) : AdviceAdapter(api, methodVisitor, access, name, desc)&#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onMethodExit</span><span class="params">(opcode: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">            methodVisitor.visitVarInsn(Opcodes.ALOAD, <span class="number">0</span>)</span><br><span class="line">            methodVisitor.visitIntInsn(Opcodes.SIPUSH, <span class="number">666</span>)</span><br><span class="line">            methodVisitor.visitFieldInsn(</span><br><span class="line">                Opcodes.PUTFIELD,</span><br><span class="line">                classFullName,</span><br><span class="line">                <span class="string">"sakurajiang"</span>,</span><br><span class="line">                <span class="string">"I"</span></span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">insertVariable</span><span class="params">(classWriter: <span class="type">ClassWriter</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">val</span> fieldVisitor = classWriter.visitField(<span class="number">0</span>, <span class="string">"sakurajiang"</span>, <span class="string">"I"</span>, <span class="literal">null</span>, <span class="literal">null</span>);</span><br><span class="line">        fieldVisitor.visitEnd();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="在类中新增方法"><a href="#在类中新增方法" class="headerlink" title="在类中新增方法"></a>在类中新增方法</h5><p>在类中新增方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertMethod</span><span class="params">(String value)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"value ="</span>+value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>新增方法是在visitend中增加。核心代码如下：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">insertMethod</span><span class="params">(classWriter: <span class="type">ClassWriter</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">val</span> methodVisitor =</span><br><span class="line">        classWriter.visitMethod(ACC_PUBLIC, <span class="string">"insertMethod"</span>, <span class="string">"(Ljava/lang/String;)V"</span>, <span class="literal">null</span>, <span class="literal">null</span>)</span><br><span class="line">    methodVisitor.visitCode()</span><br><span class="line">    <span class="keyword">val</span> label0 = Label()</span><br><span class="line">    methodVisitor.visitLabel(label0)</span><br><span class="line">    methodVisitor.visitLineNumber(<span class="number">12</span>, label0)</span><br><span class="line">    methodVisitor.visitFieldInsn(GETSTATIC, <span class="string">"java/lang/System"</span>, <span class="string">"out"</span>, <span class="string">"Ljava/io/PrintStream;"</span>)</span><br><span class="line">    methodVisitor.visitTypeInsn(NEW, <span class="string">"java/lang/StringBuilder"</span>)</span><br><span class="line">    methodVisitor.visitInsn(DUP)</span><br><span class="line">    methodVisitor.visitMethodInsn(</span><br><span class="line">        INVOKESPECIAL,</span><br><span class="line">        <span class="string">"java/lang/StringBuilder"</span>,</span><br><span class="line">        <span class="string">"&lt;init&gt;"</span>,</span><br><span class="line">        <span class="string">"()V"</span>,</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">    )</span><br><span class="line">    methodVisitor.visitLdcInsn(<span class="string">"value ="</span>)</span><br><span class="line">    methodVisitor.visitMethodInsn(</span><br><span class="line">        INVOKEVIRTUAL,</span><br><span class="line">        <span class="string">"java/lang/StringBuilder"</span>,</span><br><span class="line">        <span class="string">"append"</span>,</span><br><span class="line">        <span class="string">"(Ljava/lang/String;)Ljava/lang/StringBuilder;"</span>,</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">    )</span><br><span class="line">    methodVisitor.visitVarInsn(ALOAD, <span class="number">1</span>)</span><br><span class="line">    methodVisitor.visitMethodInsn(</span><br><span class="line">        INVOKEVIRTUAL,</span><br><span class="line">        <span class="string">"java/lang/StringBuilder"</span>,</span><br><span class="line">        <span class="string">"append"</span>,</span><br><span class="line">        <span class="string">"(Ljava/lang/String;)Ljava/lang/StringBuilder;"</span>,</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">    )</span><br><span class="line">    methodVisitor.visitMethodInsn(</span><br><span class="line">        INVOKEVIRTUAL,</span><br><span class="line">        <span class="string">"java/lang/StringBuilder"</span>,</span><br><span class="line">        <span class="string">"toString"</span>,</span><br><span class="line">        <span class="string">"()Ljava/lang/String;"</span>,</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">    )</span><br><span class="line">    methodVisitor.visitMethodInsn(</span><br><span class="line">        INVOKEVIRTUAL,</span><br><span class="line">        <span class="string">"java/io/PrintStream"</span>,</span><br><span class="line">        <span class="string">"println"</span>,</span><br><span class="line">        <span class="string">"(Ljava/lang/String;)V"</span>,</span><br><span class="line">        <span class="literal">false</span></span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">val</span> label1 = Label()</span><br><span class="line">    methodVisitor.visitLabel(label1)</span><br><span class="line">    methodVisitor.visitLineNumber(<span class="number">13</span>, label1)</span><br><span class="line">    methodVisitor.visitInsn(RETURN)</span><br><span class="line">    <span class="keyword">val</span> label2 = Label()</span><br><span class="line">    methodVisitor.visitLabel(label2)</span><br><span class="line">    methodVisitor.visitLocalVariable(</span><br><span class="line">        <span class="string">"this"</span>,</span><br><span class="line">        <span class="string">"Lcom/sakurajiang/asmsample/OriginClass;"</span>,</span><br><span class="line">        <span class="literal">null</span>,</span><br><span class="line">        label0,</span><br><span class="line">        label2,</span><br><span class="line">        <span class="number">0</span></span><br><span class="line">    )</span><br><span class="line">    methodVisitor.visitLocalVariable(<span class="string">"value"</span>, <span class="string">"Ljava/lang/String;"</span>, <span class="literal">null</span>, label0, label2, <span class="number">1</span>)</span><br><span class="line">    methodVisitor.visitMaxs(<span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line">    methodVisitor.visitEnd()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="在方法最开始插入字节码"><a href="#在方法最开始插入字节码" class="headerlink" title="在方法最开始插入字节码"></a>在方法最开始插入字节码</h5><p>接下来在方法最开始插入调用其他方法的代码，最常见的就是打印日志。以下是打印日志的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoggerHelper</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">log</span><span class="params">(<span class="keyword">boolean</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(b) &#123;</span><br><span class="line">            System.out.println(<span class="string">"print to console"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"write 2 file"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还是跟之前一样的步骤生成ASM的代码，这里就不赘述了。核心代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">methodVisitor.visitInsn(Opcodes.ICONST_1)</span><br><span class="line">methodVisitor.visitMethodInsn(</span><br><span class="line">    Opcodes.INVOKESTATIC,</span><br><span class="line">    <span class="string">"com/sakurajiang/asmsample/LoggerHelper"</span>,</span><br><span class="line">    <span class="string">"log"</span>,</span><br><span class="line">    <span class="string">"(Z)V"</span>,</span><br><span class="line">    <span class="keyword">false</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h5 id="在方法最后插入字节码"><a href="#在方法最后插入字节码" class="headerlink" title="在方法最后插入字节码"></a>在方法最后插入字节码</h5><p>和在方法前面插入代码类似，核心代码都是一样的，区别就是需要在onMethodExit中插入代码。就不赘述了。</p>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p>如何验证最后的结果呢？我们可以将字节码输出到文件中，而后通过该<a href="https://github.com/Konloch/bytecode-viewer" target="_blank" rel="noopener">工具</a>解析成java代码。上述代码都放在<a href="https://github.com/sakurajiang/ASMSample" target="_blank" rel="noopener">github</a>。</p>
+<h4 id="important"><a href="#important" class="headerlink" title="important"></a>important</h4><p>对于COMPUTE_MAXS的选项，以下是官网的解释</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A flag to automatically compute the maximum stack size and the maximum number of local</span><br><span class="line"> * variables of methods. If this flag is set, then the arguments of the &#123;@link</span><br><span class="line"> * MethodVisitor#visitMaxs&#125; method of the &#123;@link MethodVisitor&#125; returned by the &#123;@link</span><br><span class="line"> * #visitMethod&#125; method will be ignored, and computed automatically from the signature and the</span><br><span class="line"> * bytecode of each method.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; for classes whose version is &#123;@link Opcodes#V1_7&#125; of more, this option requires</span><br><span class="line"> * valid stack map frames. The maximum stack size is then computed from these frames, and from the</span><br><span class="line"> * bytecode instructions in between. If stack map frames are not present or must be recomputed,</span><br><span class="line"> * used &#123;@link #COMPUTE_FRAMES&#125; instead.</span><br><span class="line"> *</span><br><span class="line"> * @see #ClassWriter(int)</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+<p>即用于自动计算方法的最大堆栈大小和最大局部变量数。如果设置了该参数，visitMaxs参数将被忽略，但是这个方法还是要被调用。但是经过实践，发现不调用visitMaxs对于LocalVariableTable和StackMapTable都没有影响。</p>
+<p>对于COMPUTE_FRAMES的选项，以下是官网的解释</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * A flag to automatically compute the stack map frames of methods from scratch. If this flag is</span><br><span class="line"> * set, then the calls to the &#123;@link MethodVisitor#visitFrame&#125; method are ignored, and the stack</span><br><span class="line"> * map frames are recomputed from the methods bytecode. The arguments of the &#123;@link</span><br><span class="line"> * MethodVisitor#visitMaxs&#125; method are also ignored and recomputed from the bytecode. In other</span><br><span class="line"> * words, &#123;@link #COMPUTE_FRAMES&#125; implies &#123;@link #COMPUTE_MAXS&#125;.</span><br><span class="line"> *</span><br><span class="line"> * @see #ClassWriter(int)</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+<p>即不需要调用visitFrame就可以生成StackMapTable，当然visitMaxs还是需要调用，经过实践，发现如果开启了这个模式，不调用visitFrame的同时，也不调用visitMaxs，会导致无法生成StackMapTable。</p>
+<p>但是经过实践，发现一个很有意思的事，在jdk1.7之后，即使使用没有StackMapTable属性以及LocalVariableTable的类，在运行的时候也不会报错。表示迷惑</p>
+<p>但是为了保险起见，还是按照官网文档所说，即设置COMPUTE_MAXS的时候，visitLocalVariable和visitMaxs以及visitFrame都需要调用。</p>
+<p>而设置COMPUTE_FRAMES的时候，则可以不调用visitFrame，其他的还是要调用。</p>
+<p>需要注意如果继承了AdviceAdapter，则会默认调用visitLocalVariable以及visitMaxs。</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+            <div class="content">
+               转载请注明出处：<a href="/2020/07/01/ASM/" target="_blank" rel="external">http://sakurajiang.github.io/2020/07/01/ASM/</a>
+            </div>
+            <footer>
+                <a href="http://sakurajiang.github.io">
+                    <img src="/img/logo.jpg" alt="sakurajiang">
+                    sakurajiang
+                </a>
+            </footer>
+        </blockquote>
+
+        
+        <div class="post-reward">
+            <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+        </div>
+        
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AOP/">AOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+
+            
+            <div class="post-share-wrap">
+                <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+                <a href="javascript:;" id="share-fab" class="post-share-fab waves-effect waves-circle">
+                    <i class="icon icon-share-alt icon-lg"></i>
+                </a>
+            </div>
+            
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/06/23/client_collect_crash_by_breakpad/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">客户端使用breakpad收集crash</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo">
+	<div class="ds-thread" data-thread-key="ASM" data-title="ASM" data-url="http://sakurajiang.github.io/2020/07/01/ASM/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.1.7"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'sakurajiang', theme: 'none'}
+</script>
+
+
+
+
+</article>
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢各位大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.png" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.png" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+</div>
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>var BLOG = { ROOT: '/' };
+BLOG.SHARE = {
+title: "ASM",
+pic: "/img/logo.jpg",
+summary: document.getElementsByName('summary')[0].content,
+url: "http://sakurajiang.github.io/2020/07/01/ASM/" }
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.1.7"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.1.7"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

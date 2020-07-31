@@ -162,7 +162,7 @@
     <ul class="post-list">
     
         <li class="post-list-item">
-            <article id="post-Java-关于函数方法的返回类型是一个类类型时的情况"
+            <article id="post-Java-this的简介"
   class="article-card article-type-post" itemprop="blogPost">
      
     <div class="post-meta">
@@ -180,7 +180,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/21/Java-关于函数方法的返回类型是一个类类型时的情况/">关于函数方法的返回类型是一个类类型时的情况</a>
+      <a class="post-title-link" href="/2016/07/21/Java-this的简介/">this简介</a>
     </h3>
   
 
@@ -190,10 +190,10 @@
     <div class="post-content" id="post-content" itemprop="postContent" >
 
     
-        在一个方法中，如果你想返回的是一个类类型时，那么这个方法中的return语句返回的类型就需要和方法的返回类型一致，如果你在方法中定义了一个类并且指向一个变量时，这个new构造的对象决定在你调用这个方法时能不能转换成别的对象，而指向的那个变量决定的是需不需要强制类型转换，我们都知道，一个子类的对象可以指向父类的引用，假如在方法中写了这样的代码，并且方法的返回类型是父类类型，那么在调用这个方法时...
+        this这个变量是什么呢？我们可以在挺多地方看到，在类的每个实例方法中都有一个名为this的变量，它指向调用该方法的对象，这也就解决了我们不会为每个对象都提供一个实例方法的副本（因为这样太浪费资源了），我们使用的使用this这个变量进行标记，这时一个用途，还有一个就是当我们需要为类创建多个构造函数时，我们需要使用this()来引用类中无参数的构造函数（当然也可以使用this(参数)来调用类的...
     
     
-        <a href="/2016/07/21/Java-关于函数方法的返回类型是一个类类型时的情况/" class="post-more waves-effect waves-button">
+        <a href="/2016/07/21/Java-this的简介/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
@@ -256,7 +256,7 @@
         </li>
     
         <li class="post-list-item">
-            <article id="post-ReactNative-在win8上搭建ReactNative环境"
+            <article id="post-Java-关于函数方法的返回类型是一个类类型时的情况"
   class="article-card article-type-post" itemprop="blogPost">
      
     <div class="post-meta">
@@ -274,7 +274,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/21/ReactNative-在win8上搭建ReactNative环境/">如何在win8.1上搭建React-Native环境</a>
+      <a class="post-title-link" href="/2016/07/21/Java-关于函数方法的返回类型是一个类类型时的情况/">关于函数方法的返回类型是一个类类型时的情况</a>
     </h3>
   
 
@@ -284,17 +284,17 @@
     <div class="post-content" id="post-content" itemprop="postContent" >
 
     
-        这么火的ReactNative让我也把持不住了，一言不合我就开始搭建环境了，之前在网上查，好多人都说在win上搭建好难，个人表示好方，于是我怀着忐忑的心情开始搭建，我按照this开始搭建，由于之前我写android就是用AS，所以就跳过，接着VS我也有，感觉这都是程序员必备，Git也有，接下来问题来了，python？我很早就想学这门语言，但是最近都在学习android，所以就没时间，然后安装...
+        在一个方法中，如果你想返回的是一个类类型时，那么这个方法中的return语句返回的类型就需要和方法的返回类型一致，如果你在方法中定义了一个类并且指向一个变量时，这个new构造的对象决定在你调用这个方法时能不能转换成别的对象，而指向的那个变量决定的是需不需要强制类型转换，我们都知道，一个子类的对象可以指向父类的引用，假如在方法中写了这样的代码，并且方法的返回类型是父类类型，那么在调用这个方法时...
     
     
-        <a href="/2016/07/21/ReactNative-在win8上搭建ReactNative环境/" class="post-more waves-effect waves-button">
+        <a href="/2016/07/21/Java-关于函数方法的返回类型是一个类类型时的情况/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React-Native</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
 
     </div>
     
@@ -342,6 +342,53 @@
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
+            <article id="post-ReactNative-在win8上搭建ReactNative环境"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-07-21
+</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/07/21/ReactNative-在win8上搭建ReactNative环境/">如何在win8.1上搭建React-Native环境</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        这么火的ReactNative让我也把持不住了，一言不合我就开始搭建环境了，之前在网上查，好多人都说在win上搭建好难，个人表示好方，于是我怀着忐忑的心情开始搭建，我按照this开始搭建，由于之前我写android就是用AS，所以就跳过，接着VS我也有，感觉这都是程序员必备，Git也有，接下来问题来了，python？我很早就想学这门语言，但是最近都在学习android，所以就没时间，然后安装...
+    
+    
+        <a href="/2016/07/21/ReactNative-在win8上搭建ReactNative环境/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React-Native/">React-Native</a></li></ul>
 
     </div>
     

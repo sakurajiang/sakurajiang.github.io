@@ -162,7 +162,7 @@
     <ul class="post-list">
     
         <li class="post-list-item">
-            <article id="post-Android-activity window view的关系"
+            <article id="post-Android-RecyclerView的简单使用"
   class="article-card article-type-post" itemprop="blogPost">
      
     <div class="post-meta">
@@ -180,7 +180,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/21/Android-activity window view的关系/">Activity Window View的关系</a>
+      <a class="post-title-link" href="/2016/07/21/Android-RecyclerView的简单使用/">使用RecyclerView遇到的一些问题</a>
     </h3>
   
 
@@ -190,17 +190,17 @@
     <div class="post-content" id="post-content" itemprop="postContent" >
 
     
-        activity.java的attach()方法，这个方法传入多个参数，有Context,ActivityThread，Instrumentation等等，我们先不管他们，我们直接找到mWindow = PolicyManager.makeNewWindow(this);这一行代码，也就意味着我们需要找PolicyManager.java，这时我们需要找的是policy这个类，而不是Ipol...
+        ###1.无法使用RecyclerView，因为我们没有导入v7包　　我们如何导入呢？因为我使用的是AS，所以我这里说一下AS的导入，首先，你找到你项目中的build.gradle，注意这里有两个build.gradle，那么我们需要找哪个呢？下面我放了一张图片那么我们应该选哪个内容呢？我们应该选第二个，点进去第二个后，找到dependencies，如图：我们将这个修改为:这里需要注意版本要...
     
     
-        <a href="/2016/07/21/Android-activity window view的关系/" class="post-more waves-effect waves-button">
+        <a href="/2016/07/21/Android-RecyclerView的简单使用/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </div>
     
@@ -256,6 +256,53 @@
         </li>
     
         <li class="post-list-item">
+            <article id="post-Android-activity window view的关系"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-07-21
+</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/07/21/Android-activity window view的关系/">Activity Window View的关系</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        activity.java的attach()方法，这个方法传入多个参数，有Context,ActivityThread，Instrumentation等等，我们先不管他们，我们直接找到mWindow = PolicyManager.makeNewWindow(this);这一行代码，也就意味着我们需要找PolicyManager.java，这时我们需要找的是policy这个类，而不是Ipol...
+    
+    
+        <a href="/2016/07/21/Android-activity window view的关系/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
             <article id="post-Android-写一个简单的加载多张图片的自定义view"
   class="article-card article-type-post" itemprop="blogPost">
      
@@ -303,53 +350,6 @@
         </li>
     
         <li class="post-list-item">
-            <article id="post-Android-创建一个简单的对话框"
-  class="article-card article-type-post" itemprop="blogPost">
-     
-    <div class="post-meta">
-        <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-07-21
-</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/21/Android-创建一个简单的对话框/">创建一个简单的对话框</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-    
-        在android中创建一个对话框可以通过直接用AlterDialog.Builder类来创建一个对象，然后通过调用这个对象的setMessage()设置这个对话框的的显示信息，如果你需要类似于确定、取消这种按钮，你可以调用这个对象的setPositiveButton()方法和setNegativeButton()方法，当然你还可以创建一个类，让它继承DialogFragment这个类，然后复...
-    
-    
-        <a href="/2016/07/21/Android-创建一个简单的对话框/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item">
             <article id="post-Android-测试保存activity状态用preference的方式"
   class="article-card article-type-post" itemprop="blogPost">
      
@@ -383,6 +383,53 @@
     
     
         <a href="/2016/07/21/Android-测试保存activity状态用preference的方式/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
+            <article id="post-Android-创建一个简单的对话框"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-07-21
+</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/07/21/Android-创建一个简单的对话框/">创建一个简单的对话框</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        在android中创建一个对话框可以通过直接用AlterDialog.Builder类来创建一个对象，然后通过调用这个对象的setMessage()设置这个对话框的的显示信息，如果你需要类似于确定、取消这种按钮，你可以调用这个对象的setPositiveButton()方法和setNegativeButton()方法，当然你还可以创建一个类，让它继承DialogFragment这个类，然后复...
+    
+    
+        <a href="/2016/07/21/Android-创建一个简单的对话框/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
@@ -492,100 +539,6 @@
         </li>
     
         <li class="post-list-item">
-            <article id="post-Github-如何在github上建立博客"
-  class="article-card article-type-post" itemprop="blogPost">
-     
-    <div class="post-meta">
-        <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-07-21
-</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/21/Github-如何在github上建立博客/">如何在github上建立自己的个人博客</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-    
-        如何在github上建立博客呢？　　我前期都是按照this link这个链接进行了操作，这里解释一下同步内容至Github中的第五步操作，我因为这个步骤没弄明白，搞了两天，这个步骤的意思是，将运行命令hexo g生成的public文件夹下的所有内容复制到你的对应仓库目录里，注意是里面，同时，还有一点，如果你建立的这个仓库是发布过的，那么你就将那些东西全部删除，最好最开始这个仓库里不要包括任何...
-    
-    
-        <a href="/2016/07/21/Github-如何在github上建立博客/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/">Github</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item">
-            <article id="post-Java-this的简介"
-  class="article-card article-type-post" itemprop="blogPost">
-     
-    <div class="post-meta">
-        <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-07-21
-</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/07/21/Java-this的简介/">this简介</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-    
-        this这个变量是什么呢？我们可以在挺多地方看到，在类的每个实例方法中都有一个名为this的变量，它指向调用该方法的对象，这也就解决了我们不会为每个对象都提供一个实例方法的副本（因为这样太浪费资源了），我们使用的使用this这个变量进行标记，这时一个用途，还有一个就是当我们需要为类创建多个构造函数时，我们需要使用this()来引用类中无参数的构造函数（当然也可以使用this(参数)来调用类的...
-    
-    
-        <a href="/2016/07/21/Java-this的简介/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item">
             <article id="post-Java-java类与继承"
   class="article-card article-type-post" itemprop="blogPost">
      
@@ -625,6 +578,53 @@
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/干货/">干货</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
+            <article id="post-Github-如何在github上建立博客"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-07-20T16:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-07-21
+</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/07/21/Github-如何在github上建立博客/">如何在github上建立自己的个人博客</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        如何在github上建立博客呢？　　我前期都是按照this link这个链接进行了操作，这里解释一下同步内容至Github中的第五步操作，我因为这个步骤没弄明白，搞了两天，这个步骤的意思是，将运行命令hexo g生成的public文件夹下的所有内容复制到你的对应仓库目录里，注意是里面，同时，还有一点，如果你建立的这个仓库是发布过的，那么你就将那些东西全部删除，最好最开始这个仓库里不要包括任何...
+    
+    
+        <a href="/2016/07/21/Github-如何在github上建立博客/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/">Github</a></li></ul>
 
     </div>
     
